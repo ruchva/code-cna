@@ -94,11 +94,12 @@
            }
        }
 	   
-       function ca_inserta_boleta_productor_p1($doc_id, $folio, $numero_brig, $numero_emp, $numero_seg, $numero_hoja, $depto, $prov, $mun, $ac, $canton, $tipo_upa, $num_orden, $nombre_esp, $nombre_loc, $nombre_dist, $estado, $usuario_reg, $ip_reg){
+       function ca_inserta_boleta_productor_p1($doc_id, $folio, $foliocomunal, $numero_brig, $numero_emp, $numero_seg, $numero_hoja, $depto, $prov, $mun, $ac, $canton, $tipo_upa, $num_orden, $nombre_esp, $nombre_loc, $nombre_dist, $estado, $usuario_reg, $ip_reg){
             $this->conectar();
             $query = $this->consulta("insert into t_boletaproductor_p1(
                                         docid
                                        ,folio
+									   ,foliocomunal
                                        ,numerobrigada
                                        ,numeroempadronador
                                        ,numerosegmento
@@ -120,7 +121,8 @@
                                        )
                                        values(
                                         '$doc_id'
-                                       ,'$folio' 
+                                       ,'$folio'
+									   ,'$foliocomunal'
                                        ,'$numero_brig'
                                        ,'$numero_emp'
                                        ,'$numero_seg'
@@ -152,11 +154,12 @@
             }
        }
        
-       function ca_inserta_boleta_productor_p2($doc_id, $folio, $numero_brig, $numero_emp, $numero_seg, $numero_hoja, $depto, $prov, $mun, $ac, $canton, $tipo_upa, $num_orden, $nombre_esp, $nombre_loc, $nombre_dist, $estado, $usuario_reg, $ip_reg){
+       function ca_inserta_boleta_productor_p2($doc_id, $folio, $foliocomunal, $numero_brig, $numero_emp, $numero_seg, $numero_hoja, $depto, $prov, $mun, $ac, $canton, $tipo_upa, $num_orden, $nombre_esp, $nombre_loc, $nombre_dist, $estado, $usuario_reg, $ip_reg){
             $this->conectar();
             $query = $this->consulta("insert into t_boletaproductor_p2(
 					     docid
                                             ,folio
+											,foliocomunal
                                             ,numerobrigada
                                             ,numeroempadronador
                                             ,numerosegmento
@@ -178,7 +181,8 @@
                                         )
                                         values(
 				             '$doc_id'
-                                            ,'$folio' 
+                                            ,'$folio'
+											,'$foliocomunal'
                                             ,'$numero_brig'
                                             ,'$numero_emp'
                                             ,'$numero_seg'
@@ -1129,6 +1133,27 @@
        function ca_campos($pregunta){
            if($pregunta==''){$pregunta='null';} else {$pregunta="'".$pregunta."'";} 	
            return $pregunta;
+       }
+       
+       function get_real_ip(){
+          if (isset($_SERVER["HTTP_CLIENT_IP"])){
+                return $_SERVER["HTTP_CLIENT_IP"];
+            }
+            elseif (isset($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                return $_SERVER["HTTP_X_FORWARDED_FOR"];
+            }
+            elseif (isset($_SERVER["HTTP_X_FORWARDED"])){
+                return $_SERVER["HTTP_X_FORWARDED"];
+            }
+            elseif (isset($_SERVER["HTTP_FORWARDED_FOR"])){
+                return $_SERVER["HTTP_FORWARDED_FOR"];
+            }
+            elseif (isset($_SERVER["HTTP_FORWARDED"])){
+                return $_SERVER["HTTP_FORWARDED"];
+            }
+            else{
+                return $_SERVER["REMOTE_ADDR"];
+            }
        }
 }   	    
 ?>

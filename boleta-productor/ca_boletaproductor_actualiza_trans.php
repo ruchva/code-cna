@@ -3,7 +3,7 @@ require_once $_SERVER["DOCUMENT_ROOT"]."/ine_ca/class/ca_boletaproductordb.php";
 <?php
 //initialize the session
 if (!isset($_SESSION)) {
-  session_start();
+  session_start();  
    
 }
 /*$MM_authorizedUsers = "'.$row_permisos[acceso_usr].'";
@@ -74,10 +74,10 @@ if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
   }
 }*/
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/sis_ineca.dwt.php" codeOutsideHTMLIsLocked="false" -->
+<!DOCTYPE html>
+<html><!-- InstanceBegin template="/Templates/sis_ineca.dwt.php" codeOutsideHTMLIsLocked="false" -->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="UTF-8">
 <!-- InstanceBeginEditable name="doctitle" -->
 <title>Boleta Productor</title>
 <script language="JavaScript">
@@ -138,1012 +138,1028 @@ if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
 		}
 	}
 </script>
+<script type="text/javascript">
+//funcion para validad los codigos de unidad de medida  
+function validarunidadmedida25(campo){
+	var elcampo = document.getElementById(campo);  
+	var valcampo=elcampo.value;
+	var n=valcampo.length;
+	if (n==2){
+		if (valcampo!=-9){
+			if((!validarNumero(elcampo.value))||(elcampo.value == "" ) ||(elcampo.value < 20 ) ||(elcampo.value > 60 )||(elcampo.value ==0 )){
+				elcampo.focus();				
+				elcampo.value = "";    
+			}
+		}
+	}
+}
+</script>
 <script type="text/javascript" src="/ine_ca/Scripts/jquery-1.10.1.min.js"></script>
 <script type="text/javascript" src="/ine_ca/Scripts/jquery.maskedinput.js"></script>
 <script type="text/javascript" src="/ine_ca/Scripts/jquery.alphanumeric.js"></script> 
 <script type="text/javascript">
 jQuery(function($){
-$("#txtP15_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_0123456789\'' });
-$("#txtP15_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_0123456789' });
-$("#txtP15_3").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_0123456789' });
-$("#txtP15_4").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_0123456789' });
+$("#txtP15_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
+$("#txtP15_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
+$("#txtP15_3").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
+$("#txtP15_4").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP15_5").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP16").numeric({ ichars: '456780' } { allow: '-' });
+$("#txtP16").numericc({ ichars: '456780'});
 $("#txtP17_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP17_2").numeric({ ichars: '456780' });
-$("#txtP18").numeric({ ichars: '3456780' });
+$("#txtP17_2").numericc({ ichars: '456780' });
+$("#txtP18").numericc({ ichars: '3456780' });
 $("#txtP19").numeric();
-$("#txtP20_1").numeric({ ichars: '3456780' });
-$("#txtP20_2").numeric();
-$("#txtP20_3").numeric({ allow: '.' });
+$("#txtP20_1").numericc({ ichars: '3456780' });
+$("#txtP20_2").numericc();
+$("#txtP20_3").numeric(".");
 $("#txtP20_4").mask("99");
-$("#txtP21_1_1").numeric({ allow: '.-' });
+$("#txtP21_1_1").numeric(".");
 $("#txtP21_1_2").mask("99");
-$("#txtP21_2_1").numeric({ allow: '.' });
+$("#txtP21_2_1").numeric(".");
 $("#txtP21_2_2").mask("99");
-$("#txtP21_3_1").numeric({ allow: '.' });
+$("#txtP21_3_1").numeric(".");
 $("#txtP21_3_2").mask("99");
-$("#txtP21_4_1").numeric({ allow: '.' });
+$("#txtP21_4_1").numeric(".");
 $("#txtP21_4_2").mask("99");
-$("#txtP21_5_1").numeric({ allow: '.' });
+$("#txtP21_5_1").numeric(".");
 $("#txtP21_5_2").mask("99");
-$("#txtP22_1").numeric({ ichars: '3456780' });
-$("#txtP22_2").numeric({ ichars: '3456780' });
-$("#txtP22_3").numeric({ ichars: '3456780' });
-$("#txtP22_4").numeric({ ichars: '3456780' });
-$("#txtP23_1").numeric({ ichars: '3456780' });
-$("#txtP23_1_1").numeric();
+$("#txtP22_1").numericc({ ichars: '3456780' });
+$("#txtP22_2").numericc({ ichars: '3456780' });
+$("#txtP22_3").numericc({ ichars: '3456780' });
+$("#txtP22_4").numericc({ ichars: '3456780' });
+$("#txtP23_1").numericc({ ichars: '3456780' });
+$("#txtP23_1_1").numericc();
 $("#txtP23_1_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP23_1_3").numeric({ allow: '.' });
+$("#txtP23_1_3").numeric(".");
 $("#txtP23_1_4").mask("99");
-$("#txtP23_1_5").numeric({ ichars: '3456780' });
+$("#txtP23_1_5").numericc({ ichars: '3456780' });
 $("#txtP23_1_6").mask("99");
-$("#txtP23_1_7").numeric({ allow: '.' });
+$("#txtP23_1_7").numeric(".");
 $("#txtP23_1_8").mask("99");
 $("#txtP23_1_9").mask("99");
-$("#txtP23_1_10").numeric({ allow: '.' });
-$("#txtP23_1_11").numeric({ allow: '.' });
-$("#txtP23_1_12").numeric({ allow: '.' });
-$("#txtP23_2_1").numeric();
+$("#txtP23_1_10").numericc({ ichars: '3456780' });
+$("#txtP23_1_11").numericc({ ichars: '3456780' });
+$("#txtP23_1_12").numericc({ ichars: '3456780' });
+$("#txtP23_2_1").numericc();
 $("#txtP23_2_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP23_2_3").numeric({ allow: '.' });
+$("#txtP23_2_3").numeric(".");
 $("#txtP23_2_4").mask("99");
-$("#txtP23_2_5").numeric({ ichars: '3456780' });
+$("#txtP23_2_5").numericc({ ichars: '3456780' });
 $("#txtP23_2_6").mask("99");
-$("#txtP23_2_7").numeric({ allow: '.' });
+$("#txtP23_2_7").numeric(".");
 $("#txtP23_2_8").mask("99");
 $("#txtP23_2_9").mask("99");
-$("#txtP23_2_10").numeric({ ichars: '3456780' });
-$("#txtP23_2_11").numeric({ ichars: '3456780' });
-$("#txtP23_2_12").numeric({ ichars: '3456780' });
-$("#txtP23_3_1").numeric();
+$("#txtP23_2_10").numericc({ ichars: '3456780' });
+$("#txtP23_2_11").numericc({ ichars: '3456780' });
+$("#txtP23_2_12").numericc({ ichars: '3456780' });
+$("#txtP23_3_1").numericc();
 $("#txtP23_3_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP23_3_3").numeric({ allow: '.' });
+$("#txtP23_3_3").numeric(".");
 $("#txtP23_3_4").mask("99");
-$("#txtP23_3_5").numeric({ ichars: '3456780' });
+$("#txtP23_3_5").numericc({ ichars: '3456780' });
 $("#txtP23_3_6").mask("99");
-$("#txtP23_3_7").numeric({ allow: '.' });
+$("#txtP23_3_7").numeric(".");
 $("#txtP23_3_8").mask("99");
 $("#txtP23_3_9").mask("99");
-$("#txtP23_3_10").numeric({ ichars: '3456780' });
-$("#txtP23_3_11").numeric({ ichars: '3456780' });
-$("#txtP23_3_12").numeric({ ichars: '3456780' });
-$("#txtP23_4_1").numeric();
+$("#txtP23_3_10").numericc({ ichars: '3456780' });
+$("#txtP23_3_11").numericc({ ichars: '3456780' });
+$("#txtP23_3_12").numericc({ ichars: '3456780' });
+$("#txtP23_4_1").numericc();
 $("#txtP23_4_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP23_4_3").numeric({ allow: '.' });
+$("#txtP23_4_3").numeric(".");
 $("#txtP23_4_4").mask("99");
-$("#txtP23_4_5").numeric({ ichars: '3456780' });
+$("#txtP23_4_5").numericc({ ichars: '3456780' });
 $("#txtP23_4_6").mask("99");
-$("#txtP23_4_7").numeric({ allow: '.' });
+$("#txtP23_4_7").numeric(".");
 $("#txtP23_4_8").mask("99");
 $("#txtP23_4_9").mask("99");
-$("#txtP23_4_10").numeric({ ichars: '3456780' });
-$("#txtP23_4_11").numeric({ ichars: '3456780' });
-$("#txtP23_4_12").numeric({ ichars: '3456780' });
-$("#txtP23_5_1").numeric();
+$("#txtP23_4_10").numericc({ ichars: '3456780' });
+$("#txtP23_4_11").numericc({ ichars: '3456780' });
+$("#txtP23_4_12").numericc({ ichars: '3456780' });
+$("#txtP23_5_1").numericc();
 $("#txtP23_5_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP23_5_3").numeric({ allow: '.' });
+$("#txtP23_5_3").numeric(".");
 $("#txtP23_5_4").mask("99");
-$("#txtP23_5_5").numeric({ ichars: '3456780' });
+$("#txtP23_5_5").numericc({ ichars: '3456780' });
 $("#txtP23_5_6").mask("99");
-$("#txtP23_5_7").numeric({ allow: '.' });
+$("#txtP23_5_7").numeric(".");
 $("#txtP23_5_8").mask("99");
 $("#txtP23_5_9").mask("99");
-$("#txtP23_5_10").numeric({ ichars: '3456780' });
-$("#txtP23_5_11").numeric({ ichars: '3456780' });
-$("#txtP23_5_12").numeric({ ichars: '3456780' });
-$("#txtP23_6_1").numeric();
+$("#txtP23_5_10").numericc({ ichars: '3456780' });
+$("#txtP23_5_11").numericc({ ichars: '3456780' });
+$("#txtP23_5_12").numericc({ ichars: '3456780' });
+$("#txtP23_6_1").numericc();
 $("#txtP23_6_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP23_6_3").numeric({ allow: '.' });
+$("#txtP23_6_3").numeric(".");
 $("#txtP23_6_4").mask("99");
-$("#txtP23_6_5").numeric({ ichars: '3456780' });
+$("#txtP23_6_5").numericc({ ichars: '3456780' });
 $("#txtP23_6_6").mask("99");
-$("#txtP23_6_7").numeric({ allow: '.' });
+$("#txtP23_6_7").numeric(".");
 $("#txtP23_6_8").mask("99");
 $("#txtP23_6_9").mask("99");
-$("#txtP23_6_10").numeric({ ichars: '3456780' });
-$("#txtP23_6_11").numeric({ ichars: '3456780' });
-$("#txtP23_6_12").numeric({ ichars: '3456780' });
-$("#txtP23_7_1").numeric();
+$("#txtP23_6_10").numericc({ ichars: '3456780' });
+$("#txtP23_6_11").numericc({ ichars: '3456780' });
+$("#txtP23_6_12").numericc({ ichars: '3456780' });
+$("#txtP23_7_1").numericc();
 $("#txtP23_7_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP23_7_3").numeric({ allow: '.' });
+$("#txtP23_7_3").numeric(".");
 $("#txtP23_7_4").mask("99");
-$("#txtP23_7_5").numeric({ ichars: '3456780' });
+$("#txtP23_7_5").numericc({ ichars: '3456780' });
 $("#txtP23_7_6").mask("99");
-$("#txtP23_7_7").numeric({ allow: '.' });
+$("#txtP23_7_7").numeric(".");
 $("#txtP23_7_8").mask("99");
 $("#txtP23_7_9").mask("99");
-$("#txtP23_7_10").numeric({ ichars: '3456780' });
-$("#txtP23_7_11").numeric({ ichars: '3456780' });
-$("#txtP23_7_12").numeric({ ichars: '3456780' });
-$("#txtP24_1").numeric({ ichars: '3456780' });
-$("#txtP24_1_1").numeric();
+$("#txtP23_7_10").numericc({ ichars: '3456780' });
+$("#txtP23_7_11").numericc({ ichars: '3456780' });
+$("#txtP23_7_12").numericc({ ichars: '3456780' });
+$("#txtP24_1").numericc({ ichars: '3456780' });
+$("#txtP24_1_1").numericc();
 $("#txtP24_1_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_1_3").numeric();
-$("#txtP24_1_4").numeric({ allow: '.' });
+$("#txtP24_1_3").numericc();
+$("#txtP24_1_4").numeric(".");
 $("#txtP24_1_5").mask("99");
-$("#txtP24_1_6").numeric({ ichars: '3456780' });
+$("#txtP24_1_6").numericc({ ichars: '3456780' });
 $("#txtP24_1_7").mask("99");
 $("#txtP24_1_8").mask("9999");
-$("#txtP24_1_9").numeric({ allow: '.' });
+$("#txtP24_1_9").numeric(".");
 $("#txtP24_1_10").mask("99");
 $("#txtP24_1_11").mask("99");
-$("#txtP24_1_12").numeric({ ichars: '3456780' });
-$("#txtP24_1_13").numeric({ ichars: '3456780' });
-$("#txtP24_1_14").numeric({ ichars: '3456780' });
-$("#txtP24_2_1").numeric();
+$("#txtP24_1_12").numericc({ ichars: '3456780' });
+$("#txtP24_1_13").numericc({ ichars: '3456780' });
+$("#txtP24_1_14").numericc({ ichars: '3456780' });
+$("#txtP24_2_1").numericc();
 $("#txtP24_2_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_2_3").numeric();
-$("#txtP24_2_4").numeric({ allow: '.' });
+$("#txtP24_2_3").numericc();
+$("#txtP24_2_4").numericc({ allow: '.' });
 $("#txtP24_2_5").mask("99");
-$("#txtP24_2_6").numeric({ ichars: '3456780' });
+$("#txtP24_2_6").numericc({ ichars: '3456780' });
 $("#txtP24_2_7").mask("99");
 $("#txtP24_2_8").mask("9999");
-$("#txtP24_2_9").numeric({ allow: '.' });
+$("#txtP24_2_9").numericc({ allow: '.' });
 $("#txtP24_2_10").mask("99");
 $("#txtP24_2_11").mask("99");
-$("#txtP24_2_12").numeric({ ichars: '3456780' });
-$("#txtP24_2_13").numeric({ ichars: '3456780' });
-$("#txtP24_2_14").numeric({ ichars: '3456780' });
-$("#txtP24_3_1").numeric();
+$("#txtP24_2_12").numericc({ ichars: '3456780' });
+$("#txtP24_2_13").numericc({ ichars: '3456780' });
+$("#txtP24_2_14").numericc({ ichars: '3456780' });
+$("#txtP24_3_1").numericc();
 $("#txtP24_3_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_3_3").numeric();
-$("#txtP24_3_4").numeric({ allow: '.' });
+$("#txtP24_3_3").numericc();
+$("#txtP24_3_4").numericc({ allow: '.' });
 $("#txtP24_3_5").mask("99");
-$("#txtP24_3_6").numeric({ ichars: '3456780' });
+$("#txtP24_3_6").numericc({ ichars: '3456780' });
 $("#txtP24_3_7").mask("99");
 $("#txtP24_3_8").mask("9999");
-$("#txtP24_3_9").numeric({ allow: '.' });
+$("#txtP24_3_9").numericc({ allow: '.' });
 $("#txtP24_3_10").mask("99");
 $("#txtP24_3_11").mask("99");
-$("#txtP24_3_12").numeric({ ichars: '3456780' });
-$("#txtP24_3_13").numeric({ ichars: '3456780' });
-$("#txtP24_3_14").numeric({ ichars: '3456780' });
-$("#txtP24_4_1").numeric();
+$("#txtP24_3_12").numericc({ ichars: '3456780' });
+$("#txtP24_3_13").numericc({ ichars: '3456780' });
+$("#txtP24_3_14").numericc({ ichars: '3456780' });
+$("#txtP24_4_1").numericc();
 $("#txtP24_4_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_4_3").numeric();
-$("#txtP24_4_4").numeric({ allow: '.' });
+$("#txtP24_4_3").numericc();
+$("#txtP24_4_4").numericc({ allow: '.' });
 $("#txtP24_4_5").mask("99");
-$("#txtP24_4_6").numeric({ ichars: '3456780' });
+$("#txtP24_4_6").numericc({ ichars: '3456780' });
 $("#txtP24_4_7").mask("99");
 $("#txtP24_4_8").mask("9999");
-$("#txtP24_4_9").numeric({ allow: '.' });
+$("#txtP24_4_9").numericc({ allow: '.' });
 $("#txtP24_4_10").mask("99");
 $("#txtP24_4_11").mask("99");
-$("#txtP24_4_12").numeric({ ichars: '3456780' });
-$("#txtP24_4_13").numeric({ ichars: '3456780' });
-$("#txtP24_4_14").numeric({ ichars: '3456780' });
-$("#txtP24_5_1").numeric();
+$("#txtP24_4_12").numericc({ ichars: '3456780' });
+$("#txtP24_4_13").numericc({ ichars: '3456780' });
+$("#txtP24_4_14").numericc({ ichars: '3456780' });
+$("#txtP24_5_1").numericc();
 $("#txtP24_5_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_5_3").numeric();
-$("#txtP24_5_4").numeric({ allow: '.' });
+$("#txtP24_5_3").numericc();
+$("#txtP24_5_4").numericc({ allow: '.' });
 $("#txtP24_5_5").mask("99");
-$("#txtP24_5_6").numeric({ ichars: '3456780' });
+$("#txtP24_5_6").numericc({ ichars: '3456780' });
 $("#txtP24_5_7").mask("99");
 $("#txtP24_5_8").mask("9999");
-$("#txtP24_5_9").numeric({ allow: '.' });
+$("#txtP24_5_9").numericc({ allow: '.' });
 $("#txtP24_5_10").mask("99");
 $("#txtP24_5_11").mask("99");
-$("#txtP24_5_12").numeric({ ichars: '3456780' });
-$("#txtP24_5_13").numeric({ ichars: '3456780' });
-$("#txtP24_5_14").numeric({ ichars: '3456780' });
-$("#txtP24_6_1").numeric();
+$("#txtP24_5_12").numericc({ ichars: '3456780' });
+$("#txtP24_5_13").numericc({ ichars: '3456780' });
+$("#txtP24_5_14").numericc({ ichars: '3456780' });
+$("#txtP24_6_1").numericc();
 $("#txtP24_6_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_6_3").numeric();
-$("#txtP24_6_4").numeric({ allow: '.' });
+$("#txtP24_6_3").numericc();
+$("#txtP24_6_4").numericc({ allow: '.' });
 $("#txtP24_6_5").mask("99");
-$("#txtP24_6_6").numeric({ ichars: '3456780' });
+$("#txtP24_6_6").numericc({ ichars: '3456780' });
 $("#txtP24_6_7").mask("99");
 $("#txtP24_6_8").mask("9999");
-$("#txtP24_6_9").numeric({ allow: '.' });
+$("#txtP24_6_9").numericc({ allow: '.' });
 $("#txtP24_6_10").mask("99");
 $("#txtP24_6_11").mask("99");
-$("#txtP24_6_12").numeric({ ichars: '3456780' });
-$("#txtP24_6_13").numeric({ ichars: '3456780' });
-$("#txtP24_6_14").numeric({ ichars: '3456780' });
-$("#txtP24_7_1").numeric();
+$("#txtP24_6_12").numericc({ ichars: '3456780' });
+$("#txtP24_6_13").numericc({ ichars: '3456780' });
+$("#txtP24_6_14").numericc({ ichars: '3456780' });
+$("#txtP24_7_1").numericc();
 $("#txtP24_7_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_7_3").numeric();
-$("#txtP24_7_4").numeric({ allow: '.' });
+$("#txtP24_7_3").numericc();
+$("#txtP24_7_4").numericc({ allow: '.' });
 $("#txtP24_7_5").mask("99");
-$("#txtP24_7_6").numeric({ ichars: '3456780' });
+$("#txtP24_7_6").numericc({ ichars: '3456780' });
 $("#txtP24_7_7").mask("99");
 $("#txtP24_7_8").mask("9999");
-$("#txtP24_7_9").numeric({ allow: '.' });
+$("#txtP24_7_9").numericc({ allow: '.' });
 $("#txtP24_7_10").mask("99");
 $("#txtP24_7_11").mask("99");
-$("#txtP24_7_12").numeric({ ichars: '3456780' });
-$("#txtP24_7_13").numeric({ ichars: '3456780' });
-$("#txtP24_7_14").numeric({ ichars: '3456780' });
-$("#txtP24_8_1").numeric();
+$("#txtP24_7_12").numericc({ ichars: '3456780' });
+$("#txtP24_7_13").numericc({ ichars: '3456780' });
+$("#txtP24_7_14").numericc({ ichars: '3456780' });
+$("#txtP24_8_1").numericc();
 $("#txtP24_8_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_8_3").numeric();
-$("#txtP24_8_4").numeric({ allow: '.' });
+$("#txtP24_8_3").numericc();
+$("#txtP24_8_4").numericc({ allow: '.' });
 $("#txtP24_8_5").mask("99");
-$("#txtP24_8_6").numeric({ ichars: '3456780' });
+$("#txtP24_8_6").numericc({ ichars: '3456780' });
 $("#txtP24_8_7").mask("99");
 $("#txtP24_8_8").mask("9999");
-$("#txtP24_8_9").numeric({ allow: '.' });
+$("#txtP24_8_9").numericc({ allow: '.' });
 $("#txtP24_8_10").mask("99");
 $("#txtP24_8_11").mask("99");
-$("#txtP24_8_12").numeric({ ichars: '3456780' });
-$("#txtP24_8_13").numeric({ ichars: '3456780' });
-$("#txtP24_8_14").numeric({ ichars: '3456780' });
-$("#txtP24_9_1").numeric();
+$("#txtP24_8_12").numericc({ ichars: '3456780' });
+$("#txtP24_8_13").numericc({ ichars: '3456780' });
+$("#txtP24_8_14").numericc({ ichars: '3456780' });
+$("#txtP24_9_1").numericc();
 $("#txtP24_9_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_9_3").numeric();
-$("#txtP24_9_4").numeric({ allow: '.' });
+$("#txtP24_9_3").numericc();
+$("#txtP24_9_4").numericc({ allow: '.' });
 $("#txtP24_9_5").mask("99");
-$("#txtP24_9_6").numeric({ ichars: '3456780' });
+$("#txtP24_9_6").numericc({ ichars: '3456780' });
 $("#txtP24_9_7").mask("99");
 $("#txtP24_9_8").mask("9999");
-$("#txtP24_9_9").numeric({ allow: '.' });
+$("#txtP24_9_9").numericc({ allow: '.' });
 $("#txtP24_9_10").mask("99");
 $("#txtP24_9_11").mask("99");
-$("#txtP24_9_12").numeric({ ichars: '3456780' });
-$("#txtP24_9_13").numeric({ ichars: '3456780' });
-$("#txtP24_9_14").numeric({ ichars: '3456780' });
-$("#txtP24_10_1").numeric();
+$("#txtP24_9_12").numericc({ ichars: '3456780' });
+$("#txtP24_9_13").numericc({ ichars: '3456780' });
+$("#txtP24_9_14").numericc({ ichars: '3456780' });
+$("#txtP24_10_1").numericc();
 $("#txtP24_10_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_10_3").numeric();
-$("#txtP24_10_4").numeric({ allow: '.' });
+$("#txtP24_10_3").numericc();
+$("#txtP24_10_4").numericc({ allow: '.' });
 $("#txtP24_10_5").mask("99");
-$("#txtP24_10_6").numeric({ ichars: '3456780' });
+$("#txtP24_10_6").numericc({ ichars: '3456780' });
 $("#txtP24_10_7").mask("99");
 $("#txtP24_10_8").mask("9999");
-$("#txtP24_10_9").numeric({ allow: '.' });
+$("#txtP24_10_9").numericc({ allow: '.' });
 $("#txtP24_10_10").mask("99");
 $("#txtP24_10_11").mask("99");
-$("#txtP24_10_12").numeric({ ichars: '3456780' });
-$("#txtP24_10_13").numeric({ ichars: '3456780' });
-$("#txtP24_10_14").numeric({ ichars: '3456780' });
-$("#txtP24_11_1").numeric();
+$("#txtP24_10_12").numericc({ ichars: '3456780' });
+$("#txtP24_10_13").numericc({ ichars: '3456780' });
+$("#txtP24_10_14").numericc({ ichars: '3456780' });
+$("#txtP24_11_1").numericc();
 $("#txtP24_11_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_11_3").numeric();
-$("#txtP24_11_4").numeric({ allow: '.' });
+$("#txtP24_11_3").numericc();
+$("#txtP24_11_4").numericc({ allow: '.' });
 $("#txtP24_11_5").mask("99");
-$("#txtP24_11_6").numeric({ ichars: '3456780' });
+$("#txtP24_11_6").numericc({ ichars: '3456780' });
 $("#txtP24_11_7").mask("99");
 $("#txtP24_11_8").mask("9999");
-$("#txtP24_11_9").numeric({ allow: '.' });
+$("#txtP24_11_9").numericc({ allow: '.' });
 $("#txtP24_11_10").mask("99");
 $("#txtP24_11_11").mask("99");
-$("#txtP24_11_12").numeric({ ichars: '3456780' });
-$("#txtP24_11_13").numeric({ ichars: '3456780' });
-$("#txtP24_11_14").numeric({ ichars: '3456780' });
-$("#txtP24_12_1").numeric();
+$("#txtP24_11_12").numericc({ ichars: '3456780' });
+$("#txtP24_11_13").numericc({ ichars: '3456780' });
+$("#txtP24_11_14").numericc({ ichars: '3456780' });
+$("#txtP24_12_1").numericc();
 $("#txtP24_12_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_12_3").numeric();
-$("#txtP24_12_4").numeric({ allow: '.' });
+$("#txtP24_12_3").numericc();
+$("#txtP24_12_4").numericc({ allow: '.' });
 $("#txtP24_12_5").mask("99");
-$("#txtP24_12_6").numeric({ ichars: '3456780' });
+$("#txtP24_12_6").numericc({ ichars: '3456780' });
 $("#txtP24_12_7").mask("99");
 $("#txtP24_12_8").mask("9999");
-$("#txtP24_12_9").numeric({ allow: '.' });
+$("#txtP24_12_9").numericc({ allow: '.' });
 $("#txtP24_12_10").mask("99");
 $("#txtP24_12_11").mask("99");
-$("#txtP24_12_12").numeric({ ichars: '3456780' });
-$("#txtP24_12_13").numeric({ ichars: '3456780' });
-$("#txtP24_12_14").numeric({ ichars: '3456780' });
-$("#txtP24_13_1").numeric();
+$("#txtP24_12_12").numericc({ ichars: '3456780' });
+$("#txtP24_12_13").numericc({ ichars: '3456780' });
+$("#txtP24_12_14").numericc({ ichars: '3456780' });
+$("#txtP24_13_1").numericc();
 $("#txtP24_13_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_13_3").numeric();
-$("#txtP24_13_4").numeric({ allow: '.' });
+$("#txtP24_13_3").numericc();
+$("#txtP24_13_4").numericc({ allow: '.' });
 $("#txtP24_13_5").mask("99");
-$("#txtP24_13_6").numeric({ ichars: '3456780' });
+$("#txtP24_13_6").numericc({ ichars: '3456780' });
 $("#txtP24_13_7").mask("99");
 $("#txtP24_13_8").mask("9999");
-$("#txtP24_13_9").numeric({ allow: '.' });
+$("#txtP24_13_9").numericc({ allow: '.' });
 $("#txtP24_13_10").mask("99");
 $("#txtP24_13_11").mask("99");
-$("#txtP24_13_12").numeric({ ichars: '3456780' });
-$("#txtP24_13_13").numeric({ ichars: '3456780' });
-$("#txtP24_13_14").numeric({ ichars: '3456780' });
-$("#txtP24_14_1").numeric();
+$("#txtP24_13_12").numericc({ ichars: '3456780' });
+$("#txtP24_13_13").numericc({ ichars: '3456780' });
+$("#txtP24_13_14").numericc({ ichars: '3456780' });
+$("#txtP24_14_1").numericc();
 $("#txtP24_14_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_14_3").numeric();
-$("#txtP24_14_4").numeric({ allow: '.' });
+$("#txtP24_14_3").numericc();
+$("#txtP24_14_4").numericc({ allow: '.' });
 $("#txtP24_14_5").mask("99");
-$("#txtP24_14_6").numeric({ ichars: '3456780' });
+$("#txtP24_14_6").numericc({ ichars: '3456780' });
 $("#txtP24_14_7").mask("99");
 $("#txtP24_14_8").mask("9999");
-$("#txtP24_14_9").numeric({ allow: '.' });
+$("#txtP24_14_9").numericc({ allow: '.' });
 $("#txtP24_14_10").mask("99");
 $("#txtP24_14_11").mask("99");
-$("#txtP24_14_12").numeric({ ichars: '3456780' });
-$("#txtP24_14_13").numeric({ ichars: '3456780' });
-$("#txtP24_14_14").numeric({ ichars: '3456780' });
-$("#txtP24_15_1").numeric();
+$("#txtP24_14_12").numericc({ ichars: '3456780' });
+$("#txtP24_14_13").numericc({ ichars: '3456780' });
+$("#txtP24_14_14").numericc({ ichars: '3456780' });
+$("#txtP24_15_1").numericc();
 $("#txtP24_15_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_15_3").numeric();
-$("#txtP24_15_4").numeric({ allow: '.' });
+$("#txtP24_15_3").numericc();
+$("#txtP24_15_4").numericc({ allow: '.' });
 $("#txtP24_15_5").mask("99");
-$("#txtP24_15_6").numeric({ ichars: '3456780' });
+$("#txtP24_15_6").numericc({ ichars: '3456780' });
 $("#txtP24_15_7").mask("99");
 $("#txtP24_15_8").mask("9999");
-$("#txtP24_15_9").numeric({ allow: '.' });
+$("#txtP24_15_9").numericc({ allow: '.' });
 $("#txtP24_15_10").mask("99");
 $("#txtP24_15_11").mask("99");
-$("#txtP24_15_12").numeric({ ichars: '3456780' });
-$("#txtP24_15_13").numeric({ ichars: '3456780' });
-$("#txtP24_15_14").numeric({ ichars: '3456780' });
-$("#txtP24_16_1").numeric();
+$("#txtP24_15_12").numericc({ ichars: '3456780' });
+$("#txtP24_15_13").numericc({ ichars: '3456780' });
+$("#txtP24_15_14").numericc({ ichars: '3456780' });
+$("#txtP24_16_1").numericc();
 $("#txtP24_16_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_16_3").numeric();
-$("#txtP24_16_4").numeric({ allow: '.' });
+$("#txtP24_16_3").numericc();
+$("#txtP24_16_4").numericc({ allow: '.' });
 $("#txtP24_16_5").mask("99");
-$("#txtP24_16_6").numeric({ ichars: '3456780' });
+$("#txtP24_16_6").numericc({ ichars: '3456780' });
 $("#txtP24_16_7").mask("99");
 $("#txtP24_16_8").mask("9999");
-$("#txtP24_16_9").numeric({ allow: '.' });
+$("#txtP24_16_9").numericc({ allow: '.' });
 $("#txtP24_16_10").mask("99");
 $("#txtP24_16_11").mask("99");
-$("#txtP24_16_12").numeric({ ichars: '3456780' });
-$("#txtP24_16_13").numeric({ ichars: '3456780' });
-$("#txtP24_16_14").numeric({ ichars: '3456780' });
-$("#txtP24_17_1").numeric();
+$("#txtP24_16_12").numericc({ ichars: '3456780' });
+$("#txtP24_16_13").numericc({ ichars: '3456780' });
+$("#txtP24_16_14").numericc({ ichars: '3456780' });
+$("#txtP24_17_1").numericc();
 $("#txtP24_17_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_17_3").numeric();
-$("#txtP24_17_4").numeric({ allow: '.' });
+$("#txtP24_17_3").numericc();
+$("#txtP24_17_4").numericc({ allow: '.' });
 $("#txtP24_17_5").mask("99");
-$("#txtP24_17_6").numeric({ ichars: '3456780' });
+$("#txtP24_17_6").numericc({ ichars: '3456780' });
 $("#txtP24_17_7").mask("99");
 $("#txtP24_17_8").mask("9999");
-$("#txtP24_17_9").numeric({ allow: '.' });
+$("#txtP24_17_9").numericc({ allow: '.' });
 $("#txtP24_17_10").mask("99");
 $("#txtP24_17_11").mask("99");
-$("#txtP24_17_12").numeric({ ichars: '3456780' });
-$("#txtP24_17_13").numeric({ ichars: '3456780' });
-$("#txtP24_17_14").numeric({ ichars: '3456780' });
-$("#txtP24_18_1").numeric();
+$("#txtP24_17_12").numericc({ ichars: '3456780' });
+$("#txtP24_17_13").numericc({ ichars: '3456780' });
+$("#txtP24_17_14").numericc({ ichars: '3456780' });
+$("#txtP24_18_1").numericc();
 $("#txtP24_18_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_18_3").numeric();
-$("#txtP24_18_4").numeric({ allow: '.' });
+$("#txtP24_18_3").numericc();
+$("#txtP24_18_4").numericc({ allow: '.' });
 $("#txtP24_18_5").mask("99");
-$("#txtP24_18_6").numeric({ ichars: '3456780' });
+$("#txtP24_18_6").numericc({ ichars: '3456780' });
 $("#txtP24_18_7").mask("99");
 $("#txtP24_18_8").mask("9999");
-$("#txtP24_18_9").numeric({ allow: '.' });
+$("#txtP24_18_9").numericc({ allow: '.' });
 $("#txtP24_18_10").mask("99");
 $("#txtP24_18_11").mask("99");
-$("#txtP24_18_12").numeric({ ichars: '3456780' });
-$("#txtP24_18_13").numeric({ ichars: '3456780' });
-$("#txtP24_18_14").numeric({ ichars: '3456780' });
-$("#txtP24_19_1").numeric();
+$("#txtP24_18_12").numericc({ ichars: '3456780' });
+$("#txtP24_18_13").numericc({ ichars: '3456780' });
+$("#txtP24_18_14").numericc({ ichars: '3456780' });
+$("#txtP24_19_1").numericc();
 $("#txtP24_19_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_19_3").numeric();
-$("#txtP24_19_4").numeric({ allow: '.' });
+$("#txtP24_19_3").numericc();
+$("#txtP24_19_4").numericc({ allow: '.' });
 $("#txtP24_19_5").mask("99");
-$("#txtP24_19_6").numeric({ ichars: '3456780' });
+$("#txtP24_19_6").numericc({ ichars: '3456780' });
 $("#txtP24_19_7").mask("99");
 $("#txtP24_19_8").mask("9999");
-$("#txtP24_19_9").numeric({ allow: '.' });
+$("#txtP24_19_9").numericc({ allow: '.' });
 $("#txtP24_19_10").mask("99");
 $("#txtP24_19_11").mask("99");
-$("#txtP24_19_12").numeric({ ichars: '3456780' });
-$("#txtP24_19_13").numeric({ ichars: '3456780' });
-$("#txtP24_19_14").numeric({ ichars: '3456780' });
-$("#txtP24_20_1").numeric();
+$("#txtP24_19_12").numericc({ ichars: '3456780' });
+$("#txtP24_19_13").numericc({ ichars: '3456780' });
+$("#txtP24_19_14").numericc({ ichars: '3456780' });
+$("#txtP24_20_1").numericc();
 $("#txtP24_20_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_20_3").numeric();
-$("#txtP24_20_4").numeric({ allow: '.' });
+$("#txtP24_20_3").numericc();
+$("#txtP24_20_4").numericc({ allow: '.' });
 $("#txtP24_20_5").mask("99");
-$("#txtP24_20_6").numeric({ ichars: '3456780' });
+$("#txtP24_20_6").numericc({ ichars: '3456780' });
 $("#txtP24_20_7").mask("99");
 $("#txtP24_20_8").mask("9999");
-$("#txtP24_20_9").numeric({ allow: '.' });
+$("#txtP24_20_9").numericc({ allow: '.' });
 $("#txtP24_20_10").mask("99");
 $("#txtP24_20_11").mask("99");
-$("#txtP24_20_12").numeric({ ichars: '3456780' });
-$("#txtP24_20_13").numeric({ ichars: '3456780' });
-$("#txtP24_20_14").numeric({ ichars: '3456780' });
-$("#txtP24_21_1").numeric();
+$("#txtP24_20_12").numericc({ ichars: '3456780' });
+$("#txtP24_20_13").numericc({ ichars: '3456780' });
+$("#txtP24_20_14").numericc({ ichars: '3456780' });
+$("#txtP24_21_1").numericc();
 $("#txtP24_21_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_21_3").numeric();
-$("#txtP24_21_4").numeric({ allow: '.' });
+$("#txtP24_21_3").numericc();
+$("#txtP24_21_4").numericc({ allow: '.' });
 $("#txtP24_21_5").mask("99");
-$("#txtP24_21_6").numeric({ ichars: '3456780' });
+$("#txtP24_21_6").numericc({ ichars: '3456780' });
 $("#txtP24_21_7").mask("99");
 $("#txtP24_21_8").mask("9999");
-$("#txtP24_21_9").numeric({ allow: '.' });
+$("#txtP24_21_9").numericc({ allow: '.' });
 $("#txtP24_21_10").mask("99");
 $("#txtP24_21_11").mask("99");
-$("#txtP24_21_12").numeric({ ichars: '3456780' });
-$("#txtP24_21_13").numeric({ ichars: '3456780' });
-$("#txtP24_21_14").numeric({ ichars: '3456780' });
-$("#txtP24_22_1").numeric();
+$("#txtP24_21_12").numericc({ ichars: '3456780' });
+$("#txtP24_21_13").numericc({ ichars: '3456780' });
+$("#txtP24_21_14").numericc({ ichars: '3456780' });
+$("#txtP24_22_1").numericc();
 $("#txtP24_22_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_22_3").numeric();
-$("#txtP24_22_4").numeric({ allow: '.' });
+$("#txtP24_22_3").numericc();
+$("#txtP24_22_4").numericc({ allow: '.' });
 $("#txtP24_22_5").mask("99");
-$("#txtP24_22_6").numeric({ ichars: '3456780' });
+$("#txtP24_22_6").numericc({ ichars: '3456780' });
 $("#txtP24_22_7").mask("99");
 $("#txtP24_22_8").mask("9999");
-$("#txtP24_22_9").numeric({ allow: '.' });
+$("#txtP24_22_9").numericc({ allow: '.' });
 $("#txtP24_22_10").mask("99");
 $("#txtP24_22_11").mask("99");
-$("#txtP24_22_12").numeric({ ichars: '3456780' });
-$("#txtP24_22_13").numeric({ ichars: '3456780' });
-$("#txtP24_22_14").numeric({ ichars: '3456780' });
-$("#txtP24_23_1").numeric();
+$("#txtP24_22_12").numericc({ ichars: '3456780' });
+$("#txtP24_22_13").numericc({ ichars: '3456780' });
+$("#txtP24_22_14").numericc({ ichars: '3456780' });
+$("#txtP24_23_1").numericc();
 $("#txtP24_23_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_23_3").numeric();
-$("#txtP24_23_4").numeric({ allow: '.' });
+$("#txtP24_23_3").numericc();
+$("#txtP24_23_4").numericc({ allow: '.' });
 $("#txtP24_23_5").mask("99");
-$("#txtP24_23_6").numeric({ ichars: '3456780' });
+$("#txtP24_23_6").numericc({ ichars: '3456780' });
 $("#txtP24_23_7").mask("99");
 $("#txtP24_23_8").mask("9999");
-$("#txtP24_23_9").numeric({ allow: '.' });
+$("#txtP24_23_9").numericc({ allow: '.' });
 $("#txtP24_23_10").mask("99");
 $("#txtP24_23_11").mask("99");
-$("#txtP24_23_12").numeric({ ichars: '3456780' });
-$("#txtP24_23_13").numeric({ ichars: '3456780' });
-$("#txtP24_23_14").numeric({ ichars: '3456780' });
-$("#txtP24_24_1").numeric();
+$("#txtP24_23_12").numericc({ ichars: '3456780' });
+$("#txtP24_23_13").numericc({ ichars: '3456780' });
+$("#txtP24_23_14").numericc({ ichars: '3456780' });
+$("#txtP24_24_1").numericc();
 $("#txtP24_24_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_24_3").numeric();
-$("#txtP24_24_4").numeric({ allow: '.' });
+$("#txtP24_24_3").numericc();
+$("#txtP24_24_4").numericc({ allow: '.' });
 $("#txtP24_24_5").mask("99");
-$("#txtP24_24_6").numeric({ ichars: '3456780' });
+$("#txtP24_24_6").numericc({ ichars: '3456780' });
 $("#txtP24_24_7").mask("99");
 $("#txtP24_24_8").mask("9999");
-$("#txtP24_24_9").numeric({ allow: '.' });
+$("#txtP24_24_9").numericc({ allow: '.' });
 $("#txtP24_24_10").mask("99");
 $("#txtP24_24_11").mask("99");
-$("#txtP24_24_12").numeric({ ichars: '3456780' });
-$("#txtP24_24_13").numeric({ ichars: '3456780' });
-$("#txtP24_24_14").numeric({ ichars: '3456780' });
-$("#txtP24_25_1").numeric();
+$("#txtP24_24_12").numericc({ ichars: '3456780' });
+$("#txtP24_24_13").numericc({ ichars: '3456780' });
+$("#txtP24_24_14").numericc({ ichars: '3456780' });
+$("#txtP24_25_1").numericc();
 $("#txtP24_25_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_25_3").numeric();
-$("#txtP24_25_4").numeric({ allow: '.' });
+$("#txtP24_25_3").numericc();
+$("#txtP24_25_4").numericc({ allow: '.' });
 $("#txtP24_25_5").mask("99");
-$("#txtP24_25_6").numeric({ ichars: '3456780' });
+$("#txtP24_25_6").numericc({ ichars: '3456780' });
 $("#txtP24_25_7").mask("99");
 $("#txtP24_25_8").mask("9999");
-$("#txtP24_25_9").numeric({ allow: '.' });
+$("#txtP24_25_9").numericc({ allow: '.' });
 $("#txtP24_25_10").mask("99");
 $("#txtP24_25_11").mask("99");
-$("#txtP24_25_12").numeric({ ichars: '3456780' });
-$("#txtP24_25_13").numeric({ ichars: '3456780' });
-$("#txtP24_25_14").numeric({ ichars: '3456780' });
-$("#txtP24_26_1").numeric();
+$("#txtP24_25_12").numericc({ ichars: '3456780' });
+$("#txtP24_25_13").numericc({ ichars: '3456780' });
+$("#txtP24_25_14").numericc({ ichars: '3456780' });
+$("#txtP24_26_1").numericc();
 $("#txtP24_26_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_26_3").numeric();
-$("#txtP24_26_4").numeric({ allow: '.' });
+$("#txtP24_26_3").numericc();
+$("#txtP24_26_4").numericc({ allow: '.' });
 $("#txtP24_26_5").mask("99");
-$("#txtP24_26_6").numeric({ ichars: '3456780' });
+$("#txtP24_26_6").numericc({ ichars: '3456780' });
 $("#txtP24_26_7").mask("99");
 $("#txtP24_26_8").mask("9999");
-$("#txtP24_26_9").numeric({ allow: '.' });
+$("#txtP24_26_9").numericc({ allow: '.' });
 $("#txtP24_26_10").mask("99");
 $("#txtP24_26_11").mask("99");
-$("#txtP24_26_12").numeric({ ichars: '3456780' });
-$("#txtP24_26_13").numeric({ ichars: '3456780' });
-$("#txtP24_26_14").numeric({ ichars: '3456780' });
-$("#txtP24_27_1").numeric();
+$("#txtP24_26_12").numericc({ ichars: '3456780' });
+$("#txtP24_26_13").numericc({ ichars: '3456780' });
+$("#txtP24_26_14").numericc({ ichars: '3456780' });
+$("#txtP24_27_1").numericc();
 $("#txtP24_27_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_27_3").numeric();
-$("#txtP24_27_4").numeric({ allow: '.' });
+$("#txtP24_27_3").numericc();
+$("#txtP24_27_4").numericc({ allow: '.' });
 $("#txtP24_27_5").mask("99");
-$("#txtP24_27_6").numeric({ ichars: '3456780' });
+$("#txtP24_27_6").numericc({ ichars: '3456780' });
 $("#txtP24_27_7").mask("99");
 $("#txtP24_27_8").mask("9999");
-$("#txtP24_27_9").numeric({ allow: '.' });
+$("#txtP24_27_9").numericc({ allow: '.' });
 $("#txtP24_27_10").mask("99");
 $("#txtP24_27_11").mask("99");
-$("#txtP24_27_12").numeric({ ichars: '3456780' });
-$("#txtP24_27_13").numeric({ ichars: '3456780' });
-$("#txtP24_27_14").numeric({ ichars: '3456780' });
-$("#txtP24_28_1").numeric();
+$("#txtP24_27_12").numericc({ ichars: '3456780' });
+$("#txtP24_27_13").numericc({ ichars: '3456780' });
+$("#txtP24_27_14").numericc({ ichars: '3456780' });
+$("#txtP24_28_1").numericc();
 $("#txtP24_28_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_28_3").numeric();
-$("#txtP24_28_4").numeric({ allow: '.' });
+$("#txtP24_28_3").numericc();
+$("#txtP24_28_4").numericc({ allow: '.' });
 $("#txtP24_28_5").mask("99");
-$("#txtP24_28_6").numeric({ ichars: '3456780' });
+$("#txtP24_28_6").numericc({ ichars: '3456780' });
 $("#txtP24_28_7").mask("99");
 $("#txtP24_28_8").mask("9999");
-$("#txtP24_28_9").numeric({ allow: '.' });
+$("#txtP24_28_9").numericc({ allow: '.' });
 $("#txtP24_28_10").mask("99");
 $("#txtP24_28_11").mask("99");
-$("#txtP24_28_12").numeric({ ichars: '3456780' });
-$("#txtP24_28_13").numeric({ ichars: '3456780' });
-$("#txtP24_28_14").numeric({ ichars: '3456780' });
-$("#txtP24_29_1").numeric();
+$("#txtP24_28_12").numericc({ ichars: '3456780' });
+$("#txtP24_28_13").numericc({ ichars: '3456780' });
+$("#txtP24_28_14").numericc({ ichars: '3456780' });
+$("#txtP24_29_1").numericc();
 $("#txtP24_29_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_29_3").numeric();
-$("#txtP24_29_4").numeric({ allow: '.' });
+$("#txtP24_29_3").numericc();
+$("#txtP24_29_4").numericc({ allow: '.' });
 $("#txtP24_29_5").mask("99");
-$("#txtP24_29_6").numeric({ ichars: '3456780' });
+$("#txtP24_29_6").numericc({ ichars: '3456780' });
 $("#txtP24_29_7").mask("99");
 $("#txtP24_29_8").mask("9999");
-$("#txtP24_29_9").numeric({ allow: '.' });
+$("#txtP24_29_9").numericc({ allow: '.' });
 $("#txtP24_29_10").mask("99");
 $("#txtP24_29_11").mask("99");
-$("#txtP24_29_12").numeric({ ichars: '3456780' });
-$("#txtP24_29_13").numeric({ ichars: '3456780' });
-$("#txtP24_29_14").numeric({ ichars: '3456780' });
-$("#txtP24_30_1").numeric();
+$("#txtP24_29_12").numericc({ ichars: '3456780' });
+$("#txtP24_29_13").numericc({ ichars: '3456780' });
+$("#txtP24_29_14").numericc({ ichars: '3456780' });
+$("#txtP24_30_1").numericc();
 $("#txtP24_30_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_30_3").numeric();
-$("#txtP24_30_4").numeric({ allow: '.' });
+$("#txtP24_30_3").numericc();
+$("#txtP24_30_4").numericc({ allow: '.' });
 $("#txtP24_30_5").mask("99");
-$("#txtP24_30_6").numeric({ ichars: '3456780' });
+$("#txtP24_30_6").numericc({ ichars: '3456780' });
 $("#txtP24_30_7").mask("99");
 $("#txtP24_30_8").mask("9999");
-$("#txtP24_30_9").numeric({ allow: '.' });
+$("#txtP24_30_9").numericc({ allow: '.' });
 $("#txtP24_30_10").mask("99");
 $("#txtP24_30_11").mask("99");
-$("#txtP24_30_12").numeric({ ichars: '3456780' });
-$("#txtP24_30_13").numeric({ ichars: '3456780' });
-$("#txtP24_30_14").numeric({ ichars: '3456780' });
-$("#txtP24_31_1").numeric();
+$("#txtP24_30_12").numericc({ ichars: '3456780' });
+$("#txtP24_30_13").numericc({ ichars: '3456780' });
+$("#txtP24_30_14").numericc({ ichars: '3456780' });
+$("#txtP24_31_1").numericc();
 $("#txtP24_31_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_31_3").numeric();
-$("#txtP24_31_4").numeric({ allow: '.' });
+$("#txtP24_31_3").numericc();
+$("#txtP24_31_4").numericc({ allow: '.' });
 $("#txtP24_31_5").mask("99");
-$("#txtP24_31_6").numeric({ ichars: '3456780' });
+$("#txtP24_31_6").numericc({ ichars: '3456780' });
 $("#txtP24_31_7").mask("99");
 $("#txtP24_31_8").mask("9999");
-$("#txtP24_31_9").numeric({ allow: '.' });
+$("#txtP24_31_9").numericc({ allow: '.' });
 $("#txtP24_31_10").mask("99");
 $("#txtP24_31_11").mask("99");
-$("#txtP24_31_12").numeric({ ichars: '3456780' });
-$("#txtP24_31_13").numeric({ ichars: '3456780' });
-$("#txtP24_31_14").numeric({ ichars: '3456780' });
-$("#txtP24_32_1").numeric();
+$("#txtP24_31_12").numericc({ ichars: '3456780' });
+$("#txtP24_31_13").numericc({ ichars: '3456780' });
+$("#txtP24_31_14").numericc({ ichars: '3456780' });
+$("#txtP24_32_1").numericc();
 $("#txtP24_32_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_32_3").numeric();
-$("#txtP24_32_4").numeric({ allow: '.' });
+$("#txtP24_32_3").numericc();
+$("#txtP24_32_4").numericc({ allow: '.' });
 $("#txtP24_32_5").mask("99");
-$("#txtP24_32_6").numeric({ ichars: '3456780' });
+$("#txtP24_32_6").numericc({ ichars: '3456780' });
 $("#txtP24_32_7").mask("99");
 $("#txtP24_32_8").mask("9999");
-$("#txtP24_32_9").numeric({ allow: '.' });
+$("#txtP24_32_9").numericc({ allow: '.' });
 $("#txtP24_32_10").mask("99");
 $("#txtP24_32_11").mask("99");
-$("#txtP24_32_12").numeric({ ichars: '3456780' });
-$("#txtP24_32_13").numeric({ ichars: '3456780' });
-$("#txtP24_32_14").numeric({ ichars: '3456780' });
-$("#txtP24_33_1").numeric();
+$("#txtP24_32_12").numericc({ ichars: '3456780' });
+$("#txtP24_32_13").numericc({ ichars: '3456780' });
+$("#txtP24_32_14").numericc({ ichars: '3456780' });
+$("#txtP24_33_1").numericc();
 $("#txtP24_33_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_33_3").numeric();
-$("#txtP24_33_4").numeric({ allow: '.' });
+$("#txtP24_33_3").numericc();
+$("#txtP24_33_4").numericc({ allow: '.' });
 $("#txtP24_33_5").mask("99");
-$("#txtP24_33_6").numeric({ ichars: '3456780' });
+$("#txtP24_33_6").numericc({ ichars: '3456780' });
 $("#txtP24_33_7").mask("99");
 $("#txtP24_33_8").mask("9999");
-$("#txtP24_33_9").numeric({ allow: '.' });
+$("#txtP24_33_9").numericc({ allow: '.' });
 $("#txtP24_33_10").mask("99");
 $("#txtP24_33_11").mask("99");
-$("#txtP24_33_12").numeric({ ichars: '3456780' });
-$("#txtP24_33_13").numeric({ ichars: '3456780' });
-$("#txtP24_33_14").numeric({ ichars: '3456780' });
-$("#txtP24_34_1").numeric();
+$("#txtP24_33_12").numericc({ ichars: '3456780' });
+$("#txtP24_33_13").numericc({ ichars: '3456780' });
+$("#txtP24_33_14").numericc({ ichars: '3456780' });
+$("#txtP24_34_1").numericc();
 $("#txtP24_34_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP24_34_3").numeric();
-$("#txtP24_34_4").numeric({ allow: '.' });
+$("#txtP24_34_3").numericc();
+$("#txtP24_34_4").numericc({ allow: '.' });
 $("#txtP24_34_5").mask("99");
-$("#txtP24_34_6").numeric({ ichars: '3456780' });
+$("#txtP24_34_6").numericc({ ichars: '3456780' });
 $("#txtP24_34_7").mask("99");
 $("#txtP24_34_8").mask("9999");
-$("#txtP24_34_9").numeric({ allow: '.' });
+$("#txtP24_34_9").numericc({ allow: '.' });
 $("#txtP24_34_10").mask("99");
 $("#txtP24_34_11").mask("99");
-$("#txtP24_34_12").numeric({ ichars: '3456780' });
-$("#txtP24_34_13").numeric({ ichars: '3456780' });
-$("#txtP24_34_14").numeric({ ichars: '3456780' });
-$("#txtP25_1").numeric({ ichars: '3456780' });
+$("#txtP24_34_12").numericc({ ichars: '3456780' });
+$("#txtP24_34_13").numericc({ ichars: '3456780' });
+$("#txtP24_34_14").numericc({ ichars: '3456780' });
+$("#txtP25_1").numericc({ ichars: '3456780' });
 $("#txtP25_1_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP25_1_2").numeric({ allow: '.' });
+$("#txtP25_1_2").numericc({ allow: '.' });
 $("#txtP25_1_3").mask("99");
 $("#txtP25_2_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP25_2_2").numeric({ allow: '.' });
+$("#txtP25_2_2").numericc({ allow: '.' });
 $("#txtP25_2_3").mask("99");
 $("#txtP25_3_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP25_3_2").numeric({ allow: '.' });
+$("#txtP25_3_2").numericc({ allow: '.' });
 $("#txtP25_3_3").mask("99");
 $("#txtP25_4_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP25_4_2").numeric({ allow: '.' });
+$("#txtP25_4_2").numericc({ allow: '.' });
 $("#txtP25_4_3").mask("99");
 $("#txtP25_5_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP25_5_2").numeric({ allow: '.' });
+$("#txtP25_5_2").numericc({ allow: '.' });
 $("#txtP25_5_3").mask("99");
-$("#txtP26_1").numeric({ ichars: '3456780' });
+$("#txtP26_1").numericc({ ichars: '3456780' });
 $("#txtP26_1_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP26_1_2").numeric({ allow: '.' });
+$("#txtP26_1_2").numericc({ allow: '.' });
 $("#txtP26_1_3").mask("99");
 $("#txtP26_2_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP26_2_2").numeric({ allow: '.' });
+$("#txtP26_2_2").numericc({ allow: '.' });
 $("#txtP26_2_3").mask("99");
 $("#txtP26_3_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP26_3_2").numeric({ allow: '.' });
+$("#txtP26_3_2").numericc({ allow: '.' });
 $("#txtP26_3_3").mask("99");
 $("#txtP26_4_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP26_4_2").numeric({ allow: '.' });
+$("#txtP26_4_2").numericc({ allow: '.' });
 $("#txtP26_4_3").mask("99");
 $("#txtP26_5_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP26_5_2").numeric({ allow: '.' });
+$("#txtP26_5_2").numericc({ allow: '.' });
 $("#txtP26_5_3").mask("99");
-$("#txtP27_1").numeric({ ichars: '3456780' });
+$("#txtP27_1").numericc({ ichars: '3456780' });
 $("#txtP27_1_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP27_1_2").numeric({ allow: '.' });
+$("#txtP27_1_2").numericc({ allow: '.' });
 $("#txtP27_1_3").mask("99");
 $("#txtP27_2_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP27_2_2").numeric({ allow: '.' });
+$("#txtP27_2_2").numericc({ allow: '.' });
 $("#txtP27_2_3").mask("99");
 $("#txtP27_3_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP27_3_2").numeric({ allow: '.' });
+$("#txtP27_3_2").numericc({ allow: '.' });
 $("#txtP27_3_3").mask("99");
 $("#txtP27_4_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP27_4_2").numeric({ allow: '.' });
+$("#txtP27_4_2").numericc({ allow: '.' });
 $("#txtP27_4_3").mask("99");
 $("#txtP27_5_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP27_5_2").numeric({ allow: '.' });
+$("#txtP27_5_2").numericc({ allow: '.' });
 $("#txtP27_5_3").mask("99");
-$("#txtP28_1").numeric({ ichars: '3456780' });
-$("#txtP28_1_1").numeric({ allow: '.' });
+$("#txtP28_1").numericc({ ichars: '3456780' });
+$("#txtP28_1_1").numericc({ allow: '.' });
 $("#txtP28_1_2").mask("99");
-$("#txtP28_2_1").numeric({ allow: '.' });
+$("#txtP28_2_1").numericc({ allow: '.' });
 $("#txtP28_2_2").mask("99");
-$("#txtP28_3_1").numeric({ allow: '.' });
+$("#txtP28_3_1").numericc({ allow: '.' });
 $("#txtP28_3_2").mask("99");
-$("#txtP28_4_1").numeric({ allow: '.' });
+$("#txtP28_4_1").numericc({ allow: '.' });
 $("#txtP28_4_2").mask("99");
-$("#txtP28_5_1").numeric({ allow: '.' });
+$("#txtP28_5_1").numericc({ allow: '.' });
 $("#txtP28_5_2").mask("99");
-$("#txtP29_1").numeric({ ichars: '3456780' });
+$("#txtP29_1").numericc({ ichars: '3456780' });
 $("#txtP29_1_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP29_1_2").numeric();
+$("#txtP29_1_2").numericc();
 $("#txtP29_2_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP29_2_2").numeric();
+$("#txtP29_2_2").numericc();
 $("#txtP29_3_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP29_3_2").numeric();
+$("#txtP29_3_2").numericc();
 $("#txtP29_4_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP29_4_2").numeric();
+$("#txtP29_4_2").numericc();
 $("#txtP29_5_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP29_5_2").numeric();
-$("#txtP30_1").numeric({ ichars: '3456780' });
+$("#txtP29_5_2").numericc();
+$("#txtP30_1").numericc({ ichars: '3456780' });
 $("#txtP30_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP30_3").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP30_4").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP30_5").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP30_6").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP31").numeric({ ichars: '456780' });
-$("#txtP32").numeric({ ichars: '3456780' });
-$("#txtP33").numeric({ ichars: '3456780' });
-$("#txtP34").numeric({ ichars: '3456780' });
-$("#txtP35").numeric({ ichars: '3456780' });
-$("#txtP36").numeric({ ichars: '3456780' });
-$("#txtP37_1").numeric({ ichars: '3456780' });
+$("#txtP31").numericc({ ichars: '456780' });
+$("#txtP32").numericc({ ichars: '3456780' });
+$("#txtP33").numericc({ ichars: '3456780' });
+$("#txtP34").numericc({ ichars: '3456780' });
+$("#txtP35").numericc({ ichars: '3456780' });
+$("#txtP36").numericc({ ichars: '3456780' });
+$("#txtP37_1").numericc({ ichars: '3456780' });
 $("#txtP37_1_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP37_1_2").numeric({ ichars: '3456780' });
+$("#txtP37_1_2").numericc({ ichars: '3456780' });
 $("#txtP37_2_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP37_2_2").numeric({ ichars: '3456780' });
+$("#txtP37_2_2").numericc({ ichars: '3456780' });
 $("#txtP37_3_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP37_3_2").numeric({ ichars: '3456780' });
+$("#txtP37_3_2").numericc({ ichars: '3456780' });
 $("#txtP37_4_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP37_4_2").numeric({ ichars: '3456780' });
+$("#txtP37_4_2").numericc({ ichars: '3456780' });
 $("#txtP37_5_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP37_5_2").numeric({ ichars: '3456780' });
-$("#txtP38_1_1").numeric();
+$("#txtP37_5_2").numericc({ ichars: '3456780' });
+$("#txtP38_1_1").numericc();
 $("#txtP38_1_2").mask("9999");
 $("#txtP38_1_3").mask("9999");
-$("#txtP38_2_1").numeric();
+$("#txtP38_2_1").numericc();
 $("#txtP38_2_2").mask("9999");
 $("#txtP38_2_3").mask("9999");
-$("#txtP38_3_1").numeric();
+$("#txtP38_3_1").numericc();
 $("#txtP38_3_2").mask("9999");
 $("#txtP38_3_3").mask("9999");
-$("#txtP38_4_1").numeric();
+$("#txtP38_4_1").numericc();
 $("#txtP38_4_2").mask("9999");
 $("#txtP38_4_3").mask("9999");
-$("#txtP39_1_1").numeric();
+$("#txtP39_1_1").numericc();
 $("#txtP39_1_2").mask("9999");
 $("#txtP39_1_3").mask("9999");
-$("#txtP39_2_1").numeric();
+$("#txtP39_2_1").numericc();
 $("#txtP39_2_2").mask("9999");
 $("#txtP39_2_3").mask("9999");
-$("#txtP39_3_1").numeric();
+$("#txtP39_3_1").numericc();
 $("#txtP39_3_2").mask("9999");
 $("#txtP39_3_3").mask("9999");
-$("#txtP39_4_1").numeric();
+$("#txtP39_4_1").numericc();
 $("#txtP39_4_2").mask("9999");
 $("#txtP39_4_3").mask("9999");
-$("#txtP39_5_1").numeric();
+$("#txtP39_5_1").numericc();
 $("#txtP39_5_2").mask("9999");
 $("#txtP39_5_3").mask("9999");
-$("#txtP39_6_1").numeric();
+$("#txtP39_6_1").numericc();
 $("#txtP39_6_2").mask("9999");
 $("#txtP39_6_3").mask("9999");
-$("#txtP39_7_1").numeric();
+$("#txtP39_7_1").numericc();
 $("#txtP39_7_2").mask("9999");
 $("#txtP39_7_3").mask("9999");
-$("#txtP39_8_1").numeric();
+$("#txtP39_8_1").numericc();
 $("#txtP39_8_2").mask("9999");
 $("#txtP39_8_3").mask("9999");
-$("#txtP39_9_1").numeric();
+$("#txtP39_9_1").numericc();
 $("#txtP39_9_2").mask("9999");
 $("#txtP39_9_3").mask("9999");
-$("#txtP39_10_1").numeric();
+$("#txtP39_10_1").numericc();
 $("#txtP39_10_2").mask("9999");
 $("#txtP39_10_3").mask("9999");
-$("#txtP39_11_1").numeric();
+$("#txtP39_11_1").numericc();
 $("#txtP39_11_2").mask("9999");
 $("#txtP39_11_3").mask("9999");
-$("#txtP39_12_1").numeric();
+$("#txtP39_12_1").numericc();
 $("#txtP39_12_2").mask("9999");
 $("#txtP39_12_3").mask("9999");
-$("#txtP39_13_1").numeric();
+$("#txtP39_13_1").numericc();
 $("#txtP39_13_2").mask("9999");
 $("#txtP39_13_3").mask("9999");
-$("#txtP39_14_1").numeric();
+$("#txtP39_14_1").numericc();
 $("#txtP39_14_2").mask("9999");
 $("#txtP39_14_3").mask("9999");
-$("#txtP39_15_1").numeric();
+$("#txtP39_15_1").numericc();
 $("#txtP39_15_2").mask("9999");
 $("#txtP39_15_3").mask("9999");
-$("#txtP39_16_1").numeric();
+$("#txtP39_16_1").numericc();
 $("#txtP39_16_2").mask("9999");
 $("#txtP39_16_3").mask("9999");
-$("#txtP39_17_1").numeric();
+$("#txtP39_17_1").numericc();
 $("#txtP39_17_2").mask("9999");
 $("#txtP39_17_3").mask("9999");
-$("#txtP39_18_1").numeric();
+$("#txtP39_18_1").numericc();
 $("#txtP39_18_2").mask("9999");
 $("#txtP39_18_3").mask("9999");
-$("#txtP40").numeric({ ichars: '3456780' });
-$("#txtP41_1_1").numeric();
-$("#txtP41_1_2").numeric();
-$("#txtP41_1_3").numeric();
-$("#txtP41_2_1").numeric();
-$("#txtP41_2_2").numeric();
-$("#txtP41_2_3").numeric();
-$("#txtP41_3_1").numeric();
-$("#txtP41_3_2").numeric();
-$("#txtP41_3_3").numeric();
-$("#txtP41_4_1").numeric();
-$("#txtP41_4_2").numeric();
-$("#txtP41_4_3").numeric();
-$("#txtP41_5_1").numeric();
-$("#txtP41_5_2").numeric();
-$("#txtP41_5_3").numeric();
-$("#txtP41_6_1").numeric();
-$("#txtP41_6_2").numeric();
-$("#txtP41_6_3").numeric();
-$("#txtP41_7_1").numeric();
-$("#txtP41_7_2").numeric();
-$("#txtP41_7_3").numeric();
-$("#txtP41_8_1").numeric();
-$("#txtP41_8_2").numeric();
-$("#txtP41_8_3").numeric();
-$("#txtP41_9_1").numeric();
-$("#txtP41_9_2").numeric();
-$("#txtP41_9_3").numeric();
-$("#txtP42").numeric();
-$("#txtP43").numeric();
-$("#txtP44").numeric();
-$("#txtP45_1").numeric({ ichars: '3456780' });
-$("#txtP45_2").numeric({ ichars: '3456780' });
-$("#txtP45_3").numeric({ ichars: '3456780' });
-$("#txtP46").numeric({ ichars: '3456780' });
-$("#txtP47_1").numeric({ ichars: '3456780' });
-$("#txtP47_2").numeric({ ichars: '3456780' });
-$("#txtP47_3").numeric({ ichars: '3456780' });
-$("#txtP48").numeric({ ichars: '3456780' });
-$("#txtP49_1").numeric();
-$("#txtP49_2").numeric();
-$("#txtP49_3").numeric();
-$("#txtP50").numeric({ ichars: '3456780' });
-$("#txtP51_1_1").numeric();
-$("#txtP51_1_2").numeric();
-$("#txtP51_1_3").numeric();
-$("#txtP51_2_1").numeric();
-$("#txtP51_2_2").numeric();
-$("#txtP51_2_3").numeric();
-$("#txtP51_3_1").numeric();
-$("#txtP51_3_2").numeric();
-$("#txtP51_3_3").numeric();
-$("#txtP51_4_1").numeric();
-$("#txtP51_4_2").numeric();
-$("#txtP51_4_3").numeric();
-$("#txtP52_1").numeric({ ichars: '3456780' });
-$("#txtP52_2").numeric({ ichars: '3456780' });
-$("#txtP52_3").numeric({ ichars: '3456780' });
-$("#txtP53_1").numeric({ ichars: '3456780' });
-$("#txtP53_2").numeric({ ichars: '3456780' });
-$("#txtP53_3").numeric({ ichars: '3456780' });
-$("#txtP54").numeric({ ichars: '3456780' });
-$("#txtP55_1_1").numeric();
-$("#txtP55_1_2").numeric();
-$("#txtP55_1_3").numeric();
-$("#txtP55_1_4").numeric();
-$("#txtP55_1_5").numeric();
-$("#txtP55_2_1").numeric();
-$("#txtP55_2_2").numeric();
-$("#txtP55_2_3").numeric();
-$("#txtP55_2_4").numeric();
-$("#txtP55_2_5").numeric();
-$("#txtP55_3_1").numeric();
-$("#txtP55_3_2").numeric();
-$("#txtP55_3_3").numeric();
-$("#txtP55_3_4").numeric();
-$("#txtP55_3_5").numeric();
-$("#txtP55_4_1").numeric();
-$("#txtP55_4_2").numeric();
-$("#txtP55_4_3").numeric();
-$("#txtP55_4_4").numeric();
-$("#txtP55_4_5").numeric();
-$("#txtP56").numeric({ ichars: '3456780' });
-$("#txtP57_1_1").numeric();
-$("#txtP57_1_2").numeric();
-$("#txtP57_1_3").numeric();
-$("#txtP57_2_1").numeric();
-$("#txtP57_2_2").numeric();
-$("#txtP57_2_3").numeric();
-$("#txtP57_3_1").numeric();
-$("#txtP57_3_2").numeric();
-$("#txtP57_3_3").numeric();
-$("#txtP57_4_1").numeric();
-$("#txtP57_4_2").numeric();
-$("#txtP57_4_3").numeric();
-$("#txtP58_1").numeric({ ichars: '3456780' });
-$("#txtP58_2").numeric({ ichars: '3456780' });
-$("#txtP58_3").numeric({ ichars: '3456780' });
-$("#txtP59").numeric({ ichars: '3456780' });
-$("#txtP60_1_1").numeric();
-$("#txtP60_1_2").numeric();
-$("#txtP60_1_3").numeric();
-$("#txtP60_2_1").numeric();
-$("#txtP60_2_2").numeric();
-$("#txtP60_2_3").numeric();
-$("#txtP60_3_1").numeric();
-$("#txtP60_3_2").numeric();
-$("#txtP60_3_3").numeric();
-$("#txtP60_4_1").numeric();
-$("#txtP60_4_2").numeric();
-$("#txtP60_4_3").numeric();
-$("#txtP61_1").numeric({ ichars: '3456780' });
-$("#txtP61_2").numeric({ ichars: '3456780' });
-$("#txtP61_3").numeric({ ichars: '3456780' });
-$("#txtP62").numeric({ ichars: '3456780' });
-$("#txtP63_1_1").numeric();
-$("#txtP63_1_2").numeric();
-$("#txtP63_1_3").numeric();
-$("#txtP63_1_4").numeric();
-$("#txtP63_2_1").numeric();
-$("#txtP63_2_2").numeric();
-$("#txtP63_2_3").numeric();
-$("#txtP63_2_4").numeric();
-$("#txtP63_3_1").numeric();
-$("#txtP63_3_2").numeric();
-$("#txtP63_3_3").numeric();
-$("#txtP63_3_4").numeric();
-$("#txtP63_4_1").numeric();
-$("#txtP63_4_2").numeric();
-$("#txtP63_4_3").numeric();
-$("#txtP63_4_4").numeric();
-$("#txtP63_5_1").numeric();
-$("#txtP63_5_2").numeric();
-$("#txtP63_5_3").numeric();
-$("#txtP63_5_4").numeric();
-$("#txtP63_6_1").numeric();
-$("#txtP63_6_2").numeric();
-$("#txtP63_6_3").numeric();
-$("#txtP63_6_4").numeric();
-$("#txtP63_7_1").numeric();
-$("#txtP63_7_2").numeric();
-$("#txtP63_7_3").numeric();
-$("#txtP63_7_4").numeric();
-$("#txtP63_8_1").numeric();
-$("#txtP63_8_2").numeric();
-$("#txtP63_8_3").numeric();
-$("#txtP63_8_4").numeric();
-$("#txtP64_1").numeric({ ichars: '3456780' });
-$("#txtP64_2").numeric({ ichars: '3456780' });
-$("#txtP64_3").numeric({ ichars: '3456780' });
-$("#txtP65_1").numeric({ ichars: '3456780' });
-$("#txtP65_2").numeric({ ichars: '3456780' });
-$("#txtP65_3").numeric({ ichars: '3456780' });
-$("#txtP66").numeric({ ichars: '3456780' });
-$("#txtP67_1_1").numeric();
-$("#txtP67_1_2").numeric();
-$("#txtP67_1_3").numeric();
-$("#txtP67_1_4").numeric();
-$("#txtP67_2_1").numeric();
-$("#txtP67_2_2").numeric();
-$("#txtP67_2_3").numeric();
-$("#txtP67_2_4").numeric();
-$("#txtP67_3_1").numeric();
-$("#txtP67_3_2").numeric();
-$("#txtP67_3_3").numeric();
-$("#txtP67_3_4").numeric();
-$("#txtP67_4_1").numeric();
-$("#txtP67_4_2").numeric();
-$("#txtP67_4_3").numeric();
-$("#txtP67_4_4").numeric();
-$("#txtP67_5_1").numeric();
-$("#txtP67_5_2").numeric();
-$("#txtP67_5_3").numeric();
-$("#txtP67_5_4").numeric();
-$("#txtP67_6_1").numeric();
-$("#txtP67_6_2").numeric();
-$("#txtP67_6_3").numeric();
-$("#txtP67_6_4").numeric();
-$("#txtP67_7_1").numeric();
-$("#txtP67_7_2").numeric();
-$("#txtP67_7_3").numeric();
-$("#txtP67_7_4").numeric();
-$("#txtP67_8_1").numeric();
-$("#txtP67_8_2").numeric();
-$("#txtP67_8_3").numeric();
-$("#txtP67_8_4").numeric();
-$("#txtP68_1").numeric({ ichars: '3456780' });
-$("#txtP68_2").numeric({ ichars: '3456780' });
-$("#txtP68_3").numeric({ ichars: '3456780' });
-$("#txtP69_1").numeric({ ichars: '3456780' });
-$("#txtP69_2").numeric({ ichars: '3456780' });
-$("#txtP69_3").numeric({ ichars: '3456780' });
-$("#txtP70_1").numeric();
-$("#txtP70_2").numeric();
-$("#txtP70_3").numeric();
-$("#txtP70_4").numeric();
-$("#txtP70_5").numeric();
-$("#txtP71_1").numeric({ ichars: '3456780' });
-$("#txtP71_2").numeric({ ichars: '3456780' });
-$("#txtP71_3").numeric({ ichars: '3456780' });
-$("#txtP72").numeric({ ichars: '456780' });
-$("#txtP73_1").numeric();
-$("#txtP73_2").numeric();
-$("#txtP73_3").numeric();
-$("#txtP73_4").numeric();
-$("#txtP73_5").numeric();
-$("#txtP73_6").numeric();
-$("#txtP73_7").numeric();
-$("#txtP73_8").numeric();
-$("#txtP73_9").numeric();
-$("#txtP73_10").numeric();
-$("#txtP74_1_1").numeric();
+$("#txtP40").numericc({ ichars: '3456780' });
+$("#txtP41_1_1").numericc();
+$("#txtP41_1_2").numericc();
+$("#txtP41_1_3").numericc();
+$("#txtP41_2_1").numericc();
+$("#txtP41_2_2").numericc();
+$("#txtP41_2_3").numericc();
+$("#txtP41_3_1").numericc();
+$("#txtP41_3_2").numericc();
+$("#txtP41_3_3").numericc();
+$("#txtP41_4_1").numericc();
+$("#txtP41_4_2").numericc();
+$("#txtP41_4_3").numericc();
+$("#txtP41_5_1").numericc();
+$("#txtP41_5_2").numericc();
+$("#txtP41_5_3").numericc();
+$("#txtP41_6_1").numericc();
+$("#txtP41_6_2").numericc();
+$("#txtP41_6_3").numericc();
+$("#txtP41_7_1").numericc();
+$("#txtP41_7_2").numericc();
+$("#txtP41_7_3").numericc();
+$("#txtP41_8_1").numericc();
+$("#txtP41_8_2").numericc();
+$("#txtP41_8_3").numericc();
+$("#txtP41_9_1").numericc();
+$("#txtP41_9_2").numericc();
+$("#txtP41_9_3").numericc();
+$("#txtP42").numericc();
+$("#txtP43").numericc();
+$("#txtP44").numericc();
+$("#txtP45_1").numericc({ ichars: '3456780' });
+$("#txtP45_2").numericc({ ichars: '3456780' });
+$("#txtP45_3").numericc({ ichars: '3456780' });
+$("#txtP46").numericc({ ichars: '3456780' });
+$("#txtP47_1").numericc({ ichars: '3456780' });
+$("#txtP47_2").numericc({ ichars: '3456780' });
+$("#txtP47_3").numericc({ ichars: '3456780' });
+$("#txtP48").numericc({ ichars: '3456780' });
+$("#txtP49_1").numericc();
+$("#txtP49_2").numericc();
+$("#txtP49_3").numericc();
+$("#txtP50").numericc({ ichars: '3456780' });
+$("#txtP51_1_1").numericc();
+$("#txtP51_1_2").numericc();
+$("#txtP51_1_3").numericc();
+$("#txtP51_2_1").numericc();
+$("#txtP51_2_2").numericc();
+$("#txtP51_2_3").numericc();
+$("#txtP51_3_1").numericc();
+$("#txtP51_3_2").numericc();
+$("#txtP51_3_3").numericc();
+$("#txtP51_4_1").numericc();
+$("#txtP51_4_2").numericc();
+$("#txtP51_4_3").numericc();
+$("#txtP52_1").numericc({ ichars: '3456780' });
+$("#txtP52_2").numericc({ ichars: '3456780' });
+$("#txtP52_3").numericc({ ichars: '3456780' });
+$("#txtP53_1").numericc({ ichars: '3456780' });
+$("#txtP53_2").numericc({ ichars: '3456780' });
+$("#txtP53_3").numericc({ ichars: '3456780' });
+$("#txtP54").numericc({ ichars: '3456780' });
+$("#txtP55_1_1").numericc();
+$("#txtP55_1_2").numericc();
+$("#txtP55_1_3").numericc();
+$("#txtP55_1_4").numericc();
+$("#txtP55_1_5").numericc();
+$("#txtP55_2_1").numericc();
+$("#txtP55_2_2").numericc();
+$("#txtP55_2_3").numericc();
+$("#txtP55_2_4").numericc();
+$("#txtP55_2_5").numericc();
+$("#txtP55_3_1").numericc();
+$("#txtP55_3_2").numericc();
+$("#txtP55_3_3").numericc();
+$("#txtP55_3_4").numericc();
+$("#txtP55_3_5").numericc();
+$("#txtP55_4_1").numericc();
+$("#txtP55_4_2").numericc();
+$("#txtP55_4_3").numericc();
+$("#txtP55_4_4").numericc();
+$("#txtP55_4_5").numericc();
+$("#txtP56").numericc({ ichars: '3456780' });
+$("#txtP57_1_1").numericc();
+$("#txtP57_1_2").numericc();
+$("#txtP57_1_3").numericc();
+$("#txtP57_2_1").numericc();
+$("#txtP57_2_2").numericc();
+$("#txtP57_2_3").numericc();
+$("#txtP57_3_1").numericc();
+$("#txtP57_3_2").numericc();
+$("#txtP57_3_3").numericc();
+$("#txtP57_4_1").numericc();
+$("#txtP57_4_2").numericc();
+$("#txtP57_4_3").numericc();
+$("#txtP58_1").numericc({ ichars: '3456780' });
+$("#txtP58_2").numericc({ ichars: '3456780' });
+$("#txtP58_3").numericc({ ichars: '3456780' });
+$("#txtP59").numericc({ ichars: '3456780' });
+$("#txtP60_1_1").numericc();
+$("#txtP60_1_2").numericc();
+$("#txtP60_1_3").numericc();
+$("#txtP60_2_1").numericc();
+$("#txtP60_2_2").numericc();
+$("#txtP60_2_3").numericc();
+$("#txtP60_3_1").numericc();
+$("#txtP60_3_2").numericc();
+$("#txtP60_3_3").numericc();
+$("#txtP60_4_1").numericc();
+$("#txtP60_4_2").numericc();
+$("#txtP60_4_3").numericc();
+$("#txtP61_1").numericc({ ichars: '3456780' });
+$("#txtP61_2").numericc({ ichars: '3456780' });
+$("#txtP61_3").numericc({ ichars: '3456780' });
+$("#txtP62").numericc({ ichars: '3456780' });
+$("#txtP63_1_1").numericc();
+$("#txtP63_1_2").numericc();
+$("#txtP63_1_3").numericc();
+$("#txtP63_1_4").numericc();
+$("#txtP63_2_1").numericc();
+$("#txtP63_2_2").numericc();
+$("#txtP63_2_3").numericc();
+$("#txtP63_2_4").numericc();
+$("#txtP63_3_1").numericc();
+$("#txtP63_3_2").numericc();
+$("#txtP63_3_3").numericc();
+$("#txtP63_3_4").numericc();
+$("#txtP63_4_1").numericc();
+$("#txtP63_4_2").numericc();
+$("#txtP63_4_3").numericc();
+$("#txtP63_4_4").numericc();
+$("#txtP63_5_1").numericc();
+$("#txtP63_5_2").numericc();
+$("#txtP63_5_3").numericc();
+$("#txtP63_5_4").numericc();
+$("#txtP63_6_1").numericc();
+$("#txtP63_6_2").numericc();
+$("#txtP63_6_3").numericc();
+$("#txtP63_6_4").numericc();
+$("#txtP63_7_1").numericc();
+$("#txtP63_7_2").numericc();
+$("#txtP63_7_3").numericc();
+$("#txtP63_7_4").numericc();
+$("#txtP63_8_1").numericc();
+$("#txtP63_8_2").numericc();
+$("#txtP63_8_3").numericc();
+$("#txtP63_8_4").numericc();
+$("#txtP64_1").numericc({ ichars: '3456780' });
+$("#txtP64_2").numericc({ ichars: '3456780' });
+$("#txtP64_3").numericc({ ichars: '3456780' });
+$("#txtP65_1").numericc({ ichars: '3456780' });
+$("#txtP65_2").numericc({ ichars: '3456780' });
+$("#txtP65_3").numericc({ ichars: '3456780' });
+$("#txtP66").numericc({ ichars: '3456780' });
+$("#txtP67_1_1").numericc();
+$("#txtP67_1_2").numericc();
+$("#txtP67_1_3").numericc();
+$("#txtP67_1_4").numericc();
+$("#txtP67_2_1").numericc();
+$("#txtP67_2_2").numericc();
+$("#txtP67_2_3").numericc();
+$("#txtP67_2_4").numericc();
+$("#txtP67_3_1").numericc();
+$("#txtP67_3_2").numericc();
+$("#txtP67_3_3").numericc();
+$("#txtP67_3_4").numericc();
+$("#txtP67_4_1").numericc();
+$("#txtP67_4_2").numericc();
+$("#txtP67_4_3").numericc();
+$("#txtP67_4_4").numericc();
+$("#txtP67_5_1").numericc();
+$("#txtP67_5_2").numericc();
+$("#txtP67_5_3").numericc();
+$("#txtP67_5_4").numericc();
+$("#txtP67_6_1").numericc();
+$("#txtP67_6_2").numericc();
+$("#txtP67_6_3").numericc();
+$("#txtP67_6_4").numericc();
+$("#txtP67_7_1").numericc();
+$("#txtP67_7_2").numericc();
+$("#txtP67_7_3").numericc();
+$("#txtP67_7_4").numericc();
+$("#txtP67_8_1").numericc();
+$("#txtP67_8_2").numericc();
+$("#txtP67_8_3").numericc();
+$("#txtP67_8_4").numericc();
+$("#txtP68_1").numericc({ ichars: '3456780' });
+$("#txtP68_2").numericc({ ichars: '3456780' });
+$("#txtP68_3").numericc({ ichars: '3456780' });
+$("#txtP69_1").numericc({ ichars: '3456780' });
+$("#txtP69_2").numericc({ ichars: '3456780' });
+$("#txtP69_3").numericc({ ichars: '3456780' });
+$("#txtP70_1").numericc();
+$("#txtP70_2").numericc();
+$("#txtP70_3").numericc();
+$("#txtP70_4").numericc();
+$("#txtP70_5").numericc();
+$("#txtP71_1").numericc({ ichars: '3456780' });
+$("#txtP71_2").numericc({ ichars: '3456780' });
+$("#txtP71_3").numericc({ ichars: '3456780' });
+$("#txtP72").numericc({ ichars: '456780' });
+$("#txtP73_1").numericc();
+$("#txtP73_2").numericc();
+$("#txtP73_3").numericc();
+$("#txtP73_4").numericc();
+$("#txtP73_5").numericc();
+$("#txtP73_6").numericc();
+$("#txtP73_7").numericc();
+$("#txtP73_8").numericc();
+$("#txtP73_9").numericc();
+$("#txtP73_10").numericc();
+$("#txtP74_1_1").numericc();
 $("#txtP74_1_2").mask("9999");
 $("#txtP74_1_3").mask("9999");
-$("#txtP74_2_1").numeric();
+$("#txtP74_2_1").numericc();
 $("#txtP74_2_2").mask("9999");
 $("#txtP74_2_3").mask("9999");
-$("#txtP74_3_1").numeric();
+$("#txtP74_3_1").numericc();
 $("#txtP74_3_2").mask("9999");
 $("#txtP74_3_3").mask("9999");
-$("#txtP74_4_1").numeric();
+$("#txtP74_4_1").numericc();
 $("#txtP74_4_2").mask("9999");
 $("#txtP74_4_3").mask("9999");
-$("#txtP75").numeric({ ichars: '3456780' });
-$("#txtP76_1").numeric();
-$("#txtP76_2").numeric();
-$("#txtP76_3").numeric();
-$("#txtP76_4").numeric();
-$("#txtP77_1").numeric({ ichars: '3456780' });
-$("#txtP77_2").numeric({ ichars: '3456780' });
-$("#txtP77_3").numeric({ ichars: '3456780' });
-$("#txtP78").numeric({ ichars: '3456780' });
-$("#txtP79_1").numeric({ ichars: '3456780' });
-$("#txtP79_2").numeric({ ichars: '3456780' });
-$("#txtP80").numeric();
-$("#txtP81").numeric();
+$("#txtP75").numericc({ ichars: '3456780' });
+$("#txtP76_1").numericc();
+$("#txtP76_2").numericc();
+$("#txtP76_3").numericc();
+$("#txtP76_4").numericc();
+$("#txtP77_1").numericc({ ichars: '3456780' });
+$("#txtP77_2").numericc({ ichars: '3456780' });
+$("#txtP77_3").numericc({ ichars: '3456780' });
+$("#txtP78").numericc({ ichars: '3456780' });
+$("#txtP79_1").numericc({ ichars: '3456780' });
+$("#txtP79_2").numericc({ ichars: '3456780' });
+$("#txtP80").numericc();
+$("#txtP81").numericc();
 $("#txtP81").mask("99");
-$("#txtP82_1").numeric({ ichars: '3456780' });
-$("#txtP82_2").numeric({ ichars: '3456780' });
-$("#txtP82_3").numeric({ ichars: '3456780' });
-$("#txtP83_1").numeric({ ichars: '3456780' });
-$("#txtP83_2").numeric({ ichars: '3456780' });
-$("#txtP83_3").numeric({ ichars: '3456780' });
-$("#txtP83_4").numeric({ ichars: '3456780' });
-$("#txtP83_5").numeric({ ichars: '3456780' });
-$("#txtP83_6").numeric({ ichars: '3456780' });
-$("#txtP83_7").numeric({ ichars: '3456780' });
-$("#txtP84_1").numeric({ ichars: '3456780' });
-$("#txtP84_2").numeric({ ichars: '3456780' });
-$("#txtP85_1").numeric({ ichars: '3456780' });
-$("#txtP85_2").numeric({ ichars: '3456780' });
-$("#txtP85_3").numeric({ ichars: '3456780' });
+$("#txtP82_1").numericc({ ichars: '3456780' });
+$("#txtP82_2").numericc({ ichars: '3456780' });
+$("#txtP82_3").numericc({ ichars: '3456780' });
+$("#txtP83_1").numericc({ ichars: '3456780' });
+$("#txtP83_2").numericc({ ichars: '3456780' });
+$("#txtP83_3").numericc({ ichars: '3456780' });
+$("#txtP83_4").numericc({ ichars: '3456780' });
+$("#txtP83_5").numericc({ ichars: '3456780' });
+$("#txtP83_6").numericc({ ichars: '3456780' });
+$("#txtP83_7").numericc({ ichars: '3456780' });
+$("#txtP84_1").numericc({ ichars: '3456780' });
+$("#txtP84_2").numericc({ ichars: '3456780' });
+$("#txtP85_1").numericc({ ichars: '3456780' });
+$("#txtP85_2").numericc({ ichars: '3456780' });
+$("#txtP85_3").numericc({ ichars: '3456780' });
 $("#txtP86_1_1").mask("99");
 $("#txtP86_1_2").mask("9999");
 $("#txtP86_1_3").mask("9999");
@@ -1171,50 +1187,50 @@ $("#txtP87_1_3").mask("9999");
 $("#txtP87_2_1").mask("99");
 $("#txtP87_2_2").mask("9999");
 $("#txtP87_2_3").mask("9999");
-$("#txtP88").numeric({ ichars: '3456780' });
-$("#txtP89_1").numeric({ ichars: '3456780' });
-$("#txtP89_2").numeric({ ichars: '3456780' });
-$("#txtP89_3").numeric({ ichars: '3456780' });
-$("#txtP90_1").numeric({ ichars: '3456780' });
-$("#txtP90_2").numeric({ ichars: '3456780' });
-$("#txtP90_3").numeric({ ichars: '3456780' });
-$("#txtP90_4").numeric({ ichars: '3456780' });
-$("#txtP90_5").numeric({ ichars: '3456780' });
-$("#txtP90_6").numeric({ ichars: '3456780' });
-$("#txtP90_7").numeric({ ichars: '3456780' });
-$("#txtP90_8").numeric({ ichars: '3456780' });
-$("#txtP90_9").numeric({ ichars: '3456780' });
-$("#txtP90_10").numeric({ ichars: '3456780' });
-$("#txtP91").numeric({ ichars: '3456780' });
+$("#txtP88").numericc({ ichars: '3456780' });
+$("#txtP89_1").numericc({ ichars: '3456780' });
+$("#txtP89_2").numericc({ ichars: '3456780' });
+$("#txtP89_3").numericc({ ichars: '3456780' });
+$("#txtP90_1").numericc({ ichars: '3456780' });
+$("#txtP90_2").numericc({ ichars: '3456780' });
+$("#txtP90_3").numericc({ ichars: '3456780' });
+$("#txtP90_4").numericc({ ichars: '3456780' });
+$("#txtP90_5").numericc({ ichars: '3456780' });
+$("#txtP90_6").numericc({ ichars: '3456780' });
+$("#txtP90_7").numericc({ ichars: '3456780' });
+$("#txtP90_8").numericc({ ichars: '3456780' });
+$("#txtP90_9").numericc({ ichars: '3456780' });
+$("#txtP90_10").numericc({ ichars: '3456780' });
+$("#txtP91").numericc({ ichars: '3456780' });
 $("#txtP92_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP92_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP92_3").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP92_4").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP93_1").numeric({ ichars: '3456780' });
-$("#txtP93_2").numeric({ ichars: '3456780' });
-$("#txtP94").numeric({ ichars: '3456780' });
-$("#txtP95").numeric({ ichars: '3456780' });
+$("#txtP93_1").numericc({ ichars: '3456780' });
+$("#txtP93_2").numericc({ ichars: '3456780' });
+$("#txtP94").numericc({ ichars: '3456780' });
+$("#txtP95").numericc({ ichars: '3456780' });
 $("#txtP96_1_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP96_1_2").numeric();
+$("#txtP96_1_2").numericc();
 $("#txtP96_1_3").mask("99");
-$("#txtP96_1_4").numeric();
+$("#txtP96_1_4").numericc();
 $("#txtP96_2_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP96_2_2").numeric();
+$("#txtP96_2_2").numericc();
 $("#txtP96_2_3").mask("99");
-$("#txtP96_2_4").numeric();
+$("#txtP96_2_4").numericc();
 $("#txtP96_3_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP96_3_2").numeric();
+$("#txtP96_3_2").numericc();
 $("#txtP96_3_3").mask("99");
-$("#txtP96_3_4").numeric();
+$("#txtP96_3_4").numericc();
 $("#txtP96_4_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP96_4_2").numeric();
+$("#txtP96_4_2").numericc();
 $("#txtP96_4_3").mask("99");
-$("#txtP96_4_4").numeric();
+$("#txtP96_4_4").numericc();
 $("#txtP96_5_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP96_5_2").numeric();
+$("#txtP96_5_2").numericc();
 $("#txtP96_5_3").mask("99");
-$("#txtP96_5_4").numeric();
-$("#txtP97").numeric({ ichars: '3456780' });
+$("#txtP96_5_4").numericc();
+$("#txtP97").numericc({ ichars: '3456780' });
 $("#txtP98_1_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP98_1_2").mask("99");
 $("#txtP98_1_3").mask("99");
@@ -1227,9 +1243,9 @@ $("#txtP98_3_3").mask("99");
 $("#txtP98_4_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP98_4_2").mask("99");
 $("#txtP98_4_3").mask("99");
-$("#txtP99_1").numeric({ ichars: '3456780' });
-$("#txtP99_2").numeric({ ichars: '3456780' });
-$("#txtP100").numeric({ ichars: '3456780' });
+$("#txtP99_1").numericc({ ichars: '3456780' });
+$("#txtP99_2").numericc({ ichars: '3456780' });
+$("#txtP100").numericc({ ichars: '3456780' });
 $("#txtP101_1_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP101_1_2").mask("99");
 $("#txtP101_1_3").mask("99");
@@ -1242,245 +1258,245 @@ $("#txtP101_3_3").mask("99");
 $("#txtP101_4_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP101_4_2").mask("99");
 $("#txtP101_4_3").mask("99");
-$("#txtP102_1").numeric({ ichars: '3456780' });
-$("#txtP102_2").numeric({ ichars: '3456780' });
-$("#txtP102_3").numeric({ ichars: '3456780' });
-$("#txtP103").numeric({ ichars: '3456780' });
+$("#txtP102_1").numericc({ ichars: '3456780' });
+$("#txtP102_2").numericc({ ichars: '3456780' });
+$("#txtP102_3").numericc({ ichars: '3456780' });
+$("#txtP103").numericc({ ichars: '3456780' });
 $("#txtP104_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP105_1").numeric({ ichars: '3456780' });
-$("#txtP105_2").numeric({ ichars: '3456780' });
-$("#txtP105_3").numeric({ ichars: '3456780' });
-$("#txtP106").numeric({ ichars: '3456780' });
-$("#txtP107_1_1").numeric({ ichars: '3456780' });
-$("#txtP107_1_2").numeric({ ichars: '3456780' });
-$("#txtP107_1_3").numeric({ ichars: '3456780' });
-$("#txtP107_1_4").numeric({ ichars: '3456780' });
-$("#txtP107_1_5").numeric({ ichars: '3456780' });
-$("#txtP107_1_6").numeric({ ichars: '3456780' });
-$("#txtP107_2_1").numeric({ ichars: '3456780' });
-$("#txtP107_2_2").numeric({ ichars: '3456780' });
-$("#txtP107_2_3").numeric({ ichars: '3456780' });
-$("#txtP107_2_4").numeric({ ichars: '3456780' });
-$("#txtP107_2_5").numeric({ ichars: '3456780' });
-$("#txtP107_2_6").numeric({ ichars: '3456780' });
-$("#txtP107_3_1").numeric({ ichars: '3456780' });
-$("#txtP107_3_2").numeric({ ichars: '3456780' });
-$("#txtP107_3_3").numeric({ ichars: '3456780' });
-$("#txtP107_3_4").numeric({ ichars: '3456780' });
-$("#txtP107_3_5").numeric({ ichars: '3456780' });
-$("#txtP107_3_6").numeric({ ichars: '3456780' });
-$("#txtP107_4_1").numeric({ ichars: '3456780' });
-$("#txtP107_4_2").numeric({ ichars: '3456780' });
-$("#txtP107_4_3").numeric({ ichars: '3456780' });
-$("#txtP107_4_4").numeric({ ichars: '3456780' });
-$("#txtP107_4_5").numeric({ ichars: '3456780' });
-$("#txtP107_4_6").numeric({ ichars: '3456780' });
-$("#txtP107_5_1").numeric({ ichars: '3456780' });
-$("#txtP107_5_2").numeric({ ichars: '3456780' });
-$("#txtP107_5_3").numeric({ ichars: '3456780' });
-$("#txtP107_5_4").numeric({ ichars: '3456780' });
-$("#txtP107_5_5").numeric({ ichars: '3456780' });
-$("#txtP107_5_6").numeric({ ichars: '3456780' });
-$("#txtP108").numeric({ ichars: '3456780' });
-$("#txtP109").numeric({ ichars: '3456780' });
-$("#txtP110_1").numeric({ ichars: '3456780' });
-$("#txtP110_2").numeric({ ichars: '3456780' });
-$("#txtP111_1").numeric({ ichars: '3456780' });
-$("#txtP111_2").numeric({ ichars: '3456780' });
-$("#txtP111_3").numeric({ ichars: '3456780' });
-$("#txtP111_4").numeric({ ichars: '3456780' });
-$("#txtP112_1").numeric({ ichars: '3456780' });
-$("#txtP112_2").numeric({ ichars: '3456780' });
-$("#txtP112_3").numeric({ ichars: '3456780' });
-$("#txtP113").numeric({ ichars: '3456780' });
+$("#txtP105_1").numericc({ ichars: '3456780' });
+$("#txtP105_2").numericc({ ichars: '3456780' });
+$("#txtP105_3").numericc({ ichars: '3456780' });
+$("#txtP106").numericc({ ichars: '3456780' });
+$("#txtP107_1_1").numericc({ ichars: '3456780' });
+$("#txtP107_1_2").numericc({ ichars: '3456780' });
+$("#txtP107_1_3").numericc({ ichars: '3456780' });
+$("#txtP107_1_4").numericc({ ichars: '3456780' });
+$("#txtP107_1_5").numericc({ ichars: '3456780' });
+$("#txtP107_1_6").numericc({ ichars: '3456780' });
+$("#txtP107_2_1").numericc({ ichars: '3456780' });
+$("#txtP107_2_2").numericc({ ichars: '3456780' });
+$("#txtP107_2_3").numericc({ ichars: '3456780' });
+$("#txtP107_2_4").numericc({ ichars: '3456780' });
+$("#txtP107_2_5").numericc({ ichars: '3456780' });
+$("#txtP107_2_6").numericc({ ichars: '3456780' });
+$("#txtP107_3_1").numericc({ ichars: '3456780' });
+$("#txtP107_3_2").numericc({ ichars: '3456780' });
+$("#txtP107_3_3").numericc({ ichars: '3456780' });
+$("#txtP107_3_4").numericc({ ichars: '3456780' });
+$("#txtP107_3_5").numericc({ ichars: '3456780' });
+$("#txtP107_3_6").numericc({ ichars: '3456780' });
+$("#txtP107_4_1").numericc({ ichars: '3456780' });
+$("#txtP107_4_2").numericc({ ichars: '3456780' });
+$("#txtP107_4_3").numericc({ ichars: '3456780' });
+$("#txtP107_4_4").numericc({ ichars: '3456780' });
+$("#txtP107_4_5").numericc({ ichars: '3456780' });
+$("#txtP107_4_6").numericc({ ichars: '3456780' });
+$("#txtP107_5_1").numericc({ ichars: '3456780' });
+$("#txtP107_5_2").numericc({ ichars: '3456780' });
+$("#txtP107_5_3").numericc({ ichars: '3456780' });
+$("#txtP107_5_4").numericc({ ichars: '3456780' });
+$("#txtP107_5_5").numericc({ ichars: '3456780' });
+$("#txtP107_5_6").numericc({ ichars: '3456780' });
+$("#txtP108").numericc({ ichars: '3456780' });
+$("#txtP109").numericc({ ichars: '3456780' });
+$("#txtP110_1").numericc({ ichars: '3456780' });
+$("#txtP110_2").numericc({ ichars: '3456780' });
+$("#txtP111_1").numericc({ ichars: '3456780' });
+$("#txtP111_2").numericc({ ichars: '3456780' });
+$("#txtP111_3").numericc({ ichars: '3456780' });
+$("#txtP111_4").numericc({ ichars: '3456780' });
+$("#txtP112_1").numericc({ ichars: '3456780' });
+$("#txtP112_2").numericc({ ichars: '3456780' });
+$("#txtP112_3").numericc({ ichars: '3456780' });
+$("#txtP113").numericc({ ichars: '3456780' });
 $("#txtP114_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP114_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP114_3").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP115_1_1").numeric();
+$("#txtP115_1_1").numericc();
 $("#txtP115_1_2").mask("9999");
 $("#txtP115_1_3").mask("9999");
-$("#txtP115_2_1").numeric();
+$("#txtP115_2_1").numericc();
 $("#txtP115_2_2").mask("9999");
 $("#txtP115_2_3").mask("9999");
-$("#txtP115_3_1").numeric();
+$("#txtP115_3_1").numericc();
 $("#txtP115_3_2").mask("9999");
 $("#txtP115_3_3").mask("9999");
-$("#txtP115_4_1").numeric();
+$("#txtP115_4_1").numericc();
 $("#txtP115_4_2").mask("9999");
 $("#txtP115_4_3").mask("9999");
-$("#txtP115_5_1").numeric();
+$("#txtP115_5_1").numericc();
 $("#txtP115_5_2").mask("9999");
 $("#txtP115_5_3").mask("9999");
-$("#txtP115_6_1").numeric();
+$("#txtP115_6_1").numericc();
 $("#txtP115_6_2").mask("9999");
 $("#txtP115_6_3").mask("9999");
-$("#txtP115_7_1").numeric();
+$("#txtP115_7_1").numericc();
 $("#txtP115_7_2").mask("9999");
 $("#txtP115_7_3").mask("9999");
-$("#txtP116_1_1").numeric();
+$("#txtP116_1_1").numericc();
 $("#txtP116_1_2").mask("9999");
 $("#txtP116_1_3").mask("9999");
-$("#txtP116_2_1").numeric();
+$("#txtP116_2_1").numericc();
 $("#txtP116_2_2").mask("9999");
 $("#txtP116_2_3").mask("9999");
-$("#txtP116_3_1").numeric();
+$("#txtP116_3_1").numericc();
 $("#txtP116_3_2").mask("9999");
 $("#txtP116_3_3").mask("9999");
-$("#txtP116_4_1").numeric();
+$("#txtP116_4_1").numericc();
 $("#txtP116_4_2").mask("9999");
 $("#txtP116_4_3").mask("9999");
-$("#txtP116_5_1").numeric();
+$("#txtP116_5_1").numericc();
 $("#txtP116_5_2").mask("9999");
 $("#txtP116_5_3").mask("9999");
-$("#txtP116_6_1").numeric();
+$("#txtP116_6_1").numericc();
 $("#txtP116_6_2").mask("9999");
 $("#txtP116_6_3").mask("9999");
-$("#txtP116_7_1").numeric();
+$("#txtP116_7_1").numericc();
 $("#txtP116_7_2").mask("9999");
 $("#txtP116_7_3").mask("9999");
-$("#txtP117_1").numeric({ ichars: '3456780' });
-$("#txtP117_2").numeric({ ichars: '3456780' });
-$("#txtP117_3").numeric({ ichars: '3456780' });
-$("#txtP117_4").numeric({ ichars: '3456780' });
-$("#txtP117_5").numeric({ ichars: '3456780' });
-$("#txtP117_6").numeric({ ichars: '3456780' });
-$("#txtP117_7").numeric({ ichars: '3456780' });
-$("#txtP117_8").numeric({ ichars: '3456780' });
-$("#txtP118").numeric({ ichars: '3456780' });
-$("#txtP119").numeric({ ichars: '3456780' });
-$("#txtP120").numeric({ ichars: '456780' });
-$("#txtP121").numeric({ ichars: '3456780' });
-$("#txtP122").numeric({ ichars: '456780' });
-$("#txtP123_1").numeric({ ichars: '3456780' });
-$("#txtP123_2").numeric({ ichars: '3456780' });
-$("#txtP124").numeric({ ichars: '3456780' });
-$("#txtP124_1_1").numeric();
+$("#txtP117_1").numericc({ ichars: '3456780' });
+$("#txtP117_2").numericc({ ichars: '3456780' });
+$("#txtP117_3").numericc({ ichars: '3456780' });
+$("#txtP117_4").numericc({ ichars: '3456780' });
+$("#txtP117_5").numericc({ ichars: '3456780' });
+$("#txtP117_6").numericc({ ichars: '3456780' });
+$("#txtP117_7").numericc({ ichars: '3456780' });
+$("#txtP117_8").numericc({ ichars: '3456780' });
+$("#txtP118").numericc({ ichars: '3456780' });
+$("#txtP119").numericc({ ichars: '3456780' });
+$("#txtP120").numericc({ ichars: '456780' });
+$("#txtP121").numericc({ ichars: '3456780' });
+$("#txtP122").numericc({ ichars: '456780' });
+$("#txtP123_1").numericc({ ichars: '3456780' });
+$("#txtP123_2").numericc({ ichars: '3456780' });
+$("#txtP124").numericc({ ichars: '3456780' });
+$("#txtP124_1_1").numericc();
 $("#txtP124_1_2").mask("9999");
 $("#txtP124_1_3").mask("9999");
-$("#txtP124_2_1").numeric();
+$("#txtP124_2_1").numericc();
 $("#txtP124_2_2").mask("9999");
 $("#txtP124_2_3").mask("9999");
-$("#txtP125").numeric({ ichars: '3456780' });
-$("#txtP125_1_1").numeric();
-$("#txtP125_1_2").numeric();
-$("#txtP125_1_3").numeric();
-$("#txtP125_2_1").numeric();
-$("#txtP125_2_2").numeric();
-$("#txtP125_2_3").numeric();
-$("#txtP126").numeric({ ichars: '3456780' });
-$("#txtP127_1").numeric({ ichars: '3456780' });
+$("#txtP125").numericc({ ichars: '3456780' });
+$("#txtP125_1_1").numericc();
+$("#txtP125_1_2").numericc();
+$("#txtP125_1_3").numericc();
+$("#txtP125_2_1").numericc();
+$("#txtP125_2_2").numericc();
+$("#txtP125_2_3").numericc();
+$("#txtP126").numericc({ ichars: '3456780' });
+$("#txtP127_1").numericc({ ichars: '3456780' });
 $("#txtP127_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP127_3").numeric({ ichars: '3456780' });
+$("#txtP127_3").numericc({ ichars: '3456780' });
 $("#txtP127_4").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP127_5").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP128_1").numeric({ ichars: '3456780' });
+$("#txtP128_1").numericc({ ichars: '3456780' });
 $("#txtP128_2").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP128_3").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP128_4").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP129_1_1").numeric();
-$("#txtP129_1_2").numeric({ ichars: '3456780' });
-$("#txtP129_1_3").numeric();
-$("#txtP129_1_4").numeric({ ichars: '0' });
-$("#txtP129_1_5").numeric({ ichars: '3456780' });
-$("#txtP129_1_6").numeric({ ichars: '890' });
-$("#txtP129_2_1").numeric();
-$("#txtP129_2_2").numeric({ ichars: '3456780' });
-$("#txtP129_2_3").numeric();
-$("#txtP129_2_4").numeric({ ichars: '0' });
-$("#txtP129_2_5").numeric({ ichars: '3456780' });
-$("#txtP129_2_6").numeric({ ichars: '890' });
-$("#txtP129_3_1").numeric();
-$("#txtP129_3_2").numeric({ ichars: '3456780' });
-$("#txtP129_3_3").numeric();
-$("#txtP129_3_4").numeric({ ichars: '0' });
-$("#txtP129_3_5").numeric({ ichars: '3456780' });
-$("#txtP129_3_6").numeric({ ichars: '890' });
-$("#txtP129_4_1").numeric();
-$("#txtP129_4_2").numeric({ ichars: '3456780' });
-$("#txtP129_4_3").numeric();
-$("#txtP129_4_4").numeric({ ichars: '0' });
-$("#txtP129_4_5").numeric({ ichars: '3456780' });
-$("#txtP129_4_6").numeric({ ichars: '890' });
-$("#txtP129_5_1").numeric();
-$("#txtP129_5_2").numeric({ ichars: '3456780' });
-$("#txtP129_5_3").numeric();
-$("#txtP129_5_4").numeric({ ichars: '0' });
-$("#txtP129_5_5").numeric({ ichars: '3456780' });
-$("#txtP129_5_6").numeric({ ichars: '890' });
-$("#txtP129_6_1").numeric();
-$("#txtP129_6_2").numeric({ ichars: '3456780' });
-$("#txtP129_6_3").numeric();
-$("#txtP129_6_4").numeric({ ichars: '0' });
-$("#txtP129_6_5").numeric({ ichars: '3456780' });
-$("#txtP129_6_6").numeric({ ichars: '890' });
-$("#txtP129_7_1").numeric();
-$("#txtP129_7_2").numeric({ ichars: '3456780' });
-$("#txtP129_7_3").numeric();
-$("#txtP129_7_4").numeric({ ichars: '0' });
-$("#txtP129_7_5").numeric({ ichars: '3456780' });
-$("#txtP129_7_6").numeric({ ichars: '890' });
-$("#txtP129_8_1").numeric();
-$("#txtP129_8_2").numeric({ ichars: '3456780' });
-$("#txtP129_8_3").numeric();
-$("#txtP129_8_4").numeric({ ichars: '0' });
-$("#txtP129_8_5").numeric({ ichars: '3456780' });
-$("#txtP129_8_6").numeric({ ichars: '890' });
-$("#txtP129_9_1").numeric();
-$("#txtP129_9_2").numeric({ ichars: '3456780' });
-$("#txtP129_9_3").numeric();
-$("#txtP129_9_4").numeric({ ichars: '0' });
-$("#txtP129_9_5").numeric({ ichars: '3456780' });
-$("#txtP129_9_6").numeric({ ichars: '890' });
-$("#txtP129_10_1").numeric();
-$("#txtP129_10_2").numeric({ ichars: '3456780' });
-$("#txtP129_10_3").numeric();
-$("#txtP129_10_4").numeric({ ichars: '0' });
-$("#txtP129_10_5").numeric({ ichars: '3456780' });
-$("#txtP129_10_6").numeric({ ichars: '890' });
-$("#txtP130").numeric({ ichars: '3456780' });
+$("#txtP129_1_1").numericc();
+$("#txtP129_1_2").numericc({ ichars: '3456780' });
+$("#txtP129_1_3").numericc();
+$("#txtP129_1_4").numericc({ ichars: '0' });
+$("#txtP129_1_5").numericc({ ichars: '3456780' });
+$("#txtP129_1_6").numericc({ ichars: '890' });
+$("#txtP129_2_1").numericc();
+$("#txtP129_2_2").numericc({ ichars: '3456780' });
+$("#txtP129_2_3").numericc();
+$("#txtP129_2_4").numericc({ ichars: '0' });
+$("#txtP129_2_5").numericc({ ichars: '3456780' });
+$("#txtP129_2_6").numericc({ ichars: '890' });
+$("#txtP129_3_1").numericc();
+$("#txtP129_3_2").numericc({ ichars: '3456780' });
+$("#txtP129_3_3").numericc();
+$("#txtP129_3_4").numericc({ ichars: '0' });
+$("#txtP129_3_5").numericc({ ichars: '3456780' });
+$("#txtP129_3_6").numericc({ ichars: '890' });
+$("#txtP129_4_1").numericc();
+$("#txtP129_4_2").numericc({ ichars: '3456780' });
+$("#txtP129_4_3").numericc();
+$("#txtP129_4_4").numericc({ ichars: '0' });
+$("#txtP129_4_5").numericc({ ichars: '3456780' });
+$("#txtP129_4_6").numericc({ ichars: '890' });
+$("#txtP129_5_1").numericc();
+$("#txtP129_5_2").numericc({ ichars: '3456780' });
+$("#txtP129_5_3").numericc();
+$("#txtP129_5_4").numericc({ ichars: '0' });
+$("#txtP129_5_5").numericc({ ichars: '3456780' });
+$("#txtP129_5_6").numericc({ ichars: '890' });
+$("#txtP129_6_1").numericc();
+$("#txtP129_6_2").numericc({ ichars: '3456780' });
+$("#txtP129_6_3").numericc();
+$("#txtP129_6_4").numericc({ ichars: '0' });
+$("#txtP129_6_5").numericc({ ichars: '3456780' });
+$("#txtP129_6_6").numericc({ ichars: '890' });
+$("#txtP129_7_1").numericc();
+$("#txtP129_7_2").numericc({ ichars: '3456780' });
+$("#txtP129_7_3").numericc();
+$("#txtP129_7_4").numericc({ ichars: '0' });
+$("#txtP129_7_5").numericc({ ichars: '3456780' });
+$("#txtP129_7_6").numericc({ ichars: '890' });
+$("#txtP129_8_1").numericc();
+$("#txtP129_8_2").numericc({ ichars: '3456780' });
+$("#txtP129_8_3").numericc();
+$("#txtP129_8_4").numericc({ ichars: '0' });
+$("#txtP129_8_5").numericc({ ichars: '3456780' });
+$("#txtP129_8_6").numericc({ ichars: '890' });
+$("#txtP129_9_1").numericc();
+$("#txtP129_9_2").numericc({ ichars: '3456780' });
+$("#txtP129_9_3").numericc();
+$("#txtP129_9_4").numericc({ ichars: '0' });
+$("#txtP129_9_5").numericc({ ichars: '3456780' });
+$("#txtP129_9_6").numericc({ ichars: '890' });
+$("#txtP129_10_1").numericc();
+$("#txtP129_10_2").numericc({ ichars: '3456780' });
+$("#txtP129_10_3").numericc();
+$("#txtP129_10_4").numericc({ ichars: '0' });
+$("#txtP129_10_5").numericc({ ichars: '3456780' });
+$("#txtP129_10_6").numericc({ ichars: '890' });
+$("#txtP130").numericc({ ichars: '3456780' });
 $("#txtP131_1_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP131_1_2").numeric();
-$("#txtP131_1_3").numeric({ ichars: '456780' });
+$("#txtP131_1_2").numericc();
+$("#txtP131_1_3").numericc({ ichars: '456780' });
 $("#txtP131_1_4").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP131_1_5").numeric({ ichars: '.' });
+$("#txtP131_1_5").numericc({ ichars: '.' });
 $("#txtP131_1_6").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP131_2_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP131_2_2").numeric();
-$("#txtP131_2_3").numeric({ ichars: '456780' });
+$("#txtP131_2_2").numericc();
+$("#txtP131_2_3").numericc({ ichars: '456780' });
 $("#txtP131_2_4").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP131_2_5").numeric({ ichars: '.' });
+$("#txtP131_2_5").numericc({ ichars: '.' });
 $("#txtP131_2_6").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP131_3_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP131_3_2").numeric();
-$("#txtP131_3_3").numeric({ ichars: '456780' });
+$("#txtP131_3_2").numericc();
+$("#txtP131_3_3").numericc({ ichars: '456780' });
 $("#txtP131_3_4").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP131_3_5").numeric({ ichars: '.' });
+$("#txtP131_3_5").numericc({ ichars: '.' });
 $("#txtP131_3_6").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP131_4_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP131_4_2").numeric();
-$("#txtP131_4_3").numeric({ ichars: '456780' });
+$("#txtP131_4_2").numericc();
+$("#txtP131_4_3").numericc({ ichars: '456780' });
 $("#txtP131_4_4").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP131_4_5").numeric({ ichars: '.' });
+$("#txtP131_4_5").numericc({ ichars: '.' });
 $("#txtP131_4_6").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP131_5_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP131_5_2").numeric();
-$("#txtP131_5_3").numeric({ ichars: '456780' });
+$("#txtP131_5_2").numericc();
+$("#txtP131_5_3").numericc({ ichars: '456780' });
 $("#txtP131_5_4").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP131_5_5").numeric({ ichars: '.' });
+$("#txtP131_5_5").numericc({ ichars: '.' });
 $("#txtP131_5_6").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP131_6_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP131_6_2").numeric();
-$("#txtP131_6_3").numeric({ ichars: '456780' });
+$("#txtP131_6_2").numericc();
+$("#txtP131_6_3").numericc({ ichars: '456780' });
 $("#txtP131_6_4").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP131_6_5").numeric({ ichars: '.' });
+$("#txtP131_6_5").numericc({ ichars: '.' });
 $("#txtP131_6_6").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP131_7_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP131_7_2").numeric();
-$("#txtP131_7_3").numeric({ ichars: '456780' });
+$("#txtP131_7_2").numericc();
+$("#txtP131_7_3").numericc({ ichars: '456780' });
 $("#txtP131_7_4").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP131_7_5").numeric({ ichars: '.' });
+$("#txtP131_7_5").numericc({ ichars: '.' });
 $("#txtP131_7_6").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
-$("#txtP132").numeric({ ichars: '456780' });
+$("#txtP132").numericc({ ichars: '456780' });
 $("#txtP133_1").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 $("#txtP133_2").mask("99");
 $("#txtP133_3").mask("99");
@@ -1541,13 +1557,23 @@ $("#txtP134").alphanumeric({ ichars: '´+*{}[]!$%&/=!¡¿?:<>\@|#_\'' });
 		font-size: 11pt;		
 	}
 	.fuente{
-		font-size: 10pt;
+		font-size: 11pt;
 		font-family:"Trebuchet MS", Times, serif;
+		font-weight: bold;
 	}
 	#correlativo{
 		float: left;
 	}
-		
+	input{
+		font-family:"Comic Sans MS", cursive;
+		font-size: 12px;
+		font-weight: bold;
+		color: #063; 
+		text-transform:uppercase;
+    }
+    .tablas tr:hover{
+		background: #DBEBF6;
+	}
 </style> 
 <!-- InstanceEndEditable -->
 <style type="text/css">
@@ -1676,7 +1702,7 @@ $totalRows_listamenu = pg_num_rows($listamenu);
         <td align="center" class="interlineado_menu">
         <hr  size="2"/>
         <div id="menuhori">
-        <a href="/ine_ca/paneldecontroladm.php"> Men� Principal</a>             <?php do { ?>
+        <a href="/ine_ca/paneldecontroladm.php"> Menú Principal</a>             <?php do { ?>
       <?php if(($row_permisos['nivel_usr']==$row_listamenu['acceso_modulo'])&&($row_permisos['acceso_usr']==$row_listamenu['acceso_menu'])) { echo '         
 
   
@@ -1696,12 +1722,6 @@ $totalRows_listamenu = pg_num_rows($listamenu);
 
 <h2 id="titulo">BOLETA DEL PRODUCTOR</h2>
 <?php
-echo $docID = $_REQUEST['DOC_ID'];    
-echo $_REQUEST['folio'];
-echo $folioComunal = $_REQUEST['foliocomunal'];
-$obj = new ca_boletaproductordb();
-echo $datosArray = $obj->ca_obtiene_campos($_REQUEST['folio']);
-	
 for ($i = 2; $i <= 15; $i++) {
 	${"p".$i} = 'none';
 }
@@ -1723,11 +1743,7 @@ echo '<script>
 ?>
 <?php /*Update*/
 if (isset($_POST["MM_update"]) && ($_POST["MM_update"]=="form")){	
-$obj = new ca_boletaproductordb();	
-//$folio=$obj->ca_campos(strtoupper($_POST['txtFolio']));
-$folio = $_REQUEST['folio'];
-$docID = $_REQUEST['DOC_ID'];    
-//$docID=$obj->ca_campos(strtoupper($_POST['DOC_ID']));
+$obj = new ca_boletaproductordb();
 $P15_1=$obj->ca_campos(strtoupper($_POST['txtP15_1']));
 $P15_2=$obj->ca_campos(strtoupper($_POST['txtP15_2']));
 $P15_3=$obj->ca_campos(strtoupper($_POST['txtP15_3']));
@@ -3077,15 +3093,9 @@ $P133_2=$obj->ca_campos(strtoupper($_POST['txtP133_2']));
 $P133_3=$obj->ca_campos(strtoupper($_POST['txtP133_3']));
 $P133_4=$obj->ca_campos(strtoupper($_POST['txtP133_4']));
 $P134=$obj->ca_campos(strtoupper($_POST['txtP134']));
-
-$estado=$_POST['estado'];
-$UsuarioModificacion=$_SESSION['MM_Username'];
-$FechaModificacion=date("Y-m-dH:i:s");
-//$IpModificacion=$obj->get_real_ip();
-$estado = 1;
-$pregunta = $_POST["botPress"];	    
+   
 $obj->ca_actualiza_boleta_productor_p1(
-	 $folio
+	 $_POST['folio_update']
 	,$P15_1, $P15_2, $P15_3, $P15_4, $P15_5             
 	,$P16
 	,$P17_1 ,$P17_2
@@ -3141,7 +3151,7 @@ $obj->ca_actualiza_boleta_productor_p1(
 );
     
 $obj->ca_actualiza_boleta_productor_p2(	         
-	 $folio
+	 $_POST['folio_update']
 	,$P28_1 ,$P28_1_1 ,$P28_1_2 ,$P28_2_1 ,$P28_2_2 ,$P28_3_1 ,$P28_3_2 ,$P28_4_1 ,$P28_4_2 ,$P28_5_1 ,$P28_5_2			
 	,$P29_1 ,$P29_1_1 ,$P29_1_2 ,$P29_2_1 ,$P29_2_2 ,$P29_3_1 ,$P29_3_2 ,$P29_4_1 ,$P29_4_2 ,$P29_5_1 ,$P29_5_2			
 	,$P30_1 ,$P30_2 ,$P30_3 ,$P30_4 ,$P30_5 ,$P30_6  			
@@ -3260,10 +3270,16 @@ $obj->ca_actualiza_boleta_productor_p2(
 	,$P134
 );  
 }
+?>
+<?php
+$obj = new ca_boletaproductordb();
+$datosArray = $obj->ca_obtiene_campos($_POST['folio_update']);
 ?>	
 <form action="" method="post" name="boleta_upa">
 <br /><br />
-<input type="hidden" name="folioComunal" id="folioComunal" value="<?php echo $_REQUEST['foliocomunal']; ?>" />
+<input type="hidden" name="folio_update" id="folio_update" value="<?php echo $_REQUEST['folio']; ?>" />
+<input type="hidden" name="doc_id_update" id="doc_id_update" value="<?php echo $_REQUEST['DOC_ID']; ?>" />
+<input type="hidden" name="foliocomunal" id="foliocomunal_update" value="<?php echo $_REQUEST['foliocomunal']; ?>" />
 Ir a p&aacute;gina: 
 <?php for ($j=2;$j<=15;$j++) { ?>
 	<input type="button" name="<?php echo $j; ?>" id="<?php echo $j; ?>" value="<?php echo $j; ?>" onKeyDown="A(event,null);" onclick="enviar(this.form,'p<?php echo $j; ?>')"/>	
@@ -3272,19 +3288,19 @@ Ir a p&aacute;gina:
 <div id="correlativo" >
 Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']; ?></label>
 </div>
-<br />
+<br/><br/>
 <input type="hidden" name="botPress" id="botPress" />
 <?php foreach($datosArray as $row_datos): ?>
 <div id="p2" style="display:<?php echo $p2; ?>">
-<table class="fuente" width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
+<table class="fuente" style="border: 1px solid #000000;" >
 <h3 id="titulo">Boleta P&aacute;gina 2</h3>
 <br />
 <tr>
   <td colspan="2" align="center" valign="top">
-  	<label><strong>II. CARACTER&Iacute;STICAS DEL PRODUCTOR(A)</strong></label>
+  	<label style="background-color: #00D6D6"><strong>II. CARACTER&Iacute;STICAS DEL PRODUCTOR(A)</strong></label>
     <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">          
         <tr>
-            <td colspan="2">15 A. Para Productor(a) que tiene o maneja la Unidad de Producci&oacute;n Agropecuaria de manera individual o en sociedad de hecho (socio principal)</td>
+            <td style="background-color: #00D6D6" colspan="2">15 A. Para Productor(a) que tiene o maneja la Unidad de Producci&oacute;n Agropecuaria de manera individual o en sociedad de hecho (socio principal)</td>
         </tr>
         <tr>
             <td>Primer nombre</td>
@@ -3303,7 +3319,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="trecientos_px" name="txtP15_4" id="txtP15_4" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p15_4']; ?>" onKeyDown="A(event,this.form.txtP15_5);"/></td>
         </tr>
         <tr>
-            <td colspan="2">15 B. Para empresa, sociedad formal, cooperativa, entidad estatal, Comunidad ind&iacute;gena originario campesino</td>
+            <td style="background-color: #00D6D6" colspan="2">15 B. Para empresa, sociedad formal, cooperativa, entidad estatal, Comunidad ind&iacute;gena originario campesino</td>
         </tr>
         <tr>
             <td colspan="2"><input class="novecientos_px" name="txtP15_5" id="txtP15_5" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p15_5']; ?>" onKeyDown="A(event,this.form.txtP16);"/></td>
@@ -3315,7 +3331,8 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
   <td width="50%" align="center" valign="top">
   	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">          
         <tr>
-            <td colspan="2">16. Persona entrevistada</td>
+            <td style="background-color: #00D6D6" colspan="2">16. Persona entrevistada</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>Productor(a)</td>
@@ -3337,7 +3354,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
     </table>
     <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">          
         <tr>
-            <td colspan="2">17. S&oacute;lo si el Productor(a) es individual o sociedad de hecho, &iquest;d&oacute;nde naci&oacute;?</td>
+            <td style="background-color: #00D6D6" colspan="2">17. S&oacute;lo si el Productor(a) es individual o sociedad de hecho, &iquest;d&oacute;nde naci&oacute;?</td>
         </tr>
         <tr>
             <td align="right">En este minucipio</td>
@@ -3365,7 +3382,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
     </table>
     <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="2">18. &iquest;Pertenece a alguna organizaci&oacute;n de producci&oacute;n agr&iacute;cola, cr&iacute;a de ganado, aves u otras especies, recursos forestales, recolecci&oacute;n o extracci&oacute;n de especies no maderables, caza o pesca?</td>
+            <td style="background-color: #00D6D6" colspan="2">18. &iquest;Pertenece a alguna organizaci&oacute;n de producci&oacute;n agr&iacute;cola, cr&iacute;a de ganado, aves u otras especies, recursos forestales, recolecci&oacute;n o extracci&oacute;n de especies no maderables, caza o pesca?</td>
         </tr>
         <tr>
             <td>
@@ -3388,10 +3405,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
     </table>
   </td>
   <td width="50%" align="center" valign="top">
-  	<label><strong>III. UNIDAD DE PRODUCCI&Oacute;N AGROPECUARIA</strong></label>
+  	<label style="background-color: #00D6D6"><strong>III. UNIDAD DE PRODUCCI&Oacute;N AGROPECUARIA</strong></label>
     <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="2">19. &iquest;Cu&aacute;l es la condici&oacute;n jur&iacute;dica con relaci&oacute;n a la Unidad de Producci&oacute;n Agropecuaria?</td>
+            <td style="background-color: #00D6D6" colspan="2">19. &iquest;Cu&aacute;l es la condici&oacute;n jur&iacute;dica con relaci&oacute;n a la Unidad de Producci&oacute;n Agropecuaria?</td>
         </tr>
         <tr>
             <td colspan="2">A. persona natural</td>
@@ -3446,7 +3463,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
     </table>
     <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="2">20. En esta Comunidad, periferia de ciudad o en &aacute;rea dispersa &iquest;tiene o trabaja parcelas o tierras, cu&aacute;ntas y cu&aacute;l es la superficie total de todas las parcelas o tierras?</td>
+            <td style="background-color: #00D6D6" colspan="2">20. En esta Comunidad, periferia de ciudad o en &aacute;rea dispersa &iquest;tiene o trabaja parcelas o tierras, cu&aacute;ntas y cu&aacute;l es la superficie total de todas las parcelas o tierras?</td>
         </tr>
         <tr>
             <td align="right">Si</td>
@@ -3492,10 +3509,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
   <td width="50%" align="center" valign="top">
   	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="2">21. En esta UPA &iquest;las parcelas o tierras que trabaja son&hellip;</td>
+            <td style="background-color: #00D6D6" colspan="2">21. En esta UPA &iquest;las parcelas o tierras que trabaja son&hellip;</td>
         </tr>
     </table>
-    <table width="100%" border="1">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td colspan="3" align="center">SUPERFICIE</td>
         </tr>
@@ -3533,7 +3550,8 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
   <td width="50%" align="center" valign="top">
   	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">22. &iquest;Estas parcelas o tierras las obtuvo por ...</td>
+            <td style="background-color: #00D6D6" colspan="3">22. &iquest;Estas parcelas o tierras las obtuvo por ...</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>1. herencia?</td>
@@ -3564,10 +3582,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 </tr>
 <tr>
   <td colspan="2" align="center" valign="top">
-	<label><strong>IV. USO DE LA TIERRA</strong></label>
+	<label style="background-color: #00D6D6"><strong>IV. USO DE LA TIERRA</strong></label>
     <table width="100%">
         <tr>
-            <td colspan="3">23. &iquest;Tuvo o manej&oacute; cultivos en la campa&ntilde;a de invierno 2012?</td>
+            <td style="background-color: #00D6D6" colspan="3">23. &iquest;Tuvo o manej&oacute; cultivos en la campa&ntilde;a de invierno 2012?</td>
         </tr>
         <tr>
             <td>
@@ -3742,7 +3760,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
   <td colspan="2" align="center" valign="top">
     <table>          
         <tr>
-            <td colspan="3">24. &iquest;Tuvo cultivos de verano, de julio de 2012 a junio de 2013? <br>(incluya plantaciones de frutales en superficies regulares)</td>
+            <td style="background-color: #00D6D6" colspan="3">24. &iquest;Tuvo cultivos de verano, de julio de 2012 a junio de 2013? (incluya plantaciones de frutales en superficies regulares)</td>
         </tr>
         <tr>
             <td>
@@ -4392,7 +4410,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
   <td width="50%" align="center" valign="top">
   	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">25. &iquest;En sus cultivos, tiene alguna superficie destinada <br />exclusivamente a la producci&oacute;n de semilla?</td>
+            <td style="background-color: #00D6D6" colspan="3">25. &iquest;En sus cultivos, tiene alguna superficie destinada <br />exclusivamente a la producci&oacute;n de semilla?</td>
         </tr>
         <tr>
             <td>
@@ -4415,7 +4433,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table border="1" width="100%" >
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td rowspan="2"></td>
             <td rowspan="2">Nombre</td>
@@ -4456,9 +4474,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px"   name="txtP25_5_3" id="txtP25_5_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p25_5_3']; ?>" onKeyDown="A(event,this.form.txtP26_1);"   maxlength="2" /></td>
         </tr>
     </table>
-    <table  width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">26. &iquest;Tiene pastos cultivados?</td>
+            <td style="background-color: #00D6D6" colspan="3">26. &iquest;Tiene pastos cultivados?</td>
         </tr>
         <tr>
             <td>
@@ -4481,7 +4499,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table border="1" width="100%">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td rowspan="2"></td>
             <td rowspan="2">Nombre de pastos cultivados</td>
@@ -4524,7 +4542,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
     </table>
     <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">27. &iquest;Tiene plantaciones forestales maderables?</td>
+            <td style="background-color: #00D6D6" colspan="3">27. &iquest;Tiene plantaciones forestales maderables?</td>
         </tr>
         <tr>
             <td>
@@ -4547,7 +4565,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table border="1" width="100%">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td rowspan="2"></td>
             <td rowspan="2">Nombre de especies forestales maderables</td>
@@ -4592,7 +4610,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
   <td width="50%" align="center" valign="top">&nbsp;
   	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">28. &iquest;Tiene parcelas o tierras en barbecho, descanso, pastos naturales, <br/> bosques o montes u otras parcelas o tierras que no sean aptas para el cultivo?</td>
+            <td style="background-color: #00D6D6" colspan="3">28. &iquest;Tiene parcelas o tierras en barbecho, descanso, pastos naturales, <br/> bosques o montes u otras parcelas o tierras que no sean aptas para el cultivo?</td>
         </tr>
         <tr>
             <td>
@@ -4615,7 +4633,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table border="1" width="100%">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td rowspan="2"></td>
             <td rowspan="2">Otros usos de la tierra</td>
@@ -4658,7 +4676,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
     </table>
     <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">          
         <tr>
-            <td colspan="3">29. &iquest;Tiene &aacute;rboles frutales dispersos en su Unidad de Producci&oacute;n Agropecuaria?</td>
+            <td style="background-color: #00D6D6" colspan="3">29. &iquest;Tiene &aacute;rboles frutales dispersos en su Unidad de Producci&oacute;n Agropecuaria?</td>
         </tr>
         <tr>
             <td>
@@ -4681,7 +4699,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table border="1" width="100%">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td></td>
             <td>Principales especies de frutales dispersos</td>
@@ -4715,7 +4733,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
     </table>
     <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">30. &iquest;Tiene plantas medicinales en su Unidad de Producci&oacute;n Agropecuaria?</td>
+            <td style="background-color: #00D6D6" colspan="3">30. &iquest;Tiene plantas medicinales en su Unidad de Producci&oacute;n Agropecuaria?</td>
         </tr>
         <tr>
             <td>
@@ -4738,7 +4756,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table border="1" width="100%">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td></td>
             <td>Principales especies de plantas medicinales</td>
@@ -4783,7 +4801,8 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
   <td width="50%" align="center" valign="top">
   	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">31. &iquest;La semilla que utiliza es...</td>
+            <td style="background-color: #00D6D6" colspan="3">31. &iquest;La semilla que utiliza es...</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>1. criolla?</td>
@@ -4806,7 +4825,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
     </table>
     <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">          
         <tr>
-            <td colspan="2">32. &iquest;Aplica abono org&aacute;nico como esti&eacute;rcol, gallinaza u otros abonos naturales en sus cultivos?</td>
+            <td style="background-color: #00D6D6" colspan="2">32. &iquest;Aplica abono org&aacute;nico como esti&eacute;rcol, gallinaza u otros abonos naturales en sus cultivos?</td>
         </tr>
         <tr>
             <td>
@@ -4829,7 +4848,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
     </table>
     <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="2">33. &iquest;Aplica abonos qu&iacute;micos (fertilizantes) en sus cultivos?</td>
+            <td style="background-color: #00D6D6" colspan="2">33. &iquest;Aplica abonos qu&iacute;micos (fertilizantes) en sus cultivos?</td>
         </tr>
         <tr>
             <td>
@@ -4852,7 +4871,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
     </table>
     <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
         <tr>
-            <td colspan="2">34. &iquest;Utiliza productos qu&iacute;micos para el control de plagas y enfermedades en sus cultivos?</td>
+            <td style="background-color: #00D6D6" colspan="2">34. &iquest;Utiliza productos qu&iacute;micos para el control de plagas y enfermedades en sus cultivos?</td>
         </tr>
         <tr>
         	<td>
@@ -4875,7 +4894,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
     </table>
     <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
         <tr>
-            <td colspan="2">35. &iquest;Aplica el control biol&oacute;gico en sus cultivos? (insectos, hongos, bacterias, ranas y otros)</td>
+            <td style="background-color: #00D6D6" colspan="2">35. &iquest;Aplica el control biol&oacute;gico en sus cultivos? (insectos, hongos, bacterias, ranas y otros)</td>
         </tr>
         <tr>
         	<td>
@@ -4898,7 +4917,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
     </table>    
     <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="2">36. &iquest;Utiliza productos naturales para el control de plagas y enfermedades en sus cultivos?</td>
+            <td style="background-color: #00D6D6" colspan="2">36. &iquest;Utiliza productos naturales para el control de plagas y enfermedades en sus cultivos?</td>
         </tr>
         <tr>
             <td>
@@ -4921,7 +4940,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
     </table>
     <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">37. &iquest;Tiene cultivos org&aacute;nicos?</td>
+            <td style="background-color: #00D6D6" colspan="3">37. &iquest;Tiene cultivos org&aacute;nicos?</td>
         </tr>
         <tr>
             <td>
@@ -4945,7 +4964,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table border="1" width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
         <tr>
             <td rowspan="2"></td>
             <td rowspan="2">Principales cultivos org&aacute;nicos</td>
@@ -4984,12 +5003,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
   <td width="50%" align="center" valign="top">
   	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
         <tr>
-            <td>38. &iquest;Al d&iacute;a de hoy, cu&aacute;l es la cantidad de construcciones e instalaciones que tiene? (anote el
+            <td style="background-color: #00D6D6">38. &iquest;Al d&iacute;a de hoy, cu&aacute;l es la cantidad de construcciones e instalaciones que tiene? (anote el
                 a&ntilde;o de la primera y &uacute;ltima construcci&oacute;n)
             </td>
         </tr>    
     </table>
-    <table border="1" width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
+    <table  width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
         <tr>
             <td rowspan="2"></td>
             <td rowspan="2">Principales cultivos org&aacute;nicos</td>
@@ -5030,12 +5049,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
     </table>
     <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
         <tr>
-            <td>39. &iquest;Al d&iacute;a de hoy, cu&aacute;l es la cantidad de maquinaria, equipos e implementos agr&iacute;colas que
+            <td style="background-color: #00D6D6">39. &iquest;Al d&iacute;a de hoy, cu&aacute;l es la cantidad de maquinaria, equipos e implementos agr&iacute;colas que
                 tiene? (anote el a&ntilde;o de la primera y &uacute;ltima compra)
             </td>
         </tr>    
     </table>
-    <table border="1" width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
         <tr>
             <td rowspan="2"></td>
             <td rowspan="2">Principales cultivos org&aacute;nicos</td>
@@ -5190,9 +5209,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 <tr>
   <td width="50%" align="center" valign="top">
   	<label><strong>VI. GANADER&Iacute;A Y AVES</strong></label>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">40. &iquest;Tiene o maneja ganado bovino?</td>
+            <td style="background-color: #00D6D6" colspan="3">40. &iquest;Tiene o maneja ganado bovino?</td>
         </tr>
         <tr>
             <td>
@@ -5217,13 +5236,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table>    
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
         <tr>
-            <td>41. &iquest;Cu&aacute;ntas cabezas de ganado bovino, seg&uacute;n sexo y grupo de edades, tiene o maneja?</td>
+            <td style="background-color: #00D6D6">41. &iquest;Cu&aacute;ntas cabezas de ganado bovino, seg&uacute;n sexo y grupo de edades, tiene o maneja?</td>
         </tr>    
     </table>
-    <table border="1">
-
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td rowspan="2"></td>
             <td rowspan="2">Sexo y grupo <br />de edades </td>
@@ -5319,11 +5337,11 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td>42. &iquest;Cu&aacute;ntas de sus vacas han sido orde&ntilde;adas el d&iacute;a de ayer?</td>
-            <td></td>
-            <td></td>
+            <td style="background-color: #00D6D6">42. &iquest;Cu&aacute;ntas de sus vacas han sido orde&ntilde;adas el d&iacute;a de ayer?</td>
+            <td style="background-color: #00D6D6"></td>
+            <td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td align="right">N&uacute;mero de vacas orde&ntilde;adas</td>
@@ -5331,29 +5349,30 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td>si es 0 pase a la pregunta 47</td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td>43. &iquest;Cu&aacute;ntas orde&ntilde;as realiza al d&iacute;a?</td>
-            <td></td>
+            <td style="background-color: #00D6D6">43. &iquest;Cu&aacute;ntas orde&ntilde;as realiza al d&iacute;a?</td>
+            <td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td align="right">N&uacute;mero de orde&ntilde;as</td>
             <td><input class="cuarenta_px" name="txtP43" id="txtP43" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p43']; ?>" onKeyDown="A(event,this.form.txtP44);" maxlength="2"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td>44. &iquest;Cu&aacute;nto fue la producci&oacute;n de leche de sus vacas orde&ntilde;adas ayer?</td>
-            <td></td>
+            <td style="background-color: #00D6D6">44. &iquest;Cu&aacute;nto fue la producci&oacute;n de leche de sus vacas orde&ntilde;adas ayer?</td>
+            <td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td align="right">Litros de leche</td>
             <td><input class="cuarenta_px" name="txt44" id="txtP44" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p44']; ?>" onKeyDown="A(event,this.form.txtP45_1);" maxlength="5"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">45. &iquest;La leche se destina a...</td>
+            <td style="background-color: #00D6D6" colspan="3">45. &iquest;La leche se destina a...</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>1. venta?</td>
@@ -5374,9 +5393,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP45_3" id="txtP45_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p45_3']; ?>" onKeyDown="A(event,this.form.txtP46);" maxlength="1"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">46. &iquest;El orde&ntilde;o de sus vacas principalmente es?</td>
+            <td style="background-color: #00D6D6" colspan="3">46. &iquest;El orde&ntilde;o de sus vacas principalmente es?</td>
         </tr>
         <tr>
             <td>
@@ -5399,9 +5418,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
     </table>
   </td>
   <td width="50%" align="center" valign="top">
-  	<table>
+  	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">47. &iquest;El ganado bovino se destina a...</td>
+            <td style="background-color: #00D6D6" colspan="3">47. &iquest;El ganado bovino se destina a...</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>1. venta?</td>
@@ -5422,9 +5442,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP47_3" id="txtP47_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p47_3']; ?>" onKeyDown="A(event,this.form.txtP48);" maxlength="1"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">48. &iquest;Tiene o maneja b&uacute;falos?</td>
+            <td style="background-color: #00D6D6" colspan="3">48. &iquest;Tiene o maneja b&uacute;falos?</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>
@@ -5447,12 +5468,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td>49. &iquest;Cu&aacute;ntas cabezas de b&uacute;falo por sexo tiene o maneja?</td>
+            <td style="background-color: #00D6D6">49. &iquest;Cu&aacute;ntas cabezas de b&uacute;falo por sexo tiene o maneja?</td>
         </tr>
     </table>
-    <table border="1">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td rowspan="3">B&uacute;falos</td>
             <td colspan="3">Cabezas de b&uacute;falos</td>
@@ -5468,9 +5489,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td> <input class="cuarenta_px" name="txtP49_3" id="txtP49_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p49_3']; ?>" onKeyDown="A(event,this.form.txtP50);" maxlength="5"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">50. &iquest;Tiene o maneja ganado ovino?</td>
+            <td style="background-color: #00D6D6" colspan="3">50. &iquest;Tiene o maneja ganado ovino?</td>
         </tr>
         <tr>
             <td>
@@ -5493,12 +5514,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td>51. &iquest;Cu&aacute;ntas cabezas de ganado ovino, por sexo, seg&uacute;n grupo de edades, tiene o maneja?</td>
+            <td style="background-color: #00D6D6">51. &iquest;Cu&aacute;ntas cabezas de ganado ovino, por sexo, seg&uacute;n grupo de edades, tiene o maneja?</td>
         </tr>
     </table>
-    <table border="1">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td rowspan="3"></td>
             <td rowspan="2">Grupos <br />de edades</td>
@@ -5537,9 +5558,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP51_4_3" id="txtP51_4_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p51_4_3']; ?>" onKeyDown="A(event,this.form.txtP52_1);" maxlength="5"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">52. &iquest;El ganado ovino se destina a...</td>
+            <td style="background-color: #00D6D6" colspan="3">52. &iquest;El ganado ovino se destina a...</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>1. venta?</td>
@@ -5560,10 +5582,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP52_3" id="txtP52_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p52_3']; ?>" onKeyDown="A(event,this.form.txtP53_1);" maxlength="1"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">53. &iquest;La lana esquilada de ovinos se
-                destina a...</td>
+            <td style="background-color: #00D6D6" colspan="3">53. &iquest;La lana esquilada de ovinos se destina a...</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>1. venta?</td>
@@ -5601,9 +5623,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 <br />
 <tr>
   <td width="50%" align="center" valign="top">
-  	<table>
+  	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">54.&iquest;Tiene o maneja ganado porcino de granja?</td>
+            <td style="background-color: #00D6D6" colspan="3">54.&iquest;Tiene o maneja ganado porcino de granja?</td>
         </tr>
         <tr>
             <td>
@@ -5626,12 +5648,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td>55. &iquest;Cu&aacute;ntas cabezas de ganado porcino, por sexo, seg&uacute;n grupo de edades, tiene o maneja?</td>
+            <td style="background-color: #00D6D6">55. &iquest;Cu&aacute;ntas cabezas de ganado porcino, por sexo, seg&uacute;n grupo de edades, tiene o maneja?</td>
         </tr>
     </table>
-    <table border="1">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td rowspan="2"></td>
             <td rowspan="2">Grupo <br />de edades</td>
@@ -5687,9 +5709,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP55_4_5" id="txtP55_4_5" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p55_4_5']; ?>" onKeyDown="A(event,this.form.txtP56);" maxlength="3"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">56.&iquest;Tiene o maneja ganado porcino de corral?</td>
+            <td style="background-color: #00D6D6" colspan="3">56.&iquest;Tiene o maneja ganado porcino de corral?</td>
         </tr>
         <tr>
             <td>
@@ -5713,12 +5735,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td>57. &iquest;Cu&aacute;ntas cabezas de ganado porcino, por sexo, seg&uacute;n grupo de edades, tiene o maneja?</td>
+            <td style="background-color: #00D6D6">57. &iquest;Cu&aacute;ntas cabezas de ganado porcino, por sexo, seg&uacute;n grupo de edades, tiene o maneja?</td>
         </tr>
     </table>
-    <table border="1">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td rowspan="2"></td>
             <td rowspan="2">Grupo <br />de edades</td>
@@ -5758,9 +5780,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP57_4_3" id="txtP57_4_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p57_4_3']; ?>" onKeyDown="A(event,this.form.txtP58_1);" maxlength="3"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">58. &iquest;El ganado porcino de corral se destina a...</td>
+            <td style="background-color: #00D6D6" colspan="3">58. &iquest;El ganado porcino de corral se destina a...</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>1. venta?</td>
@@ -5781,9 +5804,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP58_3" id="txtP58_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p58_3']; ?>" onKeyDown="A(event,this.form.txtP59);" maxlength="1"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">59.&iquest;Tiene o maneja ganado caprino?</td>
+            <td style="background-color: #00D6D6" colspan="3">59.&iquest;Tiene o maneja ganado caprino?</td>
         </tr>
         <tr>
             <td>
@@ -5806,12 +5829,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td>60. &iquest;Cu&aacute;ntas cabezas de ganado caprino, por sexo, seg&uacute;n grupo de edades, tiene o maneja?</td>
+            <td style="background-color: #00D6D6">60. &iquest;Cu&aacute;ntas cabezas de ganado caprino, por sexo, seg&uacute;n grupo de edades, tiene o maneja?</td>
         </tr>
     </table>
-    <table border="1">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
 
         <tr>
             <td rowspan="2"></td>
@@ -5854,9 +5877,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
     </table>
   </td>
   <td width="50%" align="center" valign="top">
-  	<table>
+  	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">61. &iquest;El ganado caprino se destina a...</td>
+            <td style="background-color: #00D6D6" colspan="3">61. &iquest;El ganado caprino se destina a...</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>1. venta?</td>
@@ -5877,9 +5901,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP61_3" id="txtP61_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p61_3']; ?>" onKeyDown="A(event,this.form.txtP62);" maxlength="1"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">62. &iquest;Tiene o maneja llamas?</td>
+            <td style="background-color: #00D6D6" colspan="3">62. &iquest;Tiene o maneja llamas?</td>
         </tr>
         <tr>
             <td>
@@ -5902,12 +5926,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td>63. &iquest;Cu&aacute;ntas cabezas de llamas, seg&uacute;n sexo y grupos de edades, tiene o maneja?</td>
+            <td style="background-color: #00D6D6">63. &iquest;Cu&aacute;ntas cabezas de llamas, seg&uacute;n sexo y grupos de edades, tiene o maneja?</td>
         </tr>
     </table>
-    <table border="1">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td rowspan="2"></td>
             <td rowspan="2">Sexo y grupos <br />de edades</td>
@@ -5992,9 +6016,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP63_9_4" id="txtP63_9_4" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p63_9_4']; ?>" onKeyDown="A(event,this.form.txtP64_1);" maxlength="4"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">64. &iquest;Las llamas se destinan a...</td>
+            <td style="background-color: #00D6D6" colspan="3">64. &iquest;Las llamas se destinan a...</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>1. venta?</td>
@@ -6015,9 +6040,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP64_3" id="txtP64_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p64_3']; ?>" onKeyDown="A(event,this.form.txtP65_1);" maxlength="1"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">65. &iquest;La fibra esquilada de llama se destina a...</td>
+            <td style="background-color: #00D6D6" colspan="3">65. &iquest;La fibra esquilada de llama se destina a...</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>1. venta?</td>
@@ -6055,9 +6081,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 <br />
 <tr>
   <td width="50%" align="center" valign="top">
-  	<table>
+  	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">66.&iquest;Tiene o maneja alpacas?</td>
+            <td style="background-color: #00D6D6" colspan="3">66.&iquest;Tiene o maneja alpacas?</td>
         </tr>
         <tr>
             <td>
@@ -6080,12 +6106,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td>67.&iquest;Cu&aacute;ntas cabezas de alpacas, seg&uacute;n sexo y grupo de edades, tiene o maneja?</td>
+            <td style="background-color: #00D6D6">67.&iquest;Cu&aacute;ntas cabezas de alpacas, seg&uacute;n sexo y grupo de edades, tiene o maneja?</td>
         </tr>
     </table>
-    <table border="1">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td rowspan="2"></td>
             <td rowspan="2">Sexo y grupos <br />de edades</td>
@@ -6170,9 +6196,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP67_9_4" id="txtP67_9_4" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p67_9_4']; ?>" onKeyDown="A(event,this.form.txtP68_1);" maxlength="4"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">68. &iquest;Las alpacas se destinan a...</td>
+            <td style="background-color: #00D6D6" colspan="3">68. &iquest;Las alpacas se destinan a...</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>1. venta?</td>
@@ -6193,9 +6220,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP68_3" id="txtP68_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p68_3']; ?>" onKeyDown="A(event,this.form.txtP69_1);" maxlength="1"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">69. &iquest;La fibra esquilada de alpaca se destina a...</td>
+            <td style="background-color: #00D6D6" colspan="3">69. &iquest;La fibra esquilada de alpaca se destina a...</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>1. venta?</td>
@@ -6216,12 +6244,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP69_3" id="txtP69_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p69_3']; ?>" onKeyDown="A(event,this.form.txtP70_1);" maxlength="1"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td>70. &iquest;Cu&aacute;ntas cabezas de otras especies de ganado, tiene o maneja?</td>
+            <td style="background-color: #00D6D6">70. &iquest;Cu&aacute;ntas cabezas de otras especies de ganado, tiene o maneja?</td>
         </tr>
     </table>
-    <table border="1">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td></td>
             <td>Otras especies<br />de ganado</td>
@@ -6255,9 +6283,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
     </table>
   </td>
   <td width="50%" align="center" valign="top">
-  	<table>
+  	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">Solo para los que contestaron que tienen conejos o cuyes <br />71. &iquest;Los conejos o cuyes se destinan a...</td>
+            <td style="background-color: #00D6D6" colspan="3">Solo para los que contestaron que tienen conejos o cuyes <br />71. &iquest;Los conejos o cuyes se destinan a...</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>1. venta?</td>
@@ -6278,9 +6307,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP71_3" id="txtP71_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p71_3']; ?>" onKeyDown="A(event,this.form.txtP72);" maxlength="1"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">72. &iquest;Tiene aves de granja?</td>
+            <td style="background-color: #00D6D6" colspan="3">72. &iquest;Tiene aves de granja?</td>
         </tr>
         <tr>
             <td>
@@ -6308,12 +6337,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td>73. &iquest;Cu&aacute;ntas aves de granja, tiene o maneja?</td>
+            <td style="background-color: #00D6D6">73. &iquest;Cu&aacute;ntas aves de granja, tiene o maneja?</td>
         </tr>
     </table>
-    <table border="1">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td></td>
             <td>Aves de granja</td>
@@ -6370,14 +6399,14 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP73_10" id="txtP73_10" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p73_10']; ?>" onKeyDown="A(event,this.form.txtP74_1_1);" maxlength="7"/></td>
         </tr>    
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td>74. &iquest;Al d&iacute;a de hoy, cu&aacute;l es la cantidad de construcciones y equipos av&iacute;colas que tiene?<br />
+            <td style="background-color: #00D6D6">74. &iquest;Al d&iacute;a de hoy, cu&aacute;l es la cantidad de construcciones y equipos av&iacute;colas que tiene?<br />
                 (anote el a&ntilde;o de la primera y &uacute;ltima construcci&oacute;n o compra)
             </td>
         </tr>    
     </table>
-    <table border="1">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
 
         <tr>
             <td></td>
@@ -6415,9 +6444,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP74_4_3" id="txtP74_4_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p74_4_3']; ?>" onKeyDown="A(event,this.form.txtP75);" maxlength="4"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">75. &iquest;Tiene aves de corral o de traspatio?</td>
+            <td style="background-color: #00D6D6" colspan="3">75. &iquest;Tiene aves de corral o de traspatio?</td>
         </tr>
         <tr>
             <td>
@@ -6440,12 +6469,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td>76. &iquest;Cu&aacute;ntas aves de corral o de traspatio, tiene o maneja?</td>
+            <td style="background-color: #00D6D6">76. &iquest;Cu&aacute;ntas aves de corral o de traspatio, tiene o maneja?</td>
         </tr>
     </table>
-    <table border="1">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td></td>
             <td>Aves de corral</td>
@@ -6489,9 +6518,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 <br />
 <tr>
   <td width="50%" align="center" valign="top">
-  	<table>
+  	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">77. &iquest;Las aves de corral se destinan a...</td>
+            <td style="background-color: #00D6D6" colspan="3">77. &iquest;Las aves de corral se destinan a...</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>1. venta?</td>
@@ -6512,9 +6542,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP77_3" id="txtP77_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p77_3']; ?>" onKeyDown="A(event,this.form.txtP78);" maxlength="1"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">78 &iquest;Recolecta miel de abeja?</td>
+            <td style="background-color: #00D6D6" colspan="3">78 &iquest;Recolecta miel de abeja?</td>
         </tr>
         <tr>
             <td>
@@ -6537,9 +6567,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">79. &iquest;La recolecci&oacute;n es de...</td>
+            <td style="background-color: #00D6D6" colspan="3">79. &iquest;La recolecci&oacute;n es de...</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>1. colmenas naturales?</td>
@@ -6554,23 +6585,23 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP79_2" id="txtP79_2" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p79_2']; ?>" onKeyDown="A(event,this.form.txtP80);" maxlength="1"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td>80. &iquest;Si la recolecci&oacute;n es de colmenas artificiales, cu&aacute;ntas cajas tiene o maneja?</td>
+            <td style="background-color: #00D6D6">80. &iquest;Si la recolecci&oacute;n es de colmenas artificiales, cu&aacute;ntas cajas tiene o maneja?</td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td><input class="cuarenta_px" name="txtP80" id="txtP80" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p80']; ?>" onKeyDown="A(event,this.form.txtP81_1);" maxlength="3"/></td>
             <td>N&uacute;mero</td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td>81. &iquest;Cu&aacute;l fue su producci&oacute;n de miel en los &uacute;ltimos 12 meses?</td>
+            <td style="background-color: #00D6D6">81. &iquest;Cu&aacute;l fue su producci&oacute;n de miel en los &uacute;ltimos 12 meses?</td>
         </tr>
     </table>
-    <table border="1">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td>Cantidad</td>
             <td>C&oacute;digo<br />unidad de<br />medida</td>
@@ -6580,9 +6611,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP81_2" id="txtP81_2" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p81_2']; ?>" onKeyDown="A(event,this.form.txtP82_1);" maxlength="2"/></td>
         </tr>
     </table>    
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">82. &iquest;La miel producida se destina a...</td>
+            <td style="background-color: #00D6D6" colspan="3">82. &iquest;La miel producida se destina a...</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>1. venta?</td>
@@ -6603,13 +6635,13 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP82_3" id="txtP82_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p82_3']; ?>" onKeyDown="A(event,this.form.txtP83_1);" maxlength="1"/></td>
         </tr>
     </table>
-    <label><strong>VII. PRINCIPALES USOS Y PR&Aacute;CTICAS EN EL GANADO Y AVES</strong></label>
-    <table>
+    <label style="background-color: #00D6D6"><strong>VII. PRINCIPALES USOS Y PR&Aacute;CTICAS EN EL GANADO Y AVES</strong></label>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td>83. &iquest;En los &uacute;ltimos doce meses al d&iacute;a de hoy, vacun&oacute; a su(s)...</td>
+            <td style="background-color: #00D6D6">83. &iquest;En los &uacute;ltimos doce meses al d&iacute;a de hoy, vacun&oacute; a su(s)...</td>
         </tr>
     </table>
-    <table style="border: 1px solid ;">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td>1. ganado bovino?</td>
             <td></td>
@@ -6630,7 +6662,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
         </tr>
     </table>
     <br />
-    <table style="border: 1px solid ;">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td>2. ganado ovino?</td>
             <td>Si 1</td>
@@ -6664,9 +6696,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
     </table>
   </td>
   <td width="50%" align="center" valign="top">
-  	<table>    
+  	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
         <tr>
-            <td colspan="3">84. &iquest;Realiza la desparasitaci&oacute;n de su(s)&hellip;</td>
+            <td style="background-color: #00D6D6" colspan="3">84. &iquest;Realiza la desparasitaci&oacute;n de su(s)&hellip;</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>1. ganado?</td>
@@ -6681,9 +6714,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP84_2" id="txtP84_2" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p84_2']; ?>" onKeyDown="A(event,this.form.txtP85_1);" maxlength="1"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">85. &iquest;Realiza inseminaci&oacute;n artificial en su ganado...</td>
+            <td style="background-color: #00D6D6" colspan="3">85. &iquest;Realiza inseminaci&oacute;n artificial en su ganado...</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>1. bovino?</td>
@@ -6704,12 +6738,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP85_3" id="txtP85_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p85_3']; ?>" onKeyDown="A(event,this.form.txtP86_1_1);" maxlength="1"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td>86. &iquest;Al d&iacute;a de hoy, cu&aacute;l es la cantidad de construcciones e instalaciones que tiene para su ganado de todo tipo? <br /> (anote el a&ntilde;o de la primera y &uacute;ltima construcci&oacute;n)</td>
+            <td style="background-color: #00D6D6">86. &iquest;Al d&iacute;a de hoy, cu&aacute;l es la cantidad de construcciones e instalaciones que tiene para su ganado de todo tipo? <br /> (anote el a&ntilde;o de la primera y &uacute;ltima construcci&oacute;n)</td>
         </tr>
     </table>
-    <table border="1">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td></td>
             <td>Descripci&oacute;n</td>
@@ -6767,14 +6801,14 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP86_7_3" id="txtP86_7_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p86_7_3']; ?>" onKeyDown="A(event,this.form.txtP87_1_1);" maxlength="4"/></td>
         </tr>
     </table>
-    <table>    
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
         <tr>
-            <td>87. &iquest;Al d&iacute;a de hoy, cu&aacute;l es la cantidad de equipos e implementos que tiene para su ganado de todo tipo? <br />
+            <td style="background-color: #00D6D6">87. &iquest;Al d&iacute;a de hoy, cu&aacute;l es la cantidad de equipos e implementos que tiene para su ganado de todo tipo? <br />
                 (anote el a&ntilde;o de la primera y &uacute;ltima compra) 
             </td>
         </tr>    
     </table>
-    <table border="1">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td></td>
             <td>Descripci&oacute;n</td>
@@ -6797,10 +6831,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP87_2_3" id="txtP87_2_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p87_2_3']; ?>" onKeyDown="A(event,this.form.txtP88);" maxlength="4"/></td>
         </tr>
     </table>
-    <label><strong>VIII. FUENTES DE AGUA PARA RIEGO Y CONSUMO ANIMAL</strong></label>
-    <table>    
+    <label style="background-color: #00D6D6"><strong>VIII. FUENTES DE AGUA PARA RIEGO Y CONSUMO ANIMAL</strong></label>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
         <tr>
-            <td colspan="3">88. &iquest;Utiliza alg&uacute;n m&eacute;todo de riego?</td>
+            <td style="background-color: #00D6D6" colspan="3">88. &iquest;Utiliza alg&uacute;n m&eacute;todo de riego?</td>
         </tr>
         <tr>
             <td>
@@ -6823,9 +6857,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table>    
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
         <tr>
-            <td colspan="3">89.&iquest;El m&eacute;todo de riego que usa es por...</td>
+            <td style="background-color: #00D6D6" colspan="3">89.&iquest;El m&eacute;todo de riego que usa es por...</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>1. gravedad?</td>
@@ -6852,7 +6887,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
   <td width="50%" align="center" valign="top"></td>
   <td width="50%" align="rigth" valign="top">
   	<input name="btnP10_siguiente" id="btnP10_siguiente" value="Siguiente" type="button" onKeyDown="A(event,null);" onclick="enviar(this.form,'p11')"/>
-    <input type="hidden" name="MM_update" value="form" />
+    <input type="hidden" name="MM_update" value="form" />	
   </td>
 </tr>
 </table>
@@ -6863,12 +6898,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 <br />
 <tr>
   <td width="50%" align="center" valign="top">
-  	<table>    
+  	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
         <tr>
-            <td>90.&iquest;Cu&aacute;les son las fuentes o almacenamiento de agua que utiliza para regar sus cultivos o para el consumo de su ganado...</td>
+            <td style="background-color: #00D6D6">90.&iquest;Cu&aacute;les son las fuentes o almacenamiento de agua que utiliza para regar sus cultivos o para el consumo de su ganado...</td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td>1. represa?</td>
             <td>Si 1</td>
@@ -6930,10 +6965,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP90_10" id="txtP90_10" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p90_10']; ?>" onKeyDown="A(event,this.form.txtP91);" maxlength="1"/></td>
         </tr>
     </table>
-    <label><strong>IX. BOSQUES O MONTES</strong></label>
-    <table>    
+    <label style="background-color: #00D6D6"><strong>IX. BOSQUES O MONTES</strong></label>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
         <tr>
-            <td colspan="3">91. &iquest;Realiza actividades de extracci&oacute;n de especies maderables en bosques o montes?</td>
+            <td style="background-color: #00D6D6" colspan="3">91. &iquest;Realiza actividades de extracci&oacute;n de especies maderables en bosques o montes?</td>
         </tr>
         <tr>
             <td>
@@ -6956,12 +6991,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table>    
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
         <tr>
-            <td colspan="3">92. &iquest;En el bosque o monte, cu&aacute;les son las principales especies maderables que extrae?</td>
+            <td style="background-color: #00D6D6" colspan="3">92. &iquest;En el bosque o monte, cu&aacute;les son las principales especies maderables que extrae?</td>
         </tr>    
     </table>
-    <table border="1">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
 
         <tr>
             <td>1</td>
@@ -6980,9 +7015,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="trecientos_px" name="txtP92_4" id="txtP92_4" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p92_4']; ?>" onKeyDown="A(event,this.form.txtP93_1);" maxlength="20"/></td>
         </tr>
     </table>
-    <table>    
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
         <tr>
-            <td colspan="3">93. &iquest;Las especies maderables que extrae son para...</td>
+            <td style="background-color: #00D6D6" colspan="3">93. &iquest;Las especies maderables que extrae son para...</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>1. uso propio?</td>
@@ -6997,9 +7033,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP93_2" id="txtP93_2" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p93_2']; ?>" onKeyDown="A(event,this.form.txtP94);" maxlength="1"/></td>
         </tr>
     </table>
-    <table>    
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
         <tr>
-            <td colspan="3">94. &iquest;Realiza la reforestaci&oacute;n?</td>
+            <td style="background-color: #00D6D6" colspan="3">94. &iquest;Realiza la reforestaci&oacute;n?</td>
         </tr>
         <tr>
             <td>
@@ -7021,9 +7057,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table>    
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
         <tr>
-            <td colspan="3">95. &iquest;Recolecta o extrae productos no maderables? <br /> (casta&ntilde;a, goma, uruc&uacute;, cacao o chocolate, otros</td>
+            <td style="background-color: #00D6D6" colspan="3">95. &iquest;Recolecta o extrae productos no maderables? <br /> (casta&ntilde;a, goma, uruc&uacute;, cacao o chocolate, otros</td>
         </tr>
         <tr>
             <td>
@@ -7048,12 +7084,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
     </table>
   </td>
   <td width="50%" align="center" valign="top">&nbsp;
-  	<table>    
+  	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
         <tr>
-            <td colspan="3">96. &iquest;Cu&aacute;les son los principales productos no maderables que recolecta o <br /> extrae y cu&aacute;l fue la cantidad en el a&ntilde;o agr&iacute;cola de julio 2012 a junio 2013?</td>
+            <td style="background-color: #00D6D6" colspan="3">96. &iquest;Cu&aacute;les son los principales productos no maderables que recolecta o <br /> extrae y cu&aacute;l fue la cantidad en el a&ntilde;o agr&iacute;cola de julio 2012 a junio 2013?</td>
         </tr>
     </table>
-    <table border="1">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td rowspan="2"></td>
             <td rowspan="2">Producto</td>
@@ -7099,10 +7135,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px"   name="txtP96_5_4" id="txtP96_5_4" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p96_5_4']; ?>" onKeyDown="A(event,this.form.txtP97);" maxlength="4" /></td>
         </tr>
     </table>
-    <label><strong>X. CAZA Y PESCA</strong></label>
-    <table>    
+    <label style="background-color: #00D6D6"><strong>X. CAZA Y PESCA</strong></label>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
         <tr>
-            <td colspan="3">97. &iquest;Caza animales silvestres?</td>
+            <td style="background-color: #00D6D6" colspan="3">97. &iquest;Caza animales silvestres?</td>
         </tr>
         <tr>
             <td>
@@ -7125,12 +7161,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table>    
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
         <tr>
-            <td colspan="3">98.&iquest;Cu&aacute;les son las principales especies que caza?</td>
+            <td style="background-color: #00D6D6" colspan="3">98.&iquest;Cu&aacute;les son las principales especies que caza?</td>
         </tr>    
     </table>
-    <table border="1">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td rowspan="2"></td>
             <td rowspan="2">Especie</td>
@@ -7163,9 +7199,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px"   name="txtP98_4_3" id="txtP98_4_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p98_4_3']; ?>" onKeyDown="A(event,this.form.txtP99_1);" maxlength="2" /></td>
         </tr>
     </table>
-    <table>    
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
         <tr>
-            <td colspan="3">99. &iquest;Las especies que caza se destinan a...</td>
+            <td style="background-color: #00D6D6" colspan="3">99. &iquest;Las especies que caza se destinan a...</td>
+			<td style="background-color: #00D6D6"></td>
         </tr>
         <tr>
             <td>1. consumo del hogar?</td>
@@ -7180,9 +7217,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             <td><input class="cuarenta_px" name="txtP99_2" id="txtP99_2" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p99_2']; ?>" onKeyDown="A(event,this.form.txtP100);" maxlength="1"/></td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">100. &iquest;Realiza actividades de pesca?</td>
+            <td style="background-color: #00D6D6" colspan="3">100. &iquest;Realiza actividades de pesca?</td>
         </tr>
         <tr>
             <td>
@@ -7205,12 +7242,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
             </td>
         </tr>
     </table>
-    <table>
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="3">101. &iquest;Cu&aacute;les son las principales especies que pesca?</td>
+            <td style="background-color: #00D6D6" colspan="3">101. &iquest;Cu&aacute;les son las principales especies que pesca?</td>
         </tr>
     </table>
-    <table border="1">
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
         <tr>
             <td rowspan="2"></td>
             <td rowspan="2">Especie</td>
@@ -7260,9 +7297,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 <br />
 <tr>
   <td width="50%" align="center" valign="top">
-  	<table>    
+  	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
 		<tr>
-			<td colspan="3">102. &iquest;Las especies que pesca las destina a...</td>
+			<td style="background-color: #00D6D6" colspan="3">102. &iquest;Las especies que pesca las destina a...</td>
+			<td style="background-color: #00D6D6"></td>
 		</tr>
 		<tr>
 			<td>1. venta?</td>
@@ -7283,9 +7321,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			<td><input class="cuarenta_px" name="txtP102_3" id="txtP102_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p102_3']; ?>"onKeyDown="A(event,this.form.txtP103);" maxlength="1"/></td>
 		</tr>
 	</table>
-	<table>
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
 		<tr>
-			<td colspan="3">103. &iquest;Realiza otras actividades de cr&iacute;a de especies acu&aacute;ticas? <br /> (Incluye peces, tortugas, caimanes, lagartos, cangrejos, camarones, ranas y otros)</td>
+			<td style="background-color: #00D6D6" colspan="3">103. &iquest;Realiza otras actividades de cr&iacute;a de especies acu&aacute;ticas? <br /> (Incluye peces, tortugas, caimanes, lagartos, cangrejos, camarones, ranas y otros)</td>
 		</tr>
 		<tr>
 			<td>
@@ -7308,12 +7346,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			</td>
 		</tr>
 	</table>
-	<table>    
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
 		<tr>
-			<td colspan="3">104. &iquest;Cu&aacute;les son las principales especies que cr&iacute;a?</td>
+			<td style="background-color: #00D6D6" colspan="3">104. &iquest;Cu&aacute;les son las principales especies que cr&iacute;a?</td>
 		</tr>
 	</table>
-	<table border="1">
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
 		<tr>
 			<td>1</td>
 			<td><input class="trecientos_px" name="txtP104_1" id="txtP104_1" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p104_1']; ?>" onKeyDown="A(event,this.form.txtP104_2);" maxlength="20"/></td>
@@ -7331,9 +7369,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			<td><input class="trecientos_px" name="txtP104_4" id="txtP104_4" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p104_4']; ?>" onKeyDown="A(event,this.form.txtP105_1);" maxlength="20"/></td>
 		</tr>
 	</table>
-	<table>    
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
 		<tr>
-			<td>105. &iquest;Las especies acu&aacute;ticas que cr&iacute;a se destinan a...</td>
+			<td style="background-color: #00D6D6">105. &iquest;Las especies acu&aacute;ticas que cr&iacute;a se destinan a...</td>
+			<td style="background-color: #00D6D6"></td>
+			<td style="background-color: #00D6D6"></td>
+			<td style="background-color: #00D6D6"></td>
 		</tr>
 		<tr>
 			<td>1. venta?</td>
@@ -7354,10 +7395,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			<td><input class="cuarenta_px" name="txtP105_3" id="txtP105_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p105_3']; ?>" onKeyDown="A(event,this.form.txtP106);" maxlength="1"/></td>
 		</tr>
 	</table>
-	<label><strong>XI. ASISTENCIA O APOYO RECIBIDO, CR&Eacute;DITO Y SEGURO</strong></label>
-	<table>
+	<label style="background-color: #00D6D6"><strong>XI. ASISTENCIA O APOYO RECIBIDO, CR&Eacute;DITO Y SEGURO</strong></label>
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
 		<tr>
-			<td>106. &iquest;En los &uacute;ltimos tres a&ntilde;os, recibi&oacute; asistencia o apoyo para su actividad agr&iacute;cola, <br /> 
+			<td style="background-color: #00D6D6">106. &iquest;En los &uacute;ltimos tres a&ntilde;os, recibi&oacute; asistencia o apoyo para su actividad agr&iacute;cola, <br /> 
 				cr&iacute;a de ganado, aves u otras especies, recursos forestales, recolecci&oacute;n o extracci&oacute;n <br /> de especies no maderables, caza o pesca?</td>
 		</tr>
 		<tr>
@@ -7381,13 +7422,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			</td>
 		</tr>
 	</table>
-	<table>
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
 		<tr>
-			<td>107. &iquest;La asistencia o apoyo recibido, fue de...</td>
+			<td style="background-color: #00D6D6">107. &iquest;La asistencia o apoyo recibido, fue de...</td>
 		</tr>
-
 	</table>
-	<table border="1">
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
 		<tr>
 			<td rowspan="2">&nbsp;</td>
 			<td rowspan="2">Tipo de<br />asistencia o<br />apoyo<br />recibido</td>
@@ -7454,9 +7494,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 	</table>
   </td>
   <td width="50%" align="center" valign="top">
-	<table>
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
 		<tr>
-			<td>108.&iquest;En los &uacute;ltimos tres a&ntilde;os, solicit&oacute; cr&eacute;dito para la actividad agr&iacute;cola, <br />
+			<td style="background-color: #00D6D6">108.&iquest;En los &uacute;ltimos tres a&ntilde;os, solicit&oacute; cr&eacute;dito para la actividad agr&iacute;cola, <br />
 				cr&iacute;a de ganado, aves u otras especies, recursos forestales, <br /> recolecci&oacute;n o extracci&oacute;n de especies no maderables, caza o pesca?</td>
 		</tr>
 		<tr>
@@ -7480,9 +7520,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			</td>
 		</tr>
 	</table>
-	<table>
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
 		<tr>
-			<td>109. &iquest;Obtuvo el cr&eacute;dito solicitado?</td>
+			<td style="background-color: #00D6D6">109. &iquest;Obtuvo el cr&eacute;dito solicitado?</td>
 		</tr>
 		<tr>
 			<td>
@@ -7505,9 +7545,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			</td>
 		</tr>
 	</table>
-	<table>    
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
 		<tr>
-			<td>110. &iquest;El cr&eacute;dito que obtuvo fue de car&aacute;cter...</td>
+			<td style="background-color: #00D6D6">110. &iquest;El cr&eacute;dito que obtuvo fue de car&aacute;cter...</td>
+			<td style="background-color: #00D6D6"></td>
+			<td style="background-color: #00D6D6"></td>
+			<td style="background-color: #00D6D6"></td>
 		</tr>
 		<tr>
 			<td>1. individual?</td>
@@ -7522,9 +7565,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			<td><input class="cuarenta_px" name="txtP110_2" id="txtP110_2" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p110_2']; ?>" onKeyDown="A(event,this.form.txtP111_1);" maxlength="1"/></td>
 		</tr>
 	</table>
-	<table>    
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
 		<tr>
-			<td>111.&iquest;El cr&eacute;dito lo obtuvo en...</td>
+			<td style="background-color: #00D6D6">111.&iquest;El cr&eacute;dito lo obtuvo en...</td>
+			<td style="background-color: #00D6D6"></td>
+			<td style="background-color: #00D6D6"></td>
+			<td style="background-color: #00D6D6"></td>
 		</tr>
 		<tr>
 			<td>1. entidad financiera con<br />fondo del Banco de<br />Desarrollo Productivo?(BDP)</td>
@@ -7551,10 +7597,13 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			<td><input class="cuarenta_px" name="txtP111_4" id="txtP111_4" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p111_4']; ?>" onKeyDown="A(event,this.form.txtP112_1);" maxlength="1"/></td>
 		</tr>
 	</table>
-	<table>
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
 		<tr>
-			<td>S&oacute;lo para los que respondieron que no obtuvieron el cr&eacute;dito solicitado <br />
+			<td style="background-color: #00D6D6">S&oacute;lo para los que respondieron que no obtuvieron el cr&eacute;dito solicitado <br />
 				112.&iquest;Las causas o motivos por los que no obtuvo cr&eacute;dito son...</td>
+			<td style="background-color: #00D6D6"></td>	
+			<td style="background-color: #00D6D6"></td>	
+			<td style="background-color: #00D6D6"></td>	
 		</tr>
 		<tr>
 			<td>1. falta de garantia?</td>
@@ -7575,9 +7624,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			<td><input class="cuarenta_px" name="txtP112_3" id="txtP112_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p112_3']; ?>" onKeyDown="A(event,this.form.txtP113);" maxlength="1"/></td>
 		</tr>
 	</table>
-	<table>
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
 		<tr>
-			<td>113.&iquest;Cuenta con Seguro Agr&iacute;cola?</td>
+			<td style="background-color: #00D6D6">113.&iquest;Cuenta con Seguro Agr&iacute;cola?</td>
 		</tr>
 		<tr>
 			<td>
@@ -7600,12 +7649,12 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			</td>
 		</tr>
 	</table>
-	<table>
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
 		<tr>
-			<td>114. &iquest;A qu&eacute; cultivo(s) se aplica este seguro?</td>
+			<td style="background-color: #00D6D6">114. &iquest;A qu&eacute; cultivo(s) se aplica este seguro?</td>
 		</tr>    
 	</table>
-	<table border="1">
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
 		<tr>
 			<td>1</td>
 			<td><input class="trecientos_px" name="txtP114_1" id="txtP114_1" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p114_1']; ?>" onKeyDown="A(event,this.form.txtP114_2);" maxlength="20"/></td>
@@ -7636,14 +7685,14 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 <br />
 <tr>
   <td width="50%" align="center" valign="top">
-  	<table>    
+  	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
 		<tr>
-			<td>115. &iquest;Al d&iacute;a de hoy, cu&aacute;l es la cantidad de construcciones e instalaciones que tiene? <br />
+			<td style="background-color: #00D6D6">115. &iquest;Al d&iacute;a de hoy, cu&aacute;l es la cantidad de construcciones e instalaciones que tiene? <br />
 				(anote el a&ntilde;o de la primera y &uacute;ltima construcci&oacute;n)
 			</td>
 		</tr>
 	</table>
-	<table border="1">    
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
 		<tr>
 			<td></td>
 			<td>Descripci&oacute;n</td>
@@ -7701,14 +7750,14 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			<td><input class="cuarenta_px" name="txtP115_7_3" id="txtP115_7_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p115_7_3']; ?>" onKeyDown="A(event,this.form.txtP116_1_1);" maxlength="4"/></td>
 		</tr>
 	</table>
-	<table>    
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
 		<tr>
-			<td>116. &iquest;Al d&iacute;a de hoy, cu&aacute;l es la cantidad de maquinaria, equipos e <br />
+			<td style="background-color: #00D6D6">116. &iquest;Al d&iacute;a de hoy, cu&aacute;l es la cantidad de maquinaria, equipos e <br />
 				implementos que tiene? (anote el a&ntilde;o de la primera y &uacute;ltima compra)
 			</td>
 		</tr>    
 	</table>
-	<table border="1">
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
 		<tr>
 			<td></td>
 			<td>Descripci&oacute;n</td>
@@ -7766,15 +7815,15 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			<td><input class="cuarenta_px" name="txtP116_7_3" id="txtP116_7_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p116_7_3']; ?>" onKeyDown="A(event,this.form.txtP117_1);" maxlength="4"/></td>
 		</tr>
 	</table>
-	<label><strong>XIII. USO DE ELECTRICIDAD, GAS NATURAL, TRACCI&Oacute;N ANIMAL Y MAQUINARIA AGROPECUARIA</strong></label>
-	<table>    
+	<label style="background-color: #00D6D6"><strong>XIII. USO DE ELECTRICIDAD, GAS NATURAL, TRACCI&Oacute;N ANIMAL Y MAQUINARIA AGROPECUARIA</strong></label>
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
 		<tr>
-			<td>117.&iquest;Cu&aacute;les son las fuentes o almacenamiento de agua que utiliza <br />
+			<td style="background-color: #00D6D6">117.&iquest;Cu&aacute;les son las fuentes o almacenamiento de agua que utiliza <br />
 				para regar sus cultivos o para el consumo de su ganado...
 			</td>
 		</tr>    
 	</table>
-	<table>
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
 		<tr>
 			<td>1. energia el&eacute;ctrica de red?</td>
 			<td>Si 1</td>
@@ -7826,9 +7875,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 	</table>
   </td>
   <td width="50%" align="center" valign="top">
-	<table>    
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
 		<tr>
-			<td>118. &iquest;Utiliza animales de tiro para sus actividades agropecuarias?</td>
+			<td style="background-color: #00D6D6">118. &iquest;Utiliza animales de tiro para sus actividades agropecuarias?</td>
 		</tr>
 		<tr>
 			<td>
@@ -7849,9 +7898,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			</td>
 		</tr>
 	</table>
-	<table>
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
 		<tr>
-			<td>119. &iquest;Utiliza tractor(es) para sus trabajos agropecuarios?</td>
+			<td style="background-color: #00D6D6">119. &iquest;Utiliza tractor(es) para sus trabajos agropecuarios?</td>
 		</tr>
 		<tr>
 			<td>
@@ -7874,9 +7923,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			</td>
 		</tr>
 	</table>
-	<table>
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
 		<tr>
-			<td>120. &iquest;Los tractores que utiliza principalmente, son?</td>
+			<td style="background-color: #00D6D6">120. &iquest;Los tractores que utiliza principalmente, son?</td>
 		</tr>
 		<tr>
 			<td>
@@ -7901,9 +7950,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			</td>
 		</tr>
 	</table>
-	<table>    
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
 		<tr>
-			<td>121. &iquest;Utiliza cosechadoras para sus trabajos agr&iacute;colas?</td>
+			<td style="background-color: #00D6D6">121. &iquest;Utiliza cosechadoras para sus trabajos agr&iacute;colas?</td>
 		</tr>
 		<tr>
 			<td>
@@ -7926,9 +7975,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			</td>
 		</tr>
 	</table>
-	<table>
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
 		<tr>
-			<td>122. &iquest;Las cosechadoras que utiliza principalmente, son?</td>
+			<td style="background-color: #00D6D6">122. &iquest;Las cosechadoras que utiliza principalmente, son?</td>
 		</tr>
 		<tr>
 			<td>
@@ -7953,10 +8002,13 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			</td>
 		</tr>
 	</table>
-	<label><strong>XIV. PERSONAL OCUPADO EN LA UPA</strong></label>
-	<table>    
+	<label style="background-color: #00D6D6"><strong>XIV. PERSONAL OCUPADO EN LA UPA</strong></label>
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
 		<tr>
-			<td>123. &iquest;Durante el a&ntilde;o agr&iacute;cola, particip&oacute; de sistemas de trabajo como...</td>
+			<td style="background-color: #00D6D6">123. &iquest;Durante el a&ntilde;o agr&iacute;cola, particip&oacute; de sistemas de trabajo como...</td>
+			<td style="background-color: #00D6D6"></td>
+			<td style="background-color: #00D6D6"></td>
+			<td style="background-color: #00D6D6"></td>
 		</tr>
 		<tr>
 			<td>1. minka o ayni?</td>
@@ -7971,9 +8023,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			<td><input class="cuarenta_px" name="txtP123_2" id="txtP123_2" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p123_2']; ?>" onKeyDown="A(event,this.form.txtP124);" maxlength="1"/></td>
 		</tr>
 	</table>
-	<table>    
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
 		<tr>
-			<td>124. &iquest;Durante el a&ntilde;o agr&iacute;cola, emple&oacute; personal remunerado en dinero o en especie?<br>
+			<td style="background-color: #00D6D6">124. &iquest;Durante el a&ntilde;o agr&iacute;cola, emple&oacute; personal remunerado en dinero o en especie?<br>
 					(Incluya a trabajadores como : obreros, empleados, administrativos y otros. No incluya a los trabajadores del hogar)
 			</td>
 		</tr>
@@ -7998,7 +8050,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			</td>
 		</tr>    
 	</table>
-	<table border="1">
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
 		<tr>
 			<td rowspan="2">Actividades</td>
 			<td colspan="3" align="center">Cantidad</td>
@@ -8021,9 +8073,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			<td><input class="cuarenta_px" name="txtP124_2_3" id="txtP124_2_3" type="text" onfocus="selecciona_value(this)" value="<?php echo $row_datos['p124_2_3']; ?>" onKeyDown="A(event,this.form.txtP125_1);" maxlength="3"/></td>
 		</tr>
 	</table>
-	<table>    
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
 		<tr>
-			<td>125.&iquest;Durante el a&ntilde;o agr&iacute;cola, emple&oacute; personal no remunerado? <br />
+			<td style="background-color: #00D6D6">125.&iquest;Durante el a&ntilde;o agr&iacute;cola, emple&oacute; personal no remunerado? <br />
 				(familiares u otros no remunerados)
 			</td>
 		</tr>
@@ -8048,7 +8100,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			</td>
 		</tr>    
 	</table>
-	<table border="1">    
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
 		<tr>
 			<td rowspan="2">Actividades</td>
 			<td colspan="3" align="center">Cantidad</td>
@@ -8088,10 +8140,10 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 <br />
 <tr>
   <td width="50%" align="center" valign="top">
-  	<label><strong>XV. OTROS DATOS DEL PRODUCTOR(A)</strong></label>
-	<table>    
+  	<label style="background-color: #00D6D6"><strong>XV. OTROS DATOS DEL PRODUCTOR(A)</strong></label>
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
 		<tr>
-			<td>126. Solo para UPAs en Comunidad &iquest;tiene o trabaja otras parcelas fuera de la Comunidad ?</td>
+			<td style="background-color: #00D6D6">126. Solo para UPAs en Comunidad &iquest;tiene o trabaja otras parcelas fuera de la Comunidad ?</td>
 		</tr>
 		<tr>
 			<td>
@@ -8114,9 +8166,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			</td>
 		</tr>
 	</table>
-	<table>    
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
 		<tr>
-			<td>127. &iquest;Estas parcelas se encuentran ubicadas en...<br /> A. este municipio?</td>
+			<td style="background-color: #00D6D6">127. &iquest;Estas parcelas se encuentran ubicadas en...<br /> A. este municipio?</td>
 		</tr>
 		<tr>
 			<td>
@@ -8148,7 +8200,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			</td>
 		</tr>
 	</table>
-	<table>
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
 		<tr>
 			<td>B. otros municipios?</td>
 		</tr>
@@ -8184,9 +8236,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 	</table>
   </td>
   <td width="50%" align="center" valign="top">
-	<table>    
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
 		<tr>
-			<td>128. Solo para UPAs en &aacute;reas dispersas o periferia de ciudad &iquest;tiene o trabaja otras parcelas fuera del municipio?</td>
+			<td style="background-color: #00D6D6">128. Solo para UPAs en &aacute;reas dispersas o periferia de ciudad &iquest;tiene o trabaja otras parcelas fuera del municipio?</td>
 		</tr>
 		<tr>
 			<td>
@@ -8227,21 +8279,21 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 </tr>
 <tr>
   <td colspan="2" align="center" valign="top">
-    <table>    
+    <table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
 		<tr>
-			<td>129. S&oacute;lo si el Productor(a) es persona individual o sociedad de hecho. Incluya al Productor(a), <br />
+			<td style="background-color: #00D6D6">129. S&oacute;lo si el Productor(a) es persona individual o sociedad de hecho. Incluya al Productor(a), <br />
 				al c&oacute;nyuge, a los hijos dependientes y otros parientes dependientes del Productor(a).
 			</td>
 		</tr>    
 	</table>
-	<table border="1">    
-		<tr style="font-size: 7pt;">
-			<td></td>
-			<td>(1)<br />Componentes de la familia del<br />productor(a)<br />(incluya s&oacute;lo a mayores de 7 a&ntilde;os)</td>
-			<td>(2)<br />&iquest;Qu&eacute;<br />edad<br />tiene?<br />(a&ntilde;os<br />cumplidos)</td>
-			<td>(3)<br />Sexo<br /><br />1. Hombre<br />2. Mujer</td>
-			<td>(4)<br />&iquest;Cu&aacute;ntos a&ntilde;os de<br />estudio tiene en la<br />educaci&oacute;n formal?<br /><br />Acumule todos los&nbsp; a&ntilde;os<br />desde el nivel escolar<br />hasta el &uacute;ltimo curso<br />aprobado</td>
-			<td>(5)<br />&iquest;En qu&eacute;<br />actividades<br />participa<br />principalmente?<br /><br />
+	<table width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">    
+		<tr style="font-size: 7pt; border: 1px solid #000000;">
+			<td style="border: 1px solid #000000;"></td>
+			<td style="border: 1px solid #000000;">(1)<br />Componentes de la familia del<br />productor(a)<br />(incluya s&oacute;lo a mayores de 7 a&ntilde;os)</td>
+			<td style="border: 1px solid #000000;">(2)<br />&iquest;Qu&eacute;<br />edad<br />tiene?<br />(a&ntilde;os<br />cumplidos)</td>
+			<td style="border: 1px solid #000000;">(3)<br />Sexo<br /><br />1. Hombre<br />2. Mujer</td>
+			<td style="border: 1px solid #000000;">(4)<br />&iquest;Cu&aacute;ntos a&ntilde;os de<br />estudio tiene en la<br />educaci&oacute;n formal?<br /><br />Acumule todos los&nbsp; a&ntilde;os<br />desde el nivel escolar<br />hasta el &uacute;ltimo curso<br />aprobado</td>
+			<td style="border: 1px solid #000000;">(5)<br />&iquest;En qu&eacute;<br />actividades<br />participa<br />principalmente?<br /><br />
 				1. Agr&iacute;cola<br />
 				2. Ganadera<br />3. Avicola<br />
 				4. Forestal<br />
@@ -8250,9 +8302,9 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 				7. Caza<br />
 				8. Piscicola<br /><br />
 				9. No participa<br />(pase a otra <br />persona) </td>
-			<td>(6)<br>El tiempo que<br />dedica a esta<br />actividad es:<br /><br />1- Permanente<br />
+			<td style="border: 1px solid #000000;">(6)<br>El tiempo que<br />dedica a esta<br />actividad es:<br /><br />1- Permanente<br />
 					(pase a otra<br />persona)<br /><br />2. No permanente<br /></td>
-			<td>(7)<br>&iquest;Cu&aacute;l es la otra<br />actividad a la que<br />se dedica?<br /><br />
+			<td style="border: 1px solid #000000;">(7)<br>&iquest;Cu&aacute;l es la otra<br />actividad a la que<br />se dedica?<br /><br />
 					(Si es m&aacute;s de una<br />
 					anote la<br />
 					principal)<br /><br />
@@ -8262,7 +8314,8 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 					4. Comercio<br />
 					5. Transporte<br />
 					6. Otros servicios<br /><br />
-					7. Ninguna</td>
+					7. Ninguna
+			</td>
 		</tr>
 		<tr>
 			<td>1</td>
@@ -8384,7 +8437,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
   <td colspan="2" align="center" valign="top">
 	<table>
 		<tr>
-			<td>130. S&oacute;lo si el Productor(a) adem&aacute;s de trabajar en la UPA, tiene alguna otra actividad: &iquest;de d&oacute;nde proviene su mayor ingreso?</td>
+			<td style="background-color: #00D6D6">130. S&oacute;lo si el Productor(a) adem&aacute;s de trabajar en la UPA, tiene alguna otra actividad: &iquest;de d&oacute;nde proviene su mayor ingreso?</td>
 		</tr>
 		<tr>
 			<td>
@@ -8405,13 +8458,13 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 			</td>
 		</tr>
 	</table>
-	<label><strong>XVI. TABLA DE EQUIVALENCIAS</strong></label>
+	<label style="background-color: #00D6D6"><strong>XVI. TABLA DE EQUIVALENCIAS</strong></label>
 	<table>                  
 		<tr>
-			<td>131. (No incluya las unidades convencionales sombreadas en la tabla de equivalencias)</td>
+			<td style="background-color: #00D6D6">131. (No incluya las unidades convencionales sombreadas en la tabla de equivalencias)</td>
 		</tr>
 	</table>
-	<table border="1">
+	<table width="60%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0">
 		<tr>
 			<td rowspan="2"></td>
 			<td rowspan="2">Nombre usual de la<br />unidad de medida</td>
@@ -8472,7 +8525,7 @@ Folio: <label for="folio" style="font-size: 18pt;"><?php echo $_REQUEST['folio']
 	</table>
 	<table>
 		<tr>
-			<td>132. SITUACI&Oacute;N DE LA ENTREVISTA</td>
+			<td style="background-color: #00D6D6">132. SITUACI&Oacute;N DE LA ENTREVISTA</td>
 		</tr>
 		<tr>
 			<td>

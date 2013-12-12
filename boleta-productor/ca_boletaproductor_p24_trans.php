@@ -75,9 +75,9 @@ if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
 }*/
 ?>
 <!DOCTYPE html>
-<html><!-- InstanceBegin template="/Templates/sis_ineca.dwt.php" codeOutsideHTMLIsLocked="false" -->
-<head>
 <meta charset="UTF-8">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <!-- InstanceBeginEditable name="doctitle" -->
 <title>Boleta Productor</title>
 <script language="JavaScript">
@@ -151,6 +151,7 @@ $("#txtnum_control").mask("9999");
 
 });	
 </script>
+
 <script type="text/javascript">
 function mayuscula(campo){
     $(campo).keyup(function() {
@@ -162,14 +163,6 @@ $(document).ready(function(){
     mayuscula("input.trecientos_px");
     mayuscula("input.quinientos_px"); 	
 });
-
-function rellenar(quien,que){
-	cadcero='';
-	for(i=0;i<(6-que.length);i++){
-		cadcero+='0';
-	}
-	quien.value=cadcero+que;
-}
 </script>
 <!-- Estilos Boleta -->
 <style type="text/css">
@@ -206,20 +199,13 @@ function rellenar(quien,que){
 		font-size: 11pt;		
 	}
 	.fuente{
-		font-size: 11pt;
+		font-size: 10pt;
 		font-family:"Trebuchet MS", Times, serif;
-		font-weight: bold;
 	}
 	#correlativo{
 		float: left;
 	}
-	input{
-		font-family:"Comic Sans MS", cursive;
-		font-size: 12px;
-		font-weight: bold;
-		color: #063; 
-		text-transform:uppercase;
-    }		
+		
 </style> 
 <!-- InstanceEndEditable -->
 <style type="text/css">
@@ -366,52 +352,43 @@ $totalRows_listamenu = pg_num_rows($listamenu);
                
                   <!-- InstanceBeginEditable name="region2" -->
 <?php 
-$docID = $_REQUEST['DOC_ID'];
-$folioComunal = $_REQUEST['folio'];//parametro boleta comunal
+echo $docID = $_REQUEST['DOC_ID'];
+echo $folioComunal = $_REQUEST['folio'];//parametro comunal
 $objIns = new ca_boletaproductordb();		
-$arrayCabecera = $objIns->ca_obtiene_cabecera_por_folio($_REQUEST['folio']);
+echo $arrayCabecera = $objIns->ca_obtiene_cabecera_por_folio($_REQUEST['folio']);
 ?>
 <?php
+
 if (isset($_POST["botPress"]) && ($_POST["botPress"]=="insertar")) {	
-    if((int)strlen($_POST['txtFolio']) == 6){
-        $existe = $objIns->ca_existe_folio_productor($_POST['txtFolio']);	
-        if($existe != 0) {//no esta ingresando a este bloque 
-            echo '<script>
-                        window.alert("ESTA BOLETA YA FUE TRANSCRITA");	
-                        window.location = "/ine_ca/censoagropecuario/transcripcion_boletaproductor/ca_boletaproductor_inserta_trans.php";
-                  </script>';			
-        }
-        else {
-            echo $IpInsert = $objIns->get_real_ip(); 
-            $objIns->ca_inserta_boleta_productor_p1($_POST['doc_id'], $_POST['txtFolio'], $_POST['folioComunal'], $_POST['txtnum_brig'], $_POST['txtnum_empa'], $_POST['txtnum_seg'], $_POST['txtnum_control'], $_POST['txtP1'], $_POST['txtP2'], $_POST['txtP3'], 
-                    $_POST['txtP4'], $_POST['txtP5'], $_POST['txtP6_1'], $_POST['txtP6_2'], $_POST['txtP12'], $_POST['txtP13'], $_POST['txtP14'], 1, $_SESSION['MM_Username'], $IpInsert);
+    $existe = $objIns->ca_existe_folio_productor($_POST['txtFolio']);	
+    if($existe != 0) { 
+        echo '<script>
+                 window.alert("ESTA BOLETA YA FUE TRANSCRITA");	
+                 window.location = "/ine_ca/censoagropecuario/transcripcion_boletaproductor/ca_boletaproductor_inserta_trans.php";
+              </script>';			
+    }
+    else {
+        $objIns->ca_inserta_boleta_productor_p1($docID, $_POST['txtFolio'], $_POST['txtnum_brig'], $_POST['txtnum_empa'], $_POST['txtnum_seg'], $_POST['txtnum_control'], $_POST['txtP1'], $_POST['txtP2'], $_POST['txtP3'], 
+            $_POST['txtP4'], $_POST['txtP5'], $_POST['txtP6_1'], $_POST['txtP6_2'], $_POST['txtP12'], $_POST['txtP13'], $_POST['txtP14'], 1, 'prueba-trans', '127.0.0.1');
 
-            $objIns->ca_inserta_boleta_productor_p2($_POST['doc_id'], $_POST['txtFolio'], $_POST['folioComunal'], $_POST['txtnum_brig'], $_POST['txtnum_empa'], $_POST['txtnum_seg'], $_POST['txtnum_control'], $_POST['txtP1'], $_POST['txtP2'], $_POST['txtP3'], 
-                    $_POST['txtP4'], $_POST['txtP5'], $_POST['txtP6_1'], $_POST['txtP6_2'], $_POST['txtP12'], $_POST['txtP13'], $_POST['txtP14'], 1, $_SESSION['MM_Username'], $IpInsert);
-
+        $objIns->ca_inserta_boleta_productor_p2($docID, $_POST['txtFolio'], $_POST['txtnum_brig'], $_POST['txtnum_empa'], $_POST['txtnum_seg'], $_POST['txtnum_control'], $_POST['txtP1'], $_POST['txtP2'], $_POST['txtP3'], 
+            $_POST['txtP4'], $_POST['txtP5'], $_POST['txtP6_1'], $_POST['txtP6_2'], $_POST['txtP12'], $_POST['txtP13'], $_POST['txtP14'], 1, 'prueba-trans', '127.0.0.1');
+                                                                                                                                  
        ?><script>window.location = "/ine_ca/censoagropecuario/transcripcion_boletaproductor/ca_boletaproductor_actualiza_trans.php?folio=<?php echo $_POST['txtFolio']; ?>&foliocomunal=<?php echo $_POST['folioComunal'] ; ?>";</script>
-       <?php 
-           }
-    } else { ?>
-    <script>
-        window.alert("EL NUMERO DE FOLIO DEBE CONTENER 6 CARANTERES");	
-            window.location = "/ine_ca/censoagropecuario/transcripcion_boletaproductor/ca_boletaproductor_inserta_trans.php?folio=<?php echo $_POST['folioComunal']; ?>&DOC_ID=<?php echo $_POST['doc_id']; ?>";//parametros para volver
-    </script>
-<?php
-    }    	
+   <?php 
+   }
 }?>	
 <h2 id="titulo">BOLETA DEL PRODUCTOR</h2><br/><br/>
 <form action="" method="post" name="boleta_upa">
 <div id="p1">
 <input type="hidden" name="folioComunal" id="folioComunal" value="<?php echo $_REQUEST['folio']; ?>" />
-<input type="hidden" name="doc_id" id="doc_id" value="<?php echo $_REQUEST['DOC_ID']; ?>" />
 <table class="fuente" width="100%" style="border: 1px solid #000000;" cellpadding="0" cellspacing="0" >
 <h3 id="titulo">P&aacute;gina 1 Cabecera</h3>
 <tr>
   <br/>  
   <td colspan="2" align="center" valign="top">	
   <div id="correlativo" >
-    Folio: <input class="text-box" name="txtFolio" id="txtFolio" type="text" value="<?php echo $_POST['txtFolio']; ?>" onblur="rellenar(this,this.value);" onKeyDown="A(event,this.form.txtnum_empa);" autofocus="autofocus"/>
+    Folio: <input class="text-box" name="txtFolio" id="txtFolio" type="text" value="<?php echo $_POST['txtFolio']; ?>" onKeyDown="A(event,this.form.txtnum_empa);" autofocus="autofocus"/>
   </div>
     <?php foreach($arrayCabecera as $row_datos_ca): ?>  
     <table>
@@ -551,5 +528,5 @@ mysql_free_result($Recordset1);
 
 mysql_free_result($permisos);
 
-mysql_free_result($listamenu);*/
+mysql_free_result($listamenu);
 ?>
