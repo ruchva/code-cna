@@ -1,0 +1,11 @@
+-copiar la carpeta
+
+-incluir variable de entorno
+	C:\phalcon-devtools
+
+-modificar el archivo .bat
+
+-verificar phalcon commands
+
+
+
