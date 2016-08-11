@@ -1,0 +1,141 @@
+@font-face {
+	font-family: "Cardo";
+	src: url("../_fonts/Cardo99s-webfont.eot");
+	src: url("../_fonts/Cardo99s-webfont.eot?#iefix") format("embedded-opentype"), url("../_fonts/Cardo99s-webfont.woff") format("woff"), url("../_fonts/Cardo99s-webfont.ttf") format("truetype"), url("../_fonts/Cardo99s-webfont.svg#webfontQ5EXXZTZ") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'OstrichSansBold';
+	src: url('../_fonts/ostrich-bold-webfont.eot');
+	src: url('../_fonts/ostrich-bold-webfont.eot?#iefix') format('embedded-opentype'), url('../_fonts/ostrich-bold-webfont.woff') format('woff'), url('../_fonts/ostrich-bold-webfont.ttf') format('truetype'), url('../_fonts/ostrich-bold-webfont.svg#OstrichSansBold') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+body {
+	background: url(../img/degradado.png),rgba(0,0,0,0.1);
+	background-repeat: repeat-x;
+}
+#contenedor {
+	width: 1024px;
+	margin: auto;
+	padding: 20px;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin: 0px;
+	padding: 0px;
+}
+h1 {
+	font-family: Cardo, Georgia;
+	color: white;
+	text-shadow: 0px 4px 8px rgba(0,0,0,0.4);
+}
+ul {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+	text-align: center;
+}
+nav ul li:hover {
+	background: rgba(255,255,255,0.3);
+}
+nav ul li {
+	float: left;
+	padding: 4px;
+	margin: 4px;
+	border-right: 1px dashed white;
+	text-align: center;
+	width: 100px;
+	transition: all 1s;
+}
+nav ul li a {
+	text-decoration: none;
+	color: white;
+	text-align: center;
+
+}
+#banner {
+	width: 100%;
+	height: 400px;
+	background: url(../img/DSC_9153.JPG);
+	background-size: 100% 100%;	
+	margin-top: 10px;
+	margin-bottom: 10px;
+	box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.4);
+}
+#contenedor-banner {
+	padding: 10px;
+	background: rgba(255,255,255,0.6);
+}
+article {
+	width: 33%;
+	text-align: justify;
+	float: left;
+}
+.contenedor-articulo {
+	padding: 10px;
+	height: 350px;
+	overflow: hidden;
+}
+#izquierdo {
+	padding-left: 0px;
+}
+#derecho {
+	padding-right: 0px;
+}
+footer {
+	margin-top: 30px;
+	height: 50px;
+	text-align: center;
+}
+#logo {
+	height: 100px;
+	width: 100px;
+	background: url(../img/logo.jpg);
+	background-size: 100% 100%;
+	float: left;
+	margin-right: 20px;
+	margin-bottom: 20px;
+}
+.imagen-destacado {
+	width: 100%;
+	height: 100px;
+	background: gray;
+	margin-bottom: 10px;
+}
+#img1 {
+	background: url(../img/philly_04.jpg);
+	background-size: 100% 100%;
+}
+#img2 {
+	background: url(../img/philly_05.jpg);
+	background-size: 100% 100%;
+}
+#img3 {
+	background: url(../img/philly_08.jpg);
+	background-size: 100% 100%;
+}
+#banner #contenedor-banner p {
+	font-size: 15px;
+}
+#contenedor-formulario {
+	width: 95%;
+	background: white;
+	padding: 20px;
+	box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+	margin-top: 10px;
+}
+#contenedor-formulario form {
+	width: 50%;
+	margin: auto;
+	border: 1px dashed rgba(0,0,0,0.2);
+	padding: 10px;
+}
+#contenedor-formulario input, #contenedor-formulario textarea, #contenedor-formulario #boton-enviar {
+	width:90%;
+	margin-bottom:20px;
+	font-size:20px;
+	padding:10px;
+	margin-left:5px;
+}
+
